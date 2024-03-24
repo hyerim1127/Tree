@@ -1,6 +1,6 @@
-package com.dimmunity.CheckIt.entity;
+package com.dimmunity.Tree.entity;
 
-import com.dimmunity.CheckIt.dto.MemberDTO;
+import com.dimmunity.Tree.dto.MemberDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

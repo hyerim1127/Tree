@@ -1,6 +1,6 @@
-package com.dimmunity.CheckIt.dto;
+package com.dimmunity.Tree.dto;
 
-import com.dimmunity.CheckIt.entity.MemberEntity;
+import com.dimmunity.Tree.entity.MemberEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

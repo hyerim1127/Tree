@@ -1,13 +1,13 @@
-package com.dimmunity.CheckIt;
+package com.dimmunity.Tree;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CheckItApplication {
+public class TreeApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CheckItApplication.class, args);
+		SpringApplication.run(TreeApplication.class, args);
 	}
 
 }

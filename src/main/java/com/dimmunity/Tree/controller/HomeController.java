@@ -1,4 +1,4 @@
-package com.dimmunity.CheckIt.controller;
+package com.dimmunity.Tree.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
