@@ -57,6 +57,30 @@ public class MemberService {
         return memberDTOList;
 
     }
+    public MemberDTO findById(Long id) {
+        // 하나 조회할때 optional로 감싸줌
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findById(id);
+        if (optionalMemberEntity.isPresent()){
+            return MemberDTO.toMemberDTO(optionalMemberEntity.get()); //get을통해 optional을 벗겨내서 entity -> dto 변환
+        }else {
+            return null;
+        }
+    }
+    public void deleteById(Long id) {
+        memberRepository.deleteById(id);
+    }
 
+    public MemberDTO updateForm(String myEmail) {
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberEmail(myEmail);
+        if(optionalMemberEntity.isPresent()){
+            return MemberDTO.toMemberDTO(optionalMemberEntity.get());
+        } else{
+            return null;
+        }
+    }
 
+    public void update(MemberDTO memberDTO) {
+        memberRepository.save(MemberEntity.toUpdateMemberEntity(memberDTO));
+        //db에 이미 있는 id라면 update쿼리를 날림, 그냥 memberentity로 하면 insert가 되므로 주의
+    }
 }

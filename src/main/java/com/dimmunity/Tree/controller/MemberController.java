@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -42,7 +43,7 @@ public class MemberController {
             session.setAttribute("loginEmail", loginResult.getMemberEmail());
             return "main";
         } else {
-            // login 실패
+            // login 실패, 실패창 구현필요 /member/loginfail
             return "login";
         }
     }
@@ -52,6 +53,30 @@ public class MemberController {
         // html로 가져갈 데이터->model 사용
         model.addAttribute("memberList", memberDTOList);
         return "list";
+    }
+    @GetMapping("/member/{id}")
+    public String findById(@PathVariable Long id, Model model){
+        MemberDTO memberDTO=memberService.findById(id);
+        model.addAttribute("member",memberDTO);
+        return "detail";
+    }
+    @GetMapping("/member/delete/{id}") // /member/{id}로 할 수 있도록 공부
+    public String deleteById(@PathVariable Long id){
+        memberService.deleteById(id);
 
+        return "redirect:/member/"; // list 로 쓰면 껍데기만 보여짐
+    }
+    @GetMapping("/member/update")
+    public String updateForm(HttpSession session, Model model){
+        String myEmail=(String) session.getAttribute("loginEmail");
+        MemberDTO memberDTO=memberService.updateForm(myEmail);
+        model.addAttribute("updateMember", memberDTO);
+        return "update";
+    }
+    @PostMapping("/member/update")
+    public String update(@ModelAttribute MemberDTO memberDTO){
+        memberService.update(memberDTO);
+        return "redirect:/member/" +memberDTO.getId();
+        //정보가 수정완료된 나의 상세페이지를 띄워주기 위함
     }
 }
