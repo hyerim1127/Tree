@@ -95,6 +95,7 @@ public class MemberController {
         return "redirect:/member/" + memberDTO.getId();
         //정보가 수정완료된 나의 상세페이지를 띄워주기 위함
     }
+
     //로그아웃
     @GetMapping("/member/logout")
     public String logout(HttpSession session){
