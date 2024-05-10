@@ -3,21 +3,26 @@ package com.dimmunity.Tree.controller;
 import com.dimmunity.Tree.dto.MemberDTO;
 import com.dimmunity.Tree.service.MemberService;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
 
     private final MemberService memberService;
+
     // 회원가입 페이지 출력 요청
     @GetMapping("/member/save")
     public String saveForm() {
@@ -25,12 +30,14 @@ public class MemberController {
     }
 
     @PostMapping("/member/save")    // name값을 requestparam에 담아온다
-    public String save(@ModelAttribute MemberDTO memberDTO) {
+    public String save(@ModelAttribute MemberDTO memberDTO, Errors errors, Model model) {
         System.out.println("MemberController.save");
         System.out.println("MemberDTO= "+ memberDTO);
         memberService.save(memberDTO);
         return "login";
     }
+
+    //로그인
     @GetMapping("/member/login")
     public String loginForm(){
         return "login";
@@ -47,6 +54,8 @@ public class MemberController {
             return "login";
         }
     }
+
+    //회원리스트
     @GetMapping("/member/")
     public String findAll(Model model) {
         List<MemberDTO> memberDTOList = memberService.findAll();
@@ -54,18 +63,25 @@ public class MemberController {
         model.addAttribute("memberList", memberDTOList);
         return "list";
     }
+
+    //회원조회
     @GetMapping("/member/{id}")
-    public String findById(@PathVariable Long id, Model model){
+    public String findById(@PathVariable("id") Long id, Model model){
         MemberDTO memberDTO=memberService.findById(id);
-        model.addAttribute("member",memberDTO);
+        model.addAttribute("member", memberDTO);
         return "detail";
     }
-    @GetMapping("/member/delete/{id}") // /member/{id}로 할 수 있도록 공부
-    public String deleteById(@PathVariable Long id){
-        memberService.deleteById(id);
 
+    //회원삭제
+    //@PathVariable("id") 명시해줘야함, spring MVC가 URL경로변수이름 자동인식못함
+
+    @GetMapping("/member/delete/{id}") // /member/{id}로 할 수 있도록 공부
+    public String deleteById(@PathVariable("id") Long id){
+        memberService.deleteById(id);
         return "redirect:/member/"; // list 로 쓰면 껍데기만 보여짐
     }
+
+    //회원정보수정
     @GetMapping("/member/update")
     public String updateForm(HttpSession session, Model model){
         String myEmail=(String) session.getAttribute("loginEmail");
@@ -76,7 +92,13 @@ public class MemberController {
     @PostMapping("/member/update")
     public String update(@ModelAttribute MemberDTO memberDTO){
         memberService.update(memberDTO);
-        return "redirect:/member/" +memberDTO.getId();
+        return "redirect:/member/" + memberDTO.getId();
         //정보가 수정완료된 나의 상세페이지를 띄워주기 위함
+    }
+    //로그아웃
+    @GetMapping("/member/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "index";
     }
 }
