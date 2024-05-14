@@ -70,7 +70,7 @@ const SignUp = () => {
                 email:email,
                 password:pw
             };
-            axios.post('')
+            axios.post('http://localhost:8081/save')
             .then(response => {
                 alert("sign up success!")
                 goToLogin();

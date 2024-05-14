@@ -33,7 +33,7 @@ function App() {
       <Routes>
         <Route index element={<Login />} />
         <Route path="popup" element={<PopUp />} />
-        <Route path="sign-up" element={<SignUp />} />
+        <Route path="save" element={<SignUp />} />
         <Route path="write-impression" element={<WriteImpression />} />
         <Route path="view" element={<View />} />
        </Routes>

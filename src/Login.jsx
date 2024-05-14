@@ -57,7 +57,7 @@ export default function Login() {
 
     const navigate = useNavigate();
     const goToSign = () => {
-        navigate("/sign-up");
+        navigate("/save");
     }
 
     return (
