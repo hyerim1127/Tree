@@ -40,35 +40,36 @@ html, body {
   background-color: #E5D1B2;
   position:fixed;
   opacity: 0.8;
-  top: 20vh;
+  top: 25vh;
   text-align: right;
-  right: 5vw;
-  width: 40vw;
+  font-size: smaller;
+  right: 7.5vw;
+  width: 35vw;
   z-index: 3;
 }
 /*버튼 왼쪽, 오른쪽+hover*/
 .btnL {
   position: absolute;
-  width: 90px;
+  width: 5vh;
   left: 0px;
   transform:scaleX(-1);
   background-color: transparent;
-  top: calc(50% - 100px/2 + 0.5px);
+  top: 45vh;
   z-index: 5;
 }
 .btnL:hover {
-  width: 95px;
+  width: 6vh;
 }
 .btnR {
   position: absolute;
-  width: 90px;
+  width: 5vh;
   right: 0px;
   background-color: transparent;
-  top: calc(50% - 100px/2 + 0.5px);
+  top: 45vh;
   z-index: 5;
 }
 .btnR:hover {
-  width: 95px;
+  width: 6vh;
 }
 /*그루터기 서비스 설명 텍스트*/
 .descriptionText {
@@ -99,7 +100,7 @@ html, body {
   width: 100px;
   background-color: #F1E4D1;
 }
-/*우측 상단 단축키*/
+/*우측 상단 단축키 버튼*/
 .shortcuts {
   position:relative;
   float: right;
@@ -107,7 +108,7 @@ html, body {
   z-index: 2;
   right:1%;
   top:1%;
-  width:50px;
+  width:5vh;
 }
 /*로그인,회원가입 시 input창~버튼 묶은 div*/
 .contentWrap {
@@ -261,4 +262,18 @@ html, body {
 }
 .inputText::placeholder {
   color : #b5947e;
+}
+/*인상깊은구절 조회 페이지 - 구절 hover 시 효과*/
+.phrases:hover {
+  position: absolute;
+  padding:10px;
+  border: none;
+  font-size: 1.05em;
+  border-radius: 5px;
+  font-weight: 700;
+  background-color: #FDEEE4;
+  box-shadow: 0px 0px 35px 20px #FDEEE4;
+  border-radius: 50%;
+  filter: blur(2px);
+  word-wrap: break-word;
 }
