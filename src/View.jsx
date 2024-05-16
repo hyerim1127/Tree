@@ -2,27 +2,28 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import personLight from './img/person-light.png';
 import logoutLight from './img/logout-light.png';
+import pencilLight from './img/pencil-light.png';
+import treeLight from './img/tree-light.png';
 import btn from './img/btn.png';
 import bmkRed from './img/bookmark-red.png';
 
 //모달
 const Modal = ({ onClose }) => {
   return (
-    <div className="modal-wrapper">
-      <div className="modal">
-        <div className="modal-content">
-          <span className="modal-close" onClick={onClose}>&times;</span>
-          <h3>모아보고 싶은 장르를 선택하세요.</h3>
-          <button className='modal-genreBtn'>문학</button>
-          <button className='modal-genreBtn'>경제/경영</button>
-          <button className='modal-genreBtn'>인문</button>
-          <br />
-          <button className='modal-genreBtn'>예술</button>
-          <button className='modal-genreBtn'>기술/공학</button>
-          <button className='modal-genreBtn'>자기계발</button>
-        </div>
+    <div className="modal">
+      <div className="modal-content">
+        <span className="modal-close" onClick={onClose}>&times;</span>
+        <h3>모아보고 싶은 장르를 선택하세요.</h3>
+        <button className='modal-genreBtn'>문학</button>
+        <button className='modal-genreBtn'>경제/경영</button>
+        <button className='modal-genreBtn'>인문</button>
+        <br />
+        <button className='modal-genreBtn'>예술</button>
+        <button className='modal-genreBtn'>기술/공학</button>
+        <button className='modal-genreBtn'>자기계발</button>
       </div>
     </div>
+
   );
 };
 
@@ -40,6 +41,7 @@ const View = () => {
     
     const navigate = useNavigate();
 
+    const goToLogin = () => navigate("/");
     const goToWrite = () => navigate("/write-impression");
 
     const [impressions, setImpressions] = useState([]);
@@ -91,7 +93,12 @@ const View = () => {
     return (
         <div className='pageView'>
             <div>
-                <inline><img className='shortcuts' alt='logout' src={logoutLight} /><img className='shortcuts' alt='person' src={personLight} /></inline>
+                <inline>
+                  <img className='shortcuts' alt='logout' src={logoutLight} />
+                  <img className='shortcuts' alt='person' src={personLight} />
+                  <img className='shortcuts' alt='pencil' src={pencilLight} onClick={goToWrite} />
+                  <img className='shortcuts' alt='logo' src={treeLight} onClick={goToLogin} />
+                </inline>
                 <img className='btnL' alt='btn' src={btn}
                 onClick={goToWrite} />
                 <img className='btnR' alt='btn' src={btn} />

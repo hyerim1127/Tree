@@ -85,13 +85,6 @@ const SignUp = () => {
         } else {
             alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
         }
-        /*
-        if(pw===pwConfirm) {
-            alert('sign up success!')
-            goToLogin();
-        } else {
-            alert('sign up failed!')
-        }*/
     }
 
     const navigate = useNavigate();

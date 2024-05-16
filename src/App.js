@@ -1,5 +1,4 @@
 import Login from "./Login";
-import PopUp from "./popUp";
 import SignUp from "./SignUp";
 import WriteImpression from "./WriteImpression";
 import View from "./View";
@@ -32,7 +31,6 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route index element={<Login />} />
-        <Route path="popup" element={<PopUp />} />
         <Route path="save" element={<SignUp />} />
         <Route path="write-impression" element={<WriteImpression />} />
         <Route path="view" element={<View />} />
