@@ -3,9 +3,41 @@ import { useNavigate } from 'react-router';
 import personLight from './img/person-light.png';
 import logoutLight from './img/logout-light.png';
 import btn from './img/btn.png';
+import bmkRed from './img/bookmark-red.png';
+
+//모달
+const Modal = ({ onClose }) => {
+  return (
+    <div className="modal-wrapper">
+      <div className="modal">
+        <div className="modal-content">
+          <span className="modal-close" onClick={onClose}>&times;</span>
+          <h3>모아보고 싶은 장르를 선택하세요.</h3>
+          <button className='modal-genreBtn'>문학</button>
+          <button className='modal-genreBtn'>경제/경영</button>
+          <button className='modal-genreBtn'>인문</button>
+          <br />
+          <button className='modal-genreBtn'>예술</button>
+          <button className='modal-genreBtn'>기술/공학</button>
+          <button className='modal-genreBtn'>자기계발</button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const View = () => {
 
+    const [showModal, setShowModal] = useState(false);
+
+    const openModal = () => {
+      setShowModal(true);
+    };
+
+    const closeModal = () => {
+      setShowModal(false);
+    };
+    
     const navigate = useNavigate();
 
     const goToWrite = () => navigate("/write-impression");
@@ -63,6 +95,7 @@ const View = () => {
                 <img className='btnL' alt='btn' src={btn}
                 onClick={goToWrite} />
                 <img className='btnR' alt='btn' src={btn} />
+                <img className='bmkRed' alt='btn' src={bmkRed} />
                 <div style={{ position: 'relative', minHeight: '100vh' }}>
                 {impressions.map(impression => (
                     <div
@@ -79,14 +112,16 @@ const View = () => {
                         wordWrap: 'break-word',
                         color:'#562E12',
                         textAlign:'center'
-                        }}
-                    >
-                    {impression.text}
+                        }}>
+                          {impression.text}
                     </div>
-                ))}
+                  ))}
+                  <div>
+                    <button className='showAllBtn' onClick={openModal}>구절 전체 보기</button>      {showModal && <Modal onClose={closeModal} />}
+                  </div>
+                </div>
             </div>
-        </div>
-        </div>
+      </div>
     );
 };
 

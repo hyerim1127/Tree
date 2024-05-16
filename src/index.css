@@ -289,3 +289,73 @@ html, body {
     transform : translateY(5px);
   }
 }
+/*회원가입 페이지로 이동하는 버튼*/
+.showAllBtn {
+  position: absolute;
+  right: 3vw;
+  bottom: 4vh;
+  padding : 0 10px;
+  border : none;
+  font-size: 18px;
+  text-decoration: 2px underline;
+  font-weight:bolder;
+  background-color: transparent;
+  color:#562E12;
+}
+/*북마크-레드*/
+.bmkRed {
+  position:absolute;
+  width:3vw;
+  left:52vw;
+}
+/*모달 관련 구현*/
+.modal-wrapper {
+  display:fixed;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.4);
+}
+.modal-content {
+  background-color: #F9F3EB;
+  color:#562E12;
+  border-radius: 10px;
+  text-align: center;
+  margin: 15% auto;
+  padding: 20px;
+  width: 700px;
+}
+.modal-close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.modal-close:hover,
+.modal-close:focus {
+  color: #562E12;
+  text-decoration: none;
+  cursor: pointer;
+}
+.modal-genreBtn {
+  color :#BDA594;
+  background-color: #FFFAF3;
+  width: 20vh;
+  border: none;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 20px;
+  font-size: 1em;
+}
+.modal-genreBtn:hover {
+  color :#F9F0E3;
+  background-color: #744F36;
+}
