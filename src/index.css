@@ -277,3 +277,15 @@ html, body {
   filter: blur(2px);
   word-wrap: break-word;
 }
+/*인상깊은구절 조회 페이지 - 구절 애니메이션 효과*/
+.phrases { 
+  animation: bounce 1s infinite alternate;
+}
+@keyframes bounce {
+  0% {
+    transform : translateY(-5px);
+  }
+  100% {
+    transform : translateY(5px);
+  }
+}

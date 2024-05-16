@@ -47,8 +47,8 @@ const View = () => {
     const isOverlapping = (existingImpressions, newPosition) => {
       for (const impression of existingImpressions) {
         if (
-          Math.abs(parseInt(impression.top) - parseInt(newPosition.top)) < 130 && // 구절의 높이를 100px로 설정
-          Math.abs(parseInt(impression.left) - parseInt(newPosition.left)) < 280 // 구절의 너비를 250px로 설정
+          Math.abs(parseInt(impression.top) - parseInt(newPosition.top)) < 150 &&
+          Math.abs(parseInt(impression.left) - parseInt(newPosition.left)) < 300
         ) {
           return true; // 겹치는 경우 true 반환
         }
