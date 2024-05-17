@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -20,10 +22,10 @@ import java.util.List;
 @Controller
 public class BookController {
     @GetMapping("/book/list")
-    public String list(String text, Model model) {
+    public String list(@RequestParam(value="name") String text, Model model) {
+
         String clientId ="mapzG0yKG3_rkHMfiaKt";
         String clientSecret="2yTFmB_pY5";
-
 
         //String apiURL = "https://openapi.naver.com/v1/search/blog?query=" + text;    // JSON 결과
         URI uri = UriComponentsBuilder
@@ -62,7 +64,7 @@ public class BookController {
         List<BookVo> books =resultVO.getItems();	// books를 list.html에 출력 -> model 선언
         model.addAttribute("books", books);
 
-        return "book/booklist";
+        return "booklist";
     }
 
 }
