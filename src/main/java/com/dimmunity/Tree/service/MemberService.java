@@ -6,9 +6,7 @@ import com.dimmunity.Tree.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 //전체흐름
 //save에서 입력한 값이 controller로 넘어와서
@@ -28,6 +26,7 @@ public class MemberService {
         memberRepository.save(memberEntity); //jpa가 제공하는 save메소드 사용
 
     }
+
     public MemberDTO login(MemberDTO memberDTO){
         Optional<MemberEntity> byMemeberEmail=memberRepository.findByMemberEmail(memberDTO.getMemberEmail());
         if(byMemeberEmail.isPresent()){ //조회결과있음
@@ -57,24 +56,22 @@ public class MemberService {
         return memberDTOList;
 
     }
+
+    //오류있는듯
     public MemberDTO findById(Long id) {
         // 하나 조회할때 optional로 감싸줌
         Optional<MemberEntity> optionalMemberEntity = memberRepository.findById(id);
         if (optionalMemberEntity.isPresent()){
             return MemberDTO.toMemberDTO(optionalMemberEntity.get()); //get을통해 optional을 벗겨내서 entity -> dto 변환
-        }else {
+        } else {
             return null;
         }
     }
-    public void deleteById(Long id) {
-        memberRepository.deleteById(id);
-    }
-
     public MemberDTO updateForm(String myEmail) {
         Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberEmail(myEmail);
         if(optionalMemberEntity.isPresent()){
             return MemberDTO.toMemberDTO(optionalMemberEntity.get());
-        } else{
+        } else {
             return null;
         }
     }
@@ -83,4 +80,10 @@ public class MemberService {
         memberRepository.save(MemberEntity.toUpdateMemberEntity(memberDTO));
         //db에 이미 있는 id라면 update쿼리를 날림, 그냥 memberentity로 하면 insert가 되므로 주의
     }
+
+    public void deleteById(Long id) {
+        memberRepository.deleteById(id);
+    }
+
+
 }

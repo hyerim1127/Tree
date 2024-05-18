@@ -1,6 +1,8 @@
 package com.dimmunity.Tree.dto;
 
 import com.dimmunity.Tree.entity.MemberEntity;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
