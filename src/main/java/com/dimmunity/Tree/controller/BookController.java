@@ -1,70 +1,87 @@
 package com.dimmunity.Tree.controller;
 
 
-import com.dimmunity.Tree.vo.BookVo;
-import com.dimmunity.Tree.vo.NaverResultVo;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
+import com.dimmunity.Tree.dto.BookDTO;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
-
-import java.net.URI;
+import org.springframework.web.bind.annotation.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class BookController {
-    @GetMapping("/book/list")
-    public String list(@RequestParam(value="name") String text, Model model) {
 
-        String clientId ="mapzG0yKG3_rkHMfiaKt";
-        String clientSecret="2yTFmB_pY5";
+    // 네이버 도서 검색 api key
+    private final String CLIENT_ID = "mapzG0yKG3_rkHMfiaKt";
+    private final String CLIENT_SECRET = "2yTFmB_pY5";
 
-        //String apiURL = "https://openapi.naver.com/v1/search/blog?query=" + text;    // JSON 결과
-        URI uri = UriComponentsBuilder
-                .fromUriString("https://openapi.naver.com")
-                .path("/v1/search/book.json")
-                .queryParam("query", text)
-                .queryParam("display", 10)
-                .queryParam("start", 1)
-                .queryParam("sort", "sim")
-                .encode()
-                .build()
-                .toUri();
 
-        // Spring 요청 제공 클래스
-        RequestEntity<Void> req = RequestEntity
-                .get(uri)
-                .header("X-Naver-Client-Id", clientId)
-                .header("X-Naver-Client-Secret", clientSecret)
-                .build();
-        // Spring 제공 restTemplate
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> resp = restTemplate.exchange(req, String.class);
+    @GetMapping("/book")
+    public String home(Model model) {
+        model.addAttribute("board", new BookDTO());
+        return "bookSearch";
+    }
 
-        // JSON 파싱 (Json 문자열을 객체로 만듦, 문서화)
-        ObjectMapper om = new ObjectMapper();
-        NaverResultVo resultVO = null;
+    @GetMapping("/book-search")
+    public String BookSearchHome(Model model) {
+        String keyword = "";
+        model.addAttribute("keyword", keyword);
+        return "bookSearch";
+    }
 
+    @PostMapping("/book-search")
+    public String search(@ModelAttribute("keyword") String keyword, Model model) {
         try {
-            resultVO = om.readValue(resp.getBody(), NaverResultVo.class);
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
-        } catch (JsonProcessingException e) {
+            String encodedKeyword = URLEncoder.encode(keyword, "UTF-8");
+            String apiURL = "https://openapi.naver.com/v1/search/book.json?query=" + encodedKeyword;
+            URL url = new URL(apiURL);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("GET");
+            con.setRequestProperty("X-Naver-Client-Id", CLIENT_ID);
+            con.setRequestProperty("X-Naver-Client-Secret", CLIENT_SECRET);
+            int responseCode = con.getResponseCode();
+            BufferedReader br;
+            if (responseCode == 200) { // 정상 호출
+                br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            } else {  // 에러 발생
+                br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+            }
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+            while ((inputLine = br.readLine()) != null) {
+                response.append(inputLine);
+            }
+            br.close();
+
+
+            JSONObject jsonObject = new JSONObject(response.toString());
+            JSONArray jsonArray = (JSONArray) jsonObject.get("items");
+            List<BookDTO> bookDtoList = new ArrayList<>();
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject obj = jsonArray.getJSONObject(i);
+                String title = obj.getString("title");
+                String author = obj.getString("author");
+                String image = obj.getString("image");
+
+                bookDtoList.add(BookDTO.builder()
+                        .title(title)
+                        .author(author)
+                        .imageURL(image).build());
+            }
+            model.addAttribute("bookDtoList", bookDtoList);
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        List<BookVo> books =resultVO.getItems();	// books를 list.html에 출력 -> model 선언
-        model.addAttribute("books", books);
-
-        return "booklist";
+        return "bookSearch";
     }
-
 }
