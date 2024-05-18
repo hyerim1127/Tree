@@ -1,5 +1,6 @@
 package com.dimmunity.Tree.dto;
 
+import com.dimmunity.Tree.entity.BoardEntity;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -23,4 +24,18 @@ public class BoardDTO {
     private LocalDateTime boardCreatedTime;
     //게시글 수정시간
     private LocalDateTime boardUpdatedTime;
+
+    // entity 객체를 dto 객체로 옮겨 담는 과정 (Entity -> DTO)
+    public static BoardDTO toBoardDTO(BoardEntity boardEntity){
+        BoardDTO boardDTO = new BoardDTO();
+        boardDTO.setId(boardEntity.getId());
+        boardDTO.setBoardWriter(boardEntity.getBoardWriter());
+        boardDTO.setBoardPass(boardEntity.getBoardPass());
+        boardDTO.setBoardTitle(boardEntity.getBoardTitle());
+        boardDTO.setBoardContents(boardEntity.getBoardContents());
+        boardDTO.setBoardHits(boardEntity.getBoardHits());
+        boardDTO.setBoardCreatedTime(boardEntity.getCreatedTime());
+        boardDTO.setBoardUpdatedTime(boardEntity.getUpdatedTime());
+        return boardDTO;
+    }
 }

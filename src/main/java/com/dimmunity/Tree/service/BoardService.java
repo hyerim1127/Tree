@@ -14,6 +14,9 @@ import com.dimmunity.Tree.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class BoardService {
@@ -23,5 +26,20 @@ public class BoardService {
         // 메소드 호출한 결과가 boardEntity로 받아오고 그것을 save 메소드로 넘겨주면 insert query가 나가게 된다.
         BoardEntity boardEntity = BoardEntity.toSaveEntity(boardDTO);
         boardRepository.save(boardEntity);
+    }
+
+    public List<BoardDTO> findAll() {
+        // entity로 받아온 정보를 dto 객체로 옮겨 담아서 controller로 return 한다.
+
+        List<BoardEntity> boardEntityList = boardRepository.findAll();
+        // return 할 list 객체 선언
+        List<BoardDTO> boardDTOList = new ArrayList<>();
+        // List<BoardEntity>에 담긴 데이터를 List<BoardDTO>에 옮겨 담기 (즉, entity객체를 dto 객체로 옮겨 담기)
+        for (BoardEntity boardEntity: boardEntityList){
+            // boardEntity 객체를 DTO로 변환하고(BoardDTO.toBoardDTO(boardEntity) boardDTOList에 담는 과정
+            boardDTOList.add(BoardDTO.toBoardDTO(boardEntity));
+        }
+        return boardDTOList;
+
     }
 }

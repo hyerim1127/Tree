@@ -34,7 +34,7 @@ public class BoardEntity extends BaseEntity{
     private int boardHits;
 
     // 변환작업
-    // save.html 에서 입력한 값을 boardDTO로 담아오고 거기에 담겨있는 값들을 Entity의 값으로 set 하는 것
+    // save.html 에서 입력한 값을 boardDTO로 담아오고 거기에 담겨있는 값들을 Entity의 값으로 set 하는 것 (DTO -> Entity)
     public static BoardEntity toSaveEntity(BoardDTO boardDTO){
         // DTO에 담긴 값들을 객체로 옮겨담는 작업
         BoardEntity boardEntity = new BoardEntity();
