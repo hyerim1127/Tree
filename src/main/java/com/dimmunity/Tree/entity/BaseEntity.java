@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 
+//
 public class BaseEntity {
     // 생성됐을 때 시간을 체크
     @CreationTimestamp
