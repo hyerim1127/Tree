@@ -32,13 +32,13 @@
   
 .I-modal-close:hover,
 .I-modal-close:focus {
-    color: black;
+    color: #562E12;
     text-decoration: none;
     cursor: pointer;
 }
   
 .I-modal-body {
-    display: flex;
+    flex-direction: column;
 }
   
 .I-book-image {
@@ -46,7 +46,6 @@
 }
   
 .I-book-info {
-    flex: 2;
     padding-left: 20px;
 }
 
@@ -61,10 +60,14 @@
 .toggle-sections {
     margin-top: 30px;
     color:#744F36;
+    text-align: left;
+    width: 100%;
 }
 .toggle-detail {
+    width: 100%;
     margin-top: 10px;
     border-radius: 5px;
+    font-size: 13px;
     background-color: #F9F0E3;
     border: 1px solid #A18774;
 }
@@ -74,13 +77,12 @@
     padding: 10px;
     background-color: #F9F0E3;
     border-radius: 5px;
+    font-weight: bolder;
 }
   
 .toggle-content {
-    margin-top: 10px;
     padding: 10px;
     background-color: #F9F0E3;
     border-radius: 5px;
-
 }
   

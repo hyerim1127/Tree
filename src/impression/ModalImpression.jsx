@@ -9,22 +9,26 @@ const ModalImpression = ({ book, onClose }) => {
         <div className="I-modal-content">
           <span className="I-modal-close" onClick={onClose}>&times;</span>
 
-            <div className="I-modal-body">
-                <div className="I-book-image">
-                    <BookImage src={book.image} />
-                </div>
-                <div className="I-book-info">
-                    <BookInfo 
-                    title={book.title} 
-                    author={book.author} 
-                    description={book.description} />
-                    <div className="toggle-sections">
-                      {book.details.map((detail, index) => (
-                      <ToggleDetail key={index} detail={detail} />
-                      ))}
-                    </div>
-                </div>
+          <div className="I-modal-body">
+            <div style={{display: 'flex', alignItems: 'stretch',}}>
+            <div className="I-book-image">
+              <BookImage src={book.image} />
             </div>
+            <div className="I-book-info">
+              <BookInfo 
+                title={book.title} 
+                author={book.author} 
+                description={book.description} 
+              />
+            </div>
+            </div>
+            <div className="toggle-sections">
+              {book.details.map((detail, index) => (
+                <ToggleDetail key={index} detail={detail} />
+              ))}
+            </div>
+          </div>
+
         </div>
       </div>
   
