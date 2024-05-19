@@ -1,6 +1,7 @@
 import Login from "./Login";
 import SignUp from "./SignUp";
 import WriteImpression from "./WriteImpression";
+import ModalImpression from "./impression/ModalImpression";
 import View from "./View";
 import axios from 'axios';
 import React, {useState, useEffect} from 'react';
@@ -34,7 +35,9 @@ function App() {
         <Route path="save" element={<SignUp />} />
         <Route path="write-impression" element={<WriteImpression />} />
         <Route path="view" element={<View />} />
+        <Route path="view-modal" element={<ModalImpression />} />
        </Routes>
+       
     </BrowserRouter>
   );
 }
