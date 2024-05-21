@@ -16,17 +16,10 @@ const View = () => {
   const [showImpressionModal, setShowImpressionModal] = useState(false);
   const [selectedImpression, setSelectedImpression] = useState(null);
 
-  const book = {
-    image: 'https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791165341909.jpg',
-    title: '달러구트 꿈 백화점',
-    author: '이미예',
-    description: '잠들어야만 입장 가능한 꿈 백화점에서 일어나는 비밀스럽고도 기묘하며 가슴 뭉클한 판타지 소설 여기는 잠들어야만 입장할 수 있는 ‘달러구트 꿈 백화점’입니다. 잠들어야만 입장할 수 있는 독특한 마을. 그곳에 들어온 잠든 손님들에게 가장 인기 있는 곳은, 온갖 꿈을 한데 모아 판매하는 ‘달러구트의 꿈 백화점’이다. 긴 잠을 자는 사람들은 물론이고, 짧은 낮잠을 자는 사람들과 동물들로 매일매일 대성황을 이룬다.',
-    details: [
-      { title: 'Section 1', content: 'Details about Section 1.' },
-      { title: 'Section 2', content: 'Details about Section 2.' },
-      { title: 'Section 3', content: 'Details about Section 3.' },
-    ]
-  };
+  const navigate = useNavigate();
+
+  const goToLogin = () => navigate("/");
+  const goToWrite = () => navigate("/write-impression");
 
   const openModal = () => {
     setShowModal(true);
@@ -46,10 +39,22 @@ const View = () => {
     setSelectedImpression(null);
   };
 
-  const navigate = useNavigate();
+  const handleGenreSelect = (genre) => {
+    setShowModal(false);
+    navigate(`/phrases?genre=${genre}`);
+  };
 
-  const goToLogin = () => navigate("/");
-  const goToWrite = () => navigate("/write-impression");
+  const book = {
+    image: 'https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791165341909.jpg',
+    title: '달러구트 꿈 백화점',
+    author: '이미예',
+    description: '잠들어야만 입장 가능한 꿈 백화점에서 일어나는 비밀스럽고도 기묘하며 가슴 뭉클한 판타지 소설 여기는 잠들어야만 입장할 수 있는 ‘달러구트 꿈 백화점’입니다. 잠들어야만 입장할 수 있는 독특한 마을. 그곳에 들어온 잠든 손님들에게 가장 인기 있는 곳은, 온갖 꿈을 한데 모아 판매하는 ‘달러구트의 꿈 백화점’이다. 긴 잠을 자는 사람들은 물론이고, 짧은 낮잠을 자는 사람들과 동물들로 매일매일 대성황을 이룬다.',
+    details: [
+      { title: 'Section 1', content: 'Details about Section 1.' },
+      { title: 'Section 2', content: 'Details about Section 2.' },
+      { title: 'Section 3', content: 'Details about Section 3.' },
+    ]
+  };
 
   const [impressions, setImpressions] = useState([]);
 
@@ -132,7 +137,7 @@ const View = () => {
           ))}
           <div>
             <button className='showAllBtn' onClick={openModal}>구절 전체 보기</button>
-            {showModal && <ModalGenre onClose={closeModal} />}
+            {showModal && <ModalGenre onClose={closeModal} onGenreSelect={handleGenreSelect} />}
             {showImpressionModal && <ModalImpression book={book} onClose={closeImpressionModal} />}
           </div>
         </div>

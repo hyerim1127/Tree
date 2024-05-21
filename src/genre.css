@@ -1,0 +1,12 @@
+/*Genre 장르 스타일링*/
+* {
+  margin:0;
+  padding:0;
+}
+
+.genrePage {
+    background-color: #F9F3EB;
+    position: relative;
+    height:100vh;
+    color: #562E12;
+}

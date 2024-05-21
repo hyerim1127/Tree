@@ -4,6 +4,7 @@ import WriteImpression from "./WriteImpression";
 import ModalImpression from "./impression/ModalImpression";
 import Nothing from "./Nothing";
 import View from "./View";
+import Genre from "./Genre";
 import axios from 'axios';
 import React, {useState, useEffect} from 'react';
 import {
@@ -38,6 +39,7 @@ function App() {
         <Route path="view" element={<View />} />
         <Route path="view-modal" element={<ModalImpression />} />
         <Route path="nothing" element={<Nothing />} />
+        <Route path="phrases" element={<Genre />} />
        </Routes>
        
     </BrowserRouter>
