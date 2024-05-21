@@ -28,7 +28,10 @@ public class BoardEntity extends BaseEntity{
     private String boardTitle;
 
     @Column(length = 500)
-    private String boardContents;
+    private String boardPhrase;
+
+    @Column(length = 500)
+    private String boardReason;
 
     @Column
     private int boardHits;
@@ -41,7 +44,8 @@ public class BoardEntity extends BaseEntity{
         boardEntity.setBoardWriter(boardDTO.getBoardWriter());
         boardEntity.setBoardPass(boardDTO.getBoardPass());
         boardEntity.setBoardTitle(boardDTO.getBoardTitle());
-        boardEntity.setBoardContents(boardDTO.getBoardContents());
+        boardEntity.setBoardPhrase(boardDTO.getBoardPhrase());
+        boardEntity.setBoardReason(boardDTO.getBoardReason());
         boardEntity.setBoardHits(0); // 조회수값은 기본적으로 0이니까
         return boardEntity;
     }
@@ -53,7 +57,8 @@ public class BoardEntity extends BaseEntity{
         boardEntity.setBoardWriter(boardDTO.getBoardWriter());
         boardEntity.setBoardPass(boardDTO.getBoardPass());
         boardEntity.setBoardTitle(boardDTO.getBoardTitle());
-        boardEntity.setBoardContents(boardDTO.getBoardContents());
+        boardEntity.setBoardPhrase(boardDTO.getBoardPhrase());
+        boardEntity.setBoardReason(boardDTO.getBoardReason());
         boardEntity.setBoardHits(boardDTO.getBoardHits());
         return boardEntity;
     }

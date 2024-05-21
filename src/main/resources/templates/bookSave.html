@@ -11,10 +11,11 @@
 <!--여기에 작성한 값을 controller로 보내줘야 함-->
 <form action="/board/bookSave" method="post">
     <!--name이 정해져있어야 input에 입력한 값이 name에 담겨서 서버쪽으로 넘어갈 수 있음-->
-    writer: <input type="text" name="boardWriter"> <br>
     pass: <input type="text" name="boardPass"> <br>
     title: <input type="text" name="boardTitle"> <br>
-    contents: <textarea name="boardContents" cols="30" rows="10"></textarea> <br>
+    writer: <input type="text" name="boardWriter"> <br>
+    phrase: <textarea name="boardPhrase" cols="30" rows="10"></textarea> <br>
+    reason: <textarea name="boardReason" cols="30" rows="10"></textarea> <br>
     <input type="submit" value="글작성">
 
 </form>

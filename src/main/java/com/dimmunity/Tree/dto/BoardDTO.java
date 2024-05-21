@@ -17,7 +17,8 @@ public class BoardDTO {
     private String boardWriter;
     private String boardPass;
     private String boardTitle;
-    private String boardContents;
+    private String boardPhrase;
+    private String boardReason;
     //게시글의 조회수
     private int boardHits;
     //게시글 작성시간
@@ -32,7 +33,8 @@ public class BoardDTO {
         boardDTO.setBoardWriter(boardEntity.getBoardWriter());
         boardDTO.setBoardPass(boardEntity.getBoardPass());
         boardDTO.setBoardTitle(boardEntity.getBoardTitle());
-        boardDTO.setBoardContents(boardEntity.getBoardContents());
+        boardDTO.setBoardPhrase(boardEntity.getBoardPhrase());
+        boardDTO.setBoardReason(boardEntity.getBoardReason());
         boardDTO.setBoardHits(boardEntity.getBoardHits());
         boardDTO.setBoardCreatedTime(boardEntity.getCreatedTime());
         boardDTO.setBoardUpdatedTime(boardEntity.getUpdatedTime());

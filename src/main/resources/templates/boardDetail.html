@@ -29,8 +29,12 @@
         <td th:text="${board.boardHits}"></td>
     </tr>
     <tr>
-        <th>contents</th>
-        <td th:text="${board.boardContents}"></td>
+        <th>phrase</th>
+        <td th:text="${board.boardPhrase}"></td>
+    </tr>
+    <tr>
+        <th>reason</th>
+        <td th:text="${board.boardReason}"></td>
     </tr>
 
 <!--    <tr th:if="${board.fileAttached == 1}">-->
@@ -74,7 +78,6 @@
 
     const listReq = () => {
         console.log("목록 요청");
-
         location.href = "/board/";
     }
 
