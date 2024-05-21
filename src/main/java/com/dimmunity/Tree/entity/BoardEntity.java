@@ -46,5 +46,18 @@ public class BoardEntity extends BaseEntity{
         return boardEntity;
     }
 
-
+    public static BoardEntity toUpdateEntity(BoardDTO boardDTO){
+        BoardEntity boardEntity = new BoardEntity();
+        // id 가 있어야만 update query 수행됨
+        boardEntity.setId(boardDTO.getId());
+        boardEntity.setBoardWriter(boardDTO.getBoardWriter());
+        boardEntity.setBoardPass(boardDTO.getBoardPass());
+        boardEntity.setBoardTitle(boardDTO.getBoardTitle());
+        boardEntity.setBoardContents(boardDTO.getBoardContents());
+        boardEntity.setBoardHits(boardDTO.getBoardHits());
+        return boardEntity;
+    }
 }
+
+
+
