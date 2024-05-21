@@ -2,6 +2,7 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 import WriteImpression from "./WriteImpression";
 import ModalImpression from "./impression/ModalImpression";
+import Nothing from "./Nothing";
 import View from "./View";
 import axios from 'axios';
 import React, {useState, useEffect} from 'react';
@@ -11,7 +12,7 @@ import {
   Route
 } from "react-router-dom";
 
-function App() {
+function App() {  
 
   /*const [posts, setPosts] = useState([]);
   useEffect(() => {
@@ -36,6 +37,7 @@ function App() {
         <Route path="write-impression" element={<WriteImpression />} />
         <Route path="view" element={<View />} />
         <Route path="view-modal" element={<ModalImpression />} />
+        <Route path="nothing" element={<Nothing />} />
        </Routes>
        
     </BrowserRouter>
