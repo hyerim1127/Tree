@@ -2,7 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>list</title>
+    <title>Title</title>
+
 </head>
 <body>
 <h2>list.html</h2>
@@ -15,6 +16,7 @@
         <th>상세조회</th>
         <th>삭제</th>
     </tr>
+
     <!--th는 thymeleaf에서 제공하는 문법으로 foreach역할, tr까지 반복-->
     <tr th:each="member: ${memberList}">   <!--model에 담긴 memberlist꺼내서사용-->
         <td th:text="${member.id}"></td>
@@ -34,3 +36,4 @@
 </table>
 </body>
 </html>
+
