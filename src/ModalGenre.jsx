@@ -1,3 +1,5 @@
+//장르 선택 팝업창
+
 const ModalGenre = ({ onClose, onGenreSelect }) => {
   const handleGenreClick = (genre) => {
     onGenreSelect(genre);

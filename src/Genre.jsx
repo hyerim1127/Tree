@@ -1,3 +1,4 @@
+//장르 선택 후 보여지는 장르별 구절 조회 페이지
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useLocation } from 'react-router-dom';

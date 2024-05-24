@@ -1,3 +1,5 @@
+//인상깊은구절 조회 (랜덤플로팅)
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import personLight from './img/person-light.png';

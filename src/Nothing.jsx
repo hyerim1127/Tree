@@ -1,3 +1,5 @@
+//버블차트
+
 import BubbleChart from './BubbleChart';
 import React from 'react';
 const data = [
