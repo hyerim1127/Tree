@@ -8,7 +8,6 @@ import btn from './img/btn.png';
 import bmkRed from './img/bookmark-red.png';
 import ModalGenre from './ModalGenre';
 import ModalImpression from './impression/ModalImpression';
-import ToggleDetail from './impression/ToggleDetail';
 import './modalImpression.css';
 
 const View = () => {
@@ -19,7 +18,7 @@ const View = () => {
   const navigate = useNavigate();
 
   const goToLogin = () => navigate("/");
-  const goToWrite = () => navigate("/write-impression");
+  const goToWrite = () => navigate("/board/bookSave");
 
   const openModal = () => {
     setShowModal(true);

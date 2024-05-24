@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import logo from './img/treelogo.png';
 import mainImg from './img/mainImage.png';
 import { useNavigate } from "react-router-dom";
@@ -16,8 +16,6 @@ export default function Login() {
     const[emailValid, setEmailValid] = useState(false);
     const[pwValid, setPwValid] = useState(false);
     const[notAllow, setNotAllow] = useState(true);
-
-    const modalRef = useRef();
 
     useEffect(() => {
         if(emailValid && pwValid) {
@@ -49,7 +47,7 @@ export default function Login() {
 
     const onClickConfirmButton = () => {
         if(email===User.email && pw===User.pw) {
-            navigate('/write-impression');
+            navigate('/board/bookSave');
         } else {
             alert('login failedㅠㅠ')
         }
@@ -57,7 +55,7 @@ export default function Login() {
 
     const navigate = useNavigate();
     const goToSign = () => {
-        navigate("/save");
+        navigate("/member/save");
     }
 
     return (

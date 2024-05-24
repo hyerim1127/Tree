@@ -34,10 +34,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route index element={<Login />} />
-        <Route path="save" element={<SignUp />} />
-        <Route path="write-impression" element={<WriteImpression />} />
+        <Route path="/member/save" element={<SignUp />} />
+        <Route path="/board/bookSave" element={<WriteImpression />} />
         <Route path="view" element={<View />} />
-        <Route path="view-modal" element={<ModalImpression />} />
         <Route path="nothing" element={<Nothing />} />
         <Route path="phrases" element={<Genre />} />
        </Routes>

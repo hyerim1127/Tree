@@ -27,7 +27,7 @@ const Genre = () => {
     const navigate = useNavigate();
 
     const goToLogin = () => navigate("/");
-    const goToWrite = () => navigate("/write-impression");
+    const goToWrite = () => navigate("/board/bookSave");
 
     return (
         <div className='genrePage'>
