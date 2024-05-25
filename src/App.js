@@ -36,7 +36,7 @@ function App() {
         <Route index element={<Login />} />
         <Route path="/member/save" element={<SignUp />} />
         <Route path="/board/bookSave" element={<WriteImpression />} />
-        <Route path="view" element={<View />} />
+        <Route path="board" element={<View />} />
         <Route path="nothing" element={<Nothing />} />
         <Route path="phrases" element={<Genre />} />
        </Routes>
