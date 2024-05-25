@@ -50,10 +50,10 @@ h1 {
   justify-items: center;
 }
 
-@media (min-width: 700px) {
+@media (min-width: 650px) {
   .phrase-container {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    max-width: 700px;
+    max-width: 650px;
   }
 }
 @media (min-width: 1000px) {
