@@ -29,15 +29,16 @@ const Genre = () => {
 
     const goToLogin = () => navigate("/");
     const goToWrite = () => navigate("/board/bookSave");
+    const goToBoard = () => navigate("/board");
 
     return (
         <div className='genrePage'>
           <div>
             <span>
-              <img className='shortcuts' alt='logout' src={logoutLight} />
+              <img className='shortcuts' alt='logout' src={logoutLight} onClick={goToLogin} />
               <img className='shortcuts' alt='person' src={personLight} />
               <img className='shortcuts' alt='pencil' src={pencilLight} onClick={goToWrite} />
-              <img className='shortcuts' alt='logo' src={treeLight} onClick={goToLogin} />
+              <img className='shortcuts' alt='logo' src={treeLight} onClick={goToBoard} />
             </span>
             <div>
             <h1>구절 전체보기 - {selectedGenre}</h1>

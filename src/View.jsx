@@ -21,6 +21,7 @@ const View = () => {
 
   const goToLogin = () => navigate("/");
   const goToWrite = () => navigate("/board/bookSave");
+  const goToBoard = () => navigate("/board");
 
   const openModal = () => {
     setShowModal(true);
@@ -107,10 +108,10 @@ const View = () => {
     <div className='pageView'>
       <div>
         <div>
-          <img className='shortcuts' alt='logout' src={logoutLight} />
+          <img className='shortcuts' alt='logout' src={logoutLight}  onClick={goToLogin} />
           <img className='shortcuts' alt='person' src={personLight} />
           <img className='shortcuts' alt='pencil' src={pencilLight} onClick={goToWrite} />
-          <img className='shortcuts' alt='logo' src={treeLight} onClick={goToLogin} />
+          <img className='shortcuts' alt='logo' src={treeLight} onClick={goToBoard} />
         </div>
         <img className='btnL' alt='btn' src={btn} onClick={goToWrite} />
         <img className='btnR' alt='btn' src={btn} />
