@@ -36,8 +36,8 @@ function App() {
         <Route path="/member/save" element={<SignUp />} />
         <Route path="/board/bookSave" element={<WriteImpression />} />
         <Route path="/board" element={<View />} />
-        <Route path="nothing" element={<Nothing />} />
-        <Route path="phrases" element={<Genre />} />
+        <Route path="/nothing" element={<Nothing />} />
+        <Route path="/board/genre" element={<Genre />} />
        </Routes>
        
     </BrowserRouter>

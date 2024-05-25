@@ -4,9 +4,83 @@
   padding:0;
 }
 
-.genrePage {
+body {
     background-color: #F9F3EB;
+    margin: 0;
+    padding: 0;
+}
+
+.genrePage {
     position: relative;
-    height:100vh;
+    min-height: 100vh;
     color: #562E12;
+    padding-bottom: 40px;
+}
+
+h1 {
+  margin:0;
+  font-size: 25px;
+}
+.phrase {
+    background-color: #FFF8EE;
+    border: 1px solid #A18774;
+    color:#744F36;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width : 160px;
+    height : 140px;
+    margin: 1vw;
+    word-wrap: break-word;
+    font-size: 11px;
+}
+h1 {
+  padding:10px;
+  margin:10px;
+}
+.phrase:hover {
+  background-color: #F9F0E3;
+}
+.phrase-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100vw;
+  max-width: 700px;
+  margin: 0 auto;
+  justify-items: center;
+}
+
+@media (min-width: 700px) {
+  .phrase-container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    max-width: 700px;
+  }
+}
+@media (min-width: 1000px) {
+  .phrase-container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    max-width: 900px;
+  }
+}
+@media (min-width: 1400px) {
+  .phrase-container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    max-width: 1000px;
+  }
+}
+
+.bmkGreen {
+  position: absolute;
+  width:3vw;
+  top: 0;
+  left: 3vw;
+  padding-right: 10px;
+}
+.bmkGreen:hover {
+  width:3.3vw;
+}
+.header {
+  display: flex;
+  align-items: center;
+  padding-left: 6vw;
 }

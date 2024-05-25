@@ -43,7 +43,7 @@ const View = () => {
 
   const handleGenreSelect = (genre) => {
     setShowModal(false);
-    navigate(`/phrases?genre=${genre}`);
+    navigate(`/board/genre?genre=${genre}`);
   };
 
   const book = {
@@ -108,7 +108,7 @@ const View = () => {
     <div className='pageView'>
       <div>
         <div>
-          <img className='shortcuts' alt='logout' src={logoutLight}  onClick={goToLogin} />
+          <img className='shortcuts' alt='logout' src={logoutLight} onClick={goToLogin}/>
           <img className='shortcuts' alt='person' src={personLight} />
           <img className='shortcuts' alt='pencil' src={pencilLight} onClick={goToWrite} />
           <img className='shortcuts' alt='logo' src={treeLight} onClick={goToBoard} />

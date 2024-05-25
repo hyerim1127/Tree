@@ -30,7 +30,7 @@ const WriteImpression = () => {
     const handleReason = (e) => {
         setReason(e.target.value);
     }
-
+    const goToLogin = () => navigate("/");
     const goToBoard = () => navigate("/board");
     
     const[notAllow, setNotAllow] = useState(true);
@@ -49,7 +49,7 @@ const WriteImpression = () => {
     return (
         <div className='page'>
             <div>
-                <inline><img className='shortcuts' alt='logout' src={logoutLight} /><img className='shortcuts' alt='person' src={personLight} /></inline>
+                <inline><img className='shortcuts' alt='logout' src={logoutLight}  onClick={goToLogin}/><img className='shortcuts' alt='person' src={personLight} /></inline>
                 <img className='mainImg' alt='main' src={mainImg} />
                 <img className='btnR' alt='btn' src={btn} onClick={goToPageR} />
                 <div className='description'>
