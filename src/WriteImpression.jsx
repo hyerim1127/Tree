@@ -31,9 +31,7 @@ const WriteImpression = () => {
         setReason(e.target.value);
     }
 
-    const onClickConfirmButton = () => {
-        navigate('/view');
-    }
+    const goToBoard = () => navigate("/board");
     
     const[notAllow, setNotAllow] = useState(true);
     useEffect(() => {
@@ -45,7 +43,7 @@ const WriteImpression = () => {
     }, );
 
     const goToPageR = () => {
-        navigate("/view");
+        navigate("/board");
     }
 
     return (
@@ -103,7 +101,7 @@ const WriteImpression = () => {
                     </div>
 
                     <div>
-                        <button onClick={onClickConfirmButton}
+                        <button onClick={goToBoard}
                         disabled={notAllow}
                         className='bottomButton'>
                             확인

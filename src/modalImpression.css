@@ -53,6 +53,7 @@
 
 .I-book-text {
     text-align: left;
+    padding : 10px;
 }
 
 .I-book-text p {

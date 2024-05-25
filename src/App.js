@@ -1,12 +1,11 @@
 import Login from "./Login";
 import SignUp from "./SignUp";
 import WriteImpression from "./WriteImpression";
-import ModalImpression from "./impression/ModalImpression";
 import Nothing from "./Nothing";
 import View from "./View";
 import Genre from "./Genre";
-import axios from 'axios';
-import React, {useState, useEffect} from 'react';
+//import axios from 'axios';
+import React from 'react';
 import {
   BrowserRouter,
   Routes,
@@ -36,7 +35,7 @@ function App() {
         <Route index element={<Login />} />
         <Route path="/member/save" element={<SignUp />} />
         <Route path="/board/bookSave" element={<WriteImpression />} />
-        <Route path="board" element={<View />} />
+        <Route path="/board" element={<View />} />
         <Route path="nothing" element={<Nothing />} />
         <Route path="phrases" element={<Genre />} />
        </Routes>

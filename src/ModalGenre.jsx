@@ -10,12 +10,17 @@ const ModalGenre = ({ onClose, onGenreSelect }) => {
       <div className="modal-content">
         <span className="modal-close" onClick={onClose}>&times;</span>
         <h3>모아보고 싶은 장르를 선택하세요.</h3>
-        <button className='modal-genreBtn' onClick={() => handleGenreClick('문학')}>문학</button>
-        <button className='modal-genreBtn' onClick={() => handleGenreClick('경제/경영')}>경제/경영</button>
-        <button className='modal-genreBtn' onClick={() => handleGenreClick('인문')}>인문</button>
         <br />
-        <button className='modal-genreBtn' onClick={() => handleGenreClick('예술')}>예술</button>
-        <button className='modal-genreBtn' onClick={() => handleGenreClick('기술/공학')}>기술/공학</button>
+        <button className='modal-genreBtn' onClick={() => handleGenreClick('고전')}>고전</button>
+        <button className='modal-genreBtn' onClick={() => handleGenreClick('소설/시/희곡')}>소설/시/희곡</button>
+        <button className='modal-genreBtn' onClick={() => handleGenreClick('에세이')}>에세이</button>
+        <br />
+        <button className='modal-genreBtn' onClick={() => handleGenreClick('과학')}>과학</button>
+        <button className='modal-genreBtn' onClick={() => handleGenreClick('사회과학')}>사회과학</button>
+        <button className='modal-genreBtn' onClick={() => handleGenreClick('경제경영')}>경제경영</button>
+        <br />
+        <button className='modal-genreBtn' onClick={() => handleGenreClick('역사')}>역사</button>
+        <button className='modal-genreBtn' onClick={() => handleGenreClick('인문학')}>인문학</button>
         <button className='modal-genreBtn' onClick={() => handleGenreClick('자기계발')}>자기계발</button>
       </div>
     </div>

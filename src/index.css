@@ -325,8 +325,8 @@ html, body {
   color:#562E12;
   border-radius: 10px;
   text-align: center;
-  margin: 30vh auto;
-  padding: 20px;
+  margin: 25vh auto;
+  padding: 40px 20px;
   width: 700px;
 }
 .modal-close {
