@@ -1,11 +1,9 @@
 package com.dimmunity.Tree.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
+@Setter
 @ToString
 @NoArgsConstructor
 public class BookDTO {
@@ -14,16 +12,19 @@ public class BookDTO {
     private String author;
     private String imageURL;
     private String isbn;
-    private String category;
+    private String categoryName;
+    private String categoryId;
     private String description;
 
     @Builder
-    public BookDTO(String title, String author, String imageURL,String isbn,String category,String description) {
+    public BookDTO(String title, String author, String imageURL,String isbn,String categoryName,String categoryId,String description) {
         this.title = title;
         this.author = author;
         this.imageURL = imageURL;
         this.isbn=isbn;
-        this.category=category;
+        this.categoryName=categoryName;
+        this.categoryId=categoryId;
         this.description=description;
     }
+
 }
