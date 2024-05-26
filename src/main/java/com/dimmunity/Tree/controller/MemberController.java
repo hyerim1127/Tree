@@ -3,19 +3,17 @@ package com.dimmunity.Tree.controller;
 import com.dimmunity.Tree.dto.MemberDTO;
 import com.dimmunity.Tree.service.MemberService;
 import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -48,14 +46,14 @@ public class MemberController {
         if (loginResult != null) {
             // login 성공-login한 이메일정보를 session에 담아줌
             session.setAttribute("loginEmail", loginResult.getMemberEmail());
-            return "main";
+            return "myPage";
         } else {
             // login 실패, 실패창 구현필요 /member/loginfail
             return "login";
         }
     }
 
-    //회원리스트
+    //회원리스트-필요없을듯
     @GetMapping("/member/")
     public String findAll(Model model) {
         List<MemberDTO> memberDTOList = memberService.findAll();
@@ -63,7 +61,6 @@ public class MemberController {
         model.addAttribute("memberList", memberDTOList);
         return "list";
     }
-
     //회원조회
     @GetMapping("/member/{id}")
     public String findById(@PathVariable("id") Long id, Model model){
@@ -72,13 +69,14 @@ public class MemberController {
         return "detail";
     }
 
-    //회원삭제
+    //회원탈퇴
     //@PathVariable("id") 명시해줘야함, spring MVC가 URL경로변수이름 자동인식못함
-
     @GetMapping("/member/delete/{id}") // /member/{id}로 할 수 있도록 공부
-    public String deleteById(@PathVariable("id") Long id){
+    public String deleteById(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
         memberService.deleteById(id);
-        return "redirect:/member/"; // list 로 쓰면 껍데기만 보여짐
+
+        redirectAttributes.addFlashAttribute("message","계정 삭제가 완료되었습니다");
+        return "redirect:/login"; // list 로 쓰면 껍데기만 보여짐
     }
 
     //회원정보수정
@@ -96,11 +94,11 @@ public class MemberController {
         //정보가 수정완료된 나의 상세페이지를 띄워주기 위함
     }
 
-
     //로그아웃
     @GetMapping("/member/logout")
     public String logout(HttpSession session){
         session.invalidate();
         return "index";
     }
+
 }
