@@ -350,6 +350,7 @@ html, body {
   margin: 10px;
   padding: 20px;
   font-size: 1em;
+  transition: background-color 0.3s;
 }
 .modal-genreBtn:hover {
   color :#F9F0E3;

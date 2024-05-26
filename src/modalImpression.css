@@ -44,7 +44,8 @@
 }
   
 .I-book-image {
-    width: 150px;
+    width: 140px; 
+    height:200px;
 }
   
 .I-book-info {
@@ -102,7 +103,7 @@
 }
 .I-book-reason {
     text-align: left;
-    margin-top: 15px;
+    margin-top: 25px;
     width: 100%;
     font-size: 13px;
 }

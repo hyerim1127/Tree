@@ -4,6 +4,7 @@ import WriteImpression from "./WriteImpression";
 import Nothing from "./Nothing";
 import View from "./View";
 import Genre from "./Genre";
+import MyMain from "./myPage/MyMain";
 //import axios from 'axios';
 import React from 'react';
 import {
@@ -38,6 +39,7 @@ function App() {
         <Route path="/board" element={<View />} />
         <Route path="/nothing" element={<Nothing />} />
         <Route path="/board/genre" element={<Genre />} />
+        <Route path="/member" element={<MyMain />} />
        </Routes>
        
     </BrowserRouter>

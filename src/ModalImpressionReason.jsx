@@ -2,6 +2,7 @@ import BookImage from "./impression/BookImage";
 import BookInfo from "./impression/BookInfo";
 
 const ModalImpressionReason = ({ book, onClose }) => {
+
   return (
     <div className="I-modal">
       <div className="I-modal-reason-content">

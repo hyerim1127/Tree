@@ -75,6 +75,7 @@ h1 {
   top: 0;
   left: 3vw;
   padding-right: 10px;
+  transition: width 0.3s;
 }
 .bmkGreen:hover {
   width:3.3vw;

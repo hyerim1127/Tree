@@ -1,0 +1,18 @@
+.btn-mod-del {
+    float: right;
+    padding: 5px 7px;
+    margin: 5px;
+    font-size: 12px;
+    color: #BDA594;
+    background-color: #FFFAF3;
+    border: 1px solid #BDA594;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-mod-del:hover {
+    background-color: #744F36;
+    color: #FFFAF3;
+}
+  
