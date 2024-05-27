@@ -12,8 +12,10 @@
 <form action="/board/bookSave" method="post">
     <!--name이 정해져있어야 input에 입력한 값이 name에 담겨서 서버쪽으로 넘어갈 수 있음-->
     pass: <input type="text" name="boardPass"> <br>
-    title: <input type="text" name="boardTitle"> <br>
-    writer: <input type="text" name="boardWriter"> <br>
+    <!--onclick 함수로 책 검색 api 연결 하는 방식으로 생각하며 작성함-->
+    book search: <input type="button" name="Search" onclick=" " value="책정보 검색"> <br>
+    <!--title: <input type="text" name="boardTitle"> <br>-->
+    <!--writer: <input type="text" name="boardWriter"> <br>-->
     phrase: <textarea name="boardPhrase" cols="30" rows="10"></textarea> <br>
     reason: <textarea name="boardReason" cols="30" rows="10"></textarea> <br>
     <input type="submit" value="글작성">
