@@ -4,6 +4,7 @@ import com.dimmunity.Tree.dto.MemberDTO;
 import com.dimmunity.Tree.entity.MemberEntity;
 import com.dimmunity.Tree.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -15,6 +16,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class MemberService {
 
+    @Autowired
     private final MemberRepository memberRepository;
 
     public void save(MemberDTO memberDTO) {
@@ -57,7 +59,7 @@ public class MemberService {
 
     }
 
-    //오류있는듯
+
     public MemberDTO findById(Long id) {
         // 하나 조회할때 optional로 감싸줌
         Optional<MemberEntity> optionalMemberEntity = memberRepository.findById(id);
