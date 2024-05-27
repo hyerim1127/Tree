@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useLocation } from 'react-router-dom';
-import personLight from '../img/lock-light.png';
+import lockLight from '../img/lock-light.png';
 import logoutLight from '../img/logout-light.png';
 import pencilLight from '../img/pencil-light.png';
 import treeLight from '../img/tree-light.png';
@@ -73,9 +73,6 @@ const MyMain = () => {
   const goToLogin = () => navigate("/");
   const goToWrite = () => navigate("/board/bookSave");
   const goToBoard = () => navigate("/board");
-  const handleClick = () => {
-    alert('Button was clicked!');
-  };
 
   return (
     <div className='genrePage'>
@@ -83,7 +80,7 @@ const MyMain = () => {
 
         <span>
           <img className='shortcuts' alt='logout' src={logoutLight} onClick={goToLogin} />
-          <img className='shortcuts' alt='person' src={personLight} />
+          <img className='shortcuts' alt='lock' src={lockLight} />
           <img className='shortcuts' alt='pencil' src={pencilLight} onClick={goToWrite} />
           <img className='shortcuts' alt='logo' src={treeLight} onClick={goToBoard} />
         </span>

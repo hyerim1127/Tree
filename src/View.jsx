@@ -19,10 +19,11 @@ const View = () => {
 
   const navigate = useNavigate();
 
-  const goToLogin = () => navigate("/");
-  const goToWrite = () => navigate("/board/bookSave");
   const goToBoard = () => navigate("/board");
-
+  const goToWrite = () => navigate("/board/bookSave");
+  const goToMypage = () => navigate("/member");
+  const goToLogin = () => navigate("/");
+  
   const openModal = () => {
     setShowModal(true);
   };
@@ -109,7 +110,7 @@ const View = () => {
       <div>
         <div>
           <img className='shortcuts' alt='logout' src={logoutLight} onClick={goToLogin}/>
-          <img className='shortcuts' alt='person' src={personLight} />
+          <img className='shortcuts' alt='person' src={personLight} onClick={goToMypage} />
           <img className='shortcuts' alt='pencil' src={pencilLight} onClick={goToWrite} />
           <img className='shortcuts' alt='logo' src={treeLight} onClick={goToBoard} />
         </div>

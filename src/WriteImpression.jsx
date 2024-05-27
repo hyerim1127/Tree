@@ -32,6 +32,7 @@ const WriteImpression = () => {
     }
     const goToLogin = () => navigate("/");
     const goToBoard = () => navigate("/board");
+    const goToMypage = () => navigate("/member");
     
     const[notAllow, setNotAllow] = useState(true);
     useEffect(() => {
@@ -49,7 +50,7 @@ const WriteImpression = () => {
     return (
         <div className='page'>
             <div>
-                <inline><img className='shortcuts' alt='logout' src={logoutLight}  onClick={goToLogin}/><img className='shortcuts' alt='person' src={personLight} /></inline>
+                <inline><img className='shortcuts' alt='logout' src={logoutLight}  onClick={goToLogin}/><img className='shortcuts' alt='person' src={personLight} onClick={goToMypage} /></inline>
                 <img className='mainImg' alt='main' src={mainImg} />
                 <img className='btnR' alt='btn' src={btn} onClick={goToPageR} />
                 <div className='description'>
