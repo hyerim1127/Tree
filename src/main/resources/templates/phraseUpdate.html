@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>phraseUpdate</title>
+</head>
+<body>
+<form action="/board/phraseUpdate" method="post" name="updateForm">
+    <input type="hidden" name="id" th:value="${boardUpdate.id}">
+<!--    수정하지 못하게 할 때 readonly-->
+    writer: <input type="text" name="boardWriter" th:value="${boardUpdate.boardWriter}" readonly> <br>
+    pass: <input type="text" name="boardPass" id="boardPass"> <br>
+    title: <input type="text" name="boardTitle" th:value="${boardUpdate.boardTitle}"> <br>
+    phrase: <textarea name="boardPhrase" cols="30" rows="10" th:text="${boardUpdate.boardPhrase}"></textarea> <br>
+    reason: <textarea name="boardReason" cols="30" rows="10" th:text="${boardUpdate.boardReason}"></textarea> <br>
+<!--    수정하지 않는 정보라도 hidden 으로 가지고 있어야 한다.-->
+    <input type="hidden" name="boardHits" th:value="${boardUpdate.boardHits}">
+    <input type="button" value="글 수정" onclick="boardUpdate()">
+</form>
+<script th:inline="javascript">
+//비밀번호 검증 후 요청 보냄
+  const boardUpdate = () => {
+    const pass = [[${boardUpdate.boardPass}]]; // db 에서 가져온 기존 비밀번호
+    const inputPass = document.getElementById("boardPass").value; // 값 가져옴
+    if (pass == inputPass) { // 일치할 경우
+      document.updateForm.submit(); // form 태그를 제출하겠다는 의미
+    } else {
+      alert("비밀번호가 일치하지 않습니다!");
+    }
+  }
+</script>
+</body>

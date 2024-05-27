@@ -7,11 +7,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import jakarta.validation.Valid;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+
 
 @Controller
 @RequiredArgsConstructor
@@ -27,6 +29,7 @@ public class MemberController {
     }
 
     @PostMapping("/member/save")    // name값을 requestparam에 담아온다
+
     public String save(@ModelAttribute MemberDTO memberDTO, Errors errors, Model model) {
         System.out.println("MemberController.save");
         System.out.println("MemberDTO= "+ memberDTO);

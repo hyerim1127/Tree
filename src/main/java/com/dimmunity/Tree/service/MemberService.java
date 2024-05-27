@@ -6,8 +6,8 @@ import com.dimmunity.Tree.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.*;
+
 
 //전체흐름
 //save에서 입력한 값이 controller로 넘어와서
@@ -65,15 +65,20 @@ public class MemberService {
         Optional<MemberEntity> optionalMemberEntity = memberRepository.findById(id);
         if (optionalMemberEntity.isPresent()){
             return MemberDTO.toMemberDTO(optionalMemberEntity.get()); //get을통해 optional을 벗겨내서 entity -> dto 변환
-        } else {
+        }else {
             return null;
         }
     }
+    public void deleteById(Long id) {
+        memberRepository.deleteById(id);
+    }
+
     public MemberDTO updateForm(String myEmail) {
         Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberEmail(myEmail);
         if(optionalMemberEntity.isPresent()){
             return MemberDTO.toMemberDTO(optionalMemberEntity.get());
-        } else {
+        } else{
+
             return null;
         }
     }
@@ -83,9 +88,6 @@ public class MemberService {
         //db에 이미 있는 id라면 update쿼리를 날림, 그냥 memberentity로 하면 insert가 되므로 주의
     }
 
-    public void deleteById(Long id) {
-        memberRepository.deleteById(id);
-    }
 
 
 }
