@@ -19,9 +19,9 @@
     <!--th는 thymeleaf에서 제공하는 문법으로 foreach역할, tr까지 반복-->
     <tr th:each="board: ${boardList}">
         <td th:text="${board.id}"></td>
-        <td><a th:href="@{|/board/${board.id}|}" th:text="${board.boardTitle}"></a></td>
+        <td th:text="${board.boardTitle}"></td>
         <td th:text="${board.boardWriter}"></td>
-        <td th:text="${board.boardPhrase}"></td>
+        <td><a th:href="@{|/board/${board.id}|}" th:text="${board.boardPhrase}"></a></td>
         <td th:text="${board.boardReason}"></td>
         <td th:text="*{#temporals.format(board.boardCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
         <td th:text="${board.boardHits}"></td>
