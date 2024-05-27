@@ -16,7 +16,6 @@ public class MemberDTO { //회원 정보를 필드로 정의
     private Long id;  //pk로 등록
     private String memberEmail;
     private String memberPassword;
-    private String memberName;
 
     //lombok 어노테이션으로 getter,setter,생성자,toString 메서드 생략 가능
 
@@ -24,7 +23,6 @@ public class MemberDTO { //회원 정보를 필드로 정의
         MemberDTO memberDTO = new MemberDTO();
         memberDTO.setId(memberEntity.getId());
         memberDTO.setMemberEmail(memberEntity.getMemberEmail());
-        memberDTO.setMemberName(memberEntity.getMemberName());
         memberDTO.setMemberPassword(memberEntity.getMemberPassword());
 
         return memberDTO;

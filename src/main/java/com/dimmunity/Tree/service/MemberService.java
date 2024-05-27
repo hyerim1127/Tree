@@ -59,7 +59,7 @@ public class MemberService {
 
     }
 
-    //오류있는듯
+
     public MemberDTO findById(Long id) {
         // 하나 조회할때 optional로 감싸줌
         Optional<MemberEntity> optionalMemberEntity = memberRepository.findById(id);

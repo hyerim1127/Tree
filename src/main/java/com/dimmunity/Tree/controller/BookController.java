@@ -41,8 +41,6 @@ public class BookController {
     public String search(@ModelAttribute("keyword") String keyword, Model model) {
         List<BookDTO> bookDtoList= bookService.searchBooksWithCategories(keyword);
         model.addAttribute("bookDtoList", bookDtoList);
-
-
         return "bookSearch";
     }
 }
