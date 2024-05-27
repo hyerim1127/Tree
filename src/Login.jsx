@@ -50,7 +50,7 @@ export default function Login() {
         if(email===User.email && pw===User.pw) {
             navigate('/board/bookSave');
         } else {
-            alert('login failedㅠㅠ')
+            alert('login failed')
         }
     }
 
