@@ -2,7 +2,7 @@ import BookImage from "../impression/BookImage";
 import BookInfo from "../impression/BookInfo";
 import Button from "./Button";
 
-const MyImpressionModal = ({ book, onClose }) => {
+const ModalMyImpression = ({ book, onClose }) => {
     const handleClick = () => {
         alert('Button was clicked!');
       };
@@ -35,4 +35,4 @@ const MyImpressionModal = ({ book, onClose }) => {
   );
 };
 
-export default MyImpressionModal;
+export default ModalMyImpression;

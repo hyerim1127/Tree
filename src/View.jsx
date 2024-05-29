@@ -105,11 +105,18 @@ const View = () => {
     return false; // 겹치지 않는 경우 false 반환
   };
 
+  const[isLoggedIn, setIsLoggedIn] = useState(true);
+  const logoutHandler = () => {
+      localStorage.removeItem("isLoggedIn");
+      setIsLoggedIn(false);
+      goToLogin();
+  }
+
   return (
     <div className='pageView'>
       <div>
         <div>
-          <img className='shortcuts' alt='logout' src={logoutLight} onClick={goToLogin}/>
+          <img className='shortcuts' alt='logout' src={logoutLight} onClick={logoutHandler}/>
           <img className='shortcuts' alt='person' src={personLight} onClick={goToMypage} />
           <img className='shortcuts' alt='pencil' src={pencilLight} onClick={goToWrite} />
           <img className='shortcuts' alt='logo' src={treeLight} onClick={goToBoard} />

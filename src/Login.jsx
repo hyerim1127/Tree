@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 import logo from './img/treelogo.png';
 import mainImg from './img/mainImage.png';
 import { useNavigate } from "react-router-dom";
-
 const User = {
     email:'test@example.com',
     pw: 'test123@@@'
 }
+
 
 export default function Login() {
 
@@ -17,6 +17,23 @@ export default function Login() {
     const[emailValid, setEmailValid] = useState(false);
     const[pwValid, setPwValid] = useState(false);
     const[notAllow, setNotAllow] = useState(true);
+    //state를 이용하여 로그인 시, state를 true로 업데이트 -> 새로고침하면 모든 변수가 사라지게 됨(아이디, 비밀번호 등) -> 따라서 이 데이터를 어딘가에 저장해야됨
+    const[isLoggedIn, setIsLoggedIn] = useState(false);
+    //login버튼을 클릭하면 실행되는 함수, 로그인 정보를 저장하는 코드 작성 !!!!아직 온클릭이벤트 연결 안함, 로그인 버튼에 다른 온클릭함수가 연결되어 있을 것
+    //setItem의 첫번째 인자는 식별자 - 사용자 지정
+    //setItem의 두번째 인자는 문자열 - 1로 지정
+    const loginHandler = (email, pw) => {
+        localStorage.setItem("isLoggedIn","1");
+        setIsLoggedIn(true);
+    };
+    //getItem 로컬 스토리지에 저장된 isLoggedIn 식별자에 저장된 값(로그인 시 1)을 반환
+    const storedUserLoggedInInformation = localStorage.getItem("isLoggedIn");
+    useEffect(() => {
+        const storedUserLoggedInInformation = localStorage.getItem("isLoggedIn");
+        if(storedUserLoggedInInformation === "1") {
+            setIsLoggedIn(true);
+        }
+    },[]);
 
     useEffect(() => {
         if(emailValid && pwValid) {
@@ -46,12 +63,19 @@ export default function Login() {
         }
     }
 
+    //로그인버튼 온클릭함수
     const onClickConfirmButton = () => {
         if(email===User.email && pw===User.pw) {
+            loginHandler(email, pw);
             navigate('/board/bookSave');
         } else {
             alert('login failed')
         }
+    }
+    
+    const logoutHandler = () => {
+        localStorage.removeItem("isLoggedIn");
+        setIsLoggedIn(false);
     }
 
     const navigate = useNavigate();
@@ -73,7 +97,7 @@ export default function Login() {
             </div>
             <div className='form'>
                 <center>
-                    <button className="backBtn">
+                    <button className="backBtn" onClick={logoutHandler}>
                         <img 
                         className='logo'
                         alt='treeIm'g

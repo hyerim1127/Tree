@@ -7,7 +7,8 @@ import pencilLight from '../img/pencil-light.png';
 import treeLight from '../img/tree-light.png';
 import bmkBlue from '../img/bookmark-blue.png';
 import ModalGenre from '../ModalGenre';
-import MyImpressionModal from './MyImpressionModal';
+import ModalMyImpression from './ModalMyImpression';
+import ModalPwChange from './ModalPwChange';
 import "../genre.css";
 
 const MyMain = () => {
@@ -67,7 +68,6 @@ const MyMain = () => {
 
   const impressions = dummyImpressions;
 
-
   const navigate = useNavigate();
 
   const goToLogin = () => navigate("/");
@@ -75,12 +75,19 @@ const MyMain = () => {
   const goToBoard = () => navigate("/board");
   const goToMylog = () => navigate("/member/log");
 
+  const[isLoggedIn, setIsLoggedIn] = useState(true);
+  const logoutHandler = () => {
+      localStorage.removeItem("isLoggedIn");
+      setIsLoggedIn(false);
+      goToLogin();
+  }
+
   return (
     <div className='genrePage'>
       <div>
 
         <span>
-          <img className='shortcuts' alt='logout' src={logoutLight} onClick={goToLogin} />
+          <img className='shortcuts' alt='logout' src={logoutLight} onClick={logoutHandler} />
           <img className='shortcuts' alt='lock' src={lockLight} />
           <img className='shortcuts' alt='pencil' src={pencilLight} onClick={goToWrite} />
           <img className='shortcuts' alt='logo' src={treeLight} onClick={goToBoard} />
@@ -105,7 +112,7 @@ const MyMain = () => {
         </div>
       </div>
       {showModalImpression && selectedBook && (
-        <MyImpressionModal book={selectedBook} onClose={closeModalImpression} />
+        <ModalMyImpression book={selectedBook} onClose={closeModalImpression} />
       )}
     </div>
   );

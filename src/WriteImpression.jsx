@@ -11,6 +11,7 @@ const WriteImpression = () => {
 
     const navigate = useNavigate();
 
+
     const [title, setTitle] = useState('');
     const handleTitle = (e) => {
         setTitle(e.target.value);
@@ -46,11 +47,17 @@ const WriteImpression = () => {
     const goToPageR = () => {
         navigate("/board");
     }
+    const[isLoggedIn, setIsLoggedIn] = useState(true);
+    const logoutHandler = () => {
+        localStorage.removeItem("isLoggedIn");
+        setIsLoggedIn(false);
+        goToLogin();
+    }
 
     return (
         <div className='page'>
             <div>
-                <inline><img className='shortcuts' alt='logout' src={logoutLight}  onClick={goToLogin}/><img className='shortcuts' alt='person' src={personLight} onClick={goToMypage} /></inline>
+                <inline><img className='shortcuts' alt='logout' src={logoutLight}  onClick={logoutHandler}/><img className='shortcuts' alt='person' src={personLight} onClick={goToMypage} /></inline>
                 <img className='mainImg' alt='main' src={mainImg} />
                 <img className='btnR' alt='btn' src={btn} onClick={goToPageR} />
                 <div className='description'>
