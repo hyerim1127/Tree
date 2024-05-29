@@ -9,7 +9,6 @@ import bmkBlue from '../img/bookmark-blue.png';
 import ModalGenre from '../ModalGenre';
 import ModalMyImpression from './ModalMyImpression';
 import ModalPwChange from './passwordChange/ModalPwChange';
-import NewPasswordModal from './passwordChange/NewPasswordModal';
 import "../genre.css";
 
 const MyMain = () => {
