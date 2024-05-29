@@ -8,7 +8,8 @@ import treeLight from '../img/tree-light.png';
 import bmkBlue from '../img/bookmark-blue.png';
 import ModalGenre from '../ModalGenre';
 import ModalMyImpression from './ModalMyImpression';
-import ModalPwChange from './ModalPwChange';
+import ModalPwChange from './passwordChange/ModalPwChange';
+import NewPasswordModal from './passwordChange/NewPasswordModal';
 import "../genre.css";
 
 const MyMain = () => {
@@ -24,6 +25,7 @@ const MyMain = () => {
   const [showModalGenre, setShowModalGenre] = useState(false);
   const [showModalImpression, setShowModalImpression] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
+  const [showModalPwChange, setShowModalPwChange] = useState(false);
 
   const openModalGenre = () => {
     setShowModalGenre(true);
@@ -46,6 +48,13 @@ const MyMain = () => {
   const handleGenreSelect = (genre) => {
     setShowModalGenre(false);
     navigate(`/board/genre?genre=${genre}`);
+  };
+  const openModalPwChange = () => {
+    setShowModalPwChange(true); // 비밀번호 변경 모달 열기
+  };
+
+  const closeModalPwChange = () => {
+    setShowModalPwChange(false); // 비밀번호 변경 모달 닫기
   };
 
   const dummyImpressions = [
@@ -88,7 +97,8 @@ const MyMain = () => {
 
         <span>
           <img className='shortcuts' alt='logout' src={logoutLight} onClick={logoutHandler} />
-          <img className='shortcuts' alt='lock' src={lockLight} />
+          <img className='shortcuts' alt='lock' src={lockLight}  onClick={openModalPwChange} />
+          {showModalPwChange && <ModalPwChange onClose={closeModalPwChange} />}
           <img className='shortcuts' alt='pencil' src={pencilLight} onClick={goToWrite} />
           <img className='shortcuts' alt='logo' src={treeLight} onClick={goToBoard} />
         </span>
