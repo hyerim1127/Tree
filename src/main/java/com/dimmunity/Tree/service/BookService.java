@@ -88,7 +88,7 @@ public class BookService {
                 String title = obj.getString("title");
                 String author = obj.getString("author");
                 String image = obj.getString("image");
-                String isbn = obj.getString("isbn");
+                String isbn = obj.getString("isbn").split(" ")[0];
                 String description = obj.getString("description");
 
 

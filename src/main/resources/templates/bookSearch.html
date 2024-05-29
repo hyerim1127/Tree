@@ -1,48 +1,70 @@
-<div id="popup">   <!-- 팝업 -->
-
-    <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <style>
-            table {
-                width: 100%;
-                border-collapse: collapse;
-            }
-
-            th, td {
-                border-bottom: 1px solid #555555;
-                padding: 10px;
-            }
-        </style>
-
-    </head>
-    <body>
-    <script th:src="@{/js/search.js}"></script>
-    <div class="col-md-12">
-        <h1>도서 검색</h1>
-        <div class="col-md-4">
-            <form th:action="@{/book-search}" method="post">
-                <input type="text" th:value="${keyword}" name="keyword" placeholder="도서명을 입력해주세요.">
-                <button th:text="검색" type="submit"/>
-            </form>
-        </div>
-
-        <hr>
-        <div>
-            <table class="table">
-                <tbody>
-                <tr th:each="bookDto : ${bookDtoList}" onclick="selectElement(this)" style="cursor : pointer;" \>
-                    <td><img th:src="@{${bookDto.imageURL}}" width="100" height="150"/></td>
-                    <td th:text="${bookDto.title}">title</td>
-                    <td th:text="${bookDto.author}">authorA</td>
-                    <td th:text="${bookDto.categoryId}">categoryId</td>
-                    <td th:text="${bookDto.isbn}">isbn</td>
-                    <td th:text="${bookDto.description}">description</td>
-
-                </tr>
-                </tbody>
-            </table>
-        </div>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>도서 검색</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border-bottom: 1px solid #555555;
+            padding: 10px;
+        }
+    </style>
+    <script>
+        function selectElement(selectedElement) {
+            const elements = selectedElement.getElementsByTagName("td");
+            const data = {
+                title: elements[1].innerText,
+                author: elements[2].innerText,
+                category: elements[3].innerText,
+                imageURL: elements[0].querySelector('img').getAttribute('src')
+            };
+            opener.document.getElementById("bookTitle").value = data.title;
+            opener.document.getElementById("bookAuthor").value = data.author;
+            opener.document.getElementById("bookCategory").value = data.category;
+            opener.document.getElementById("bookImageURL").value = data.imageURL;
+            window.close();
+        }
+    </script>
+</head>
+<body>
+<div class="col-md-12">
+    <h1>도서 검색</h1>
+    <div class="col-md-4">
+        <form th:action="@{/book-search}" method="post">
+            <input type="text" th:value="${keyword}" name="keyword" placeholder="도서명을 입력해주세요." required>
+            <button type="submit">검색</button>
+        </form>
     </div>
-    </body>
-    </html>
+    <hr>
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>이미지</th>
+                <th>제목</th>
+                <th>저자</th>
+                <th>카테고리</th>
+                <th>ISBN</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="bookDto : ${bookDtoList}" onclick="selectElement(this)" style="cursor: pointer;">
+                <td><img th:src="${bookDto.imageURL}" width="100" height="150" alt="책 이미지"/></td>
+                <td th:text="${bookDto.title}">제목</td>
+                <td th:text="${bookDto.author}">저자</td>
+                <td th:text="${bookDto.categoryName}">카테고리</td>
+                <td th:text="${bookDto.isbn}">ISBN</td>
+                <td th:text="${bookDto.description}">설명</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
+</body>
+</html>
