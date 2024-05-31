@@ -23,7 +23,7 @@ const View = () => {
   const goToWrite = () => navigate("/board/bookSave");
   const goToMypage = () => navigate("/member");
   const goToLogin = () => navigate("/");
-  
+
   const openModal = () => {
     setShowModal(true);
   };
@@ -107,9 +107,9 @@ const View = () => {
 
   const[isLoggedIn, setIsLoggedIn] = useState(true);
   const logoutHandler = () => {
-      localStorage.removeItem("isLoggedIn");
-      setIsLoggedIn(false);
-      goToLogin();
+    localStorage.removeItem("isLoggedIn");
+    setIsLoggedIn(false);
+    goToLogin();
   }
 
   return (

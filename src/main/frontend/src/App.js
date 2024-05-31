@@ -6,31 +6,23 @@ import View from "./View";
 import Genre from "./Genre";
 import MyMain from "./myPage/MyMain";
 import MyLog from "./myPage/MyLog";
-//import axios from 'axios';
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter,
   Routes,
   Route
 } from "react-router-dom";
 
-function App() {  
+function App() {
+  const [msg, setMsg] = useState('')
 
-  /*const [posts, setPosts] = useState([]);
   useEffect(() => {
-    axios({
-      method:'GET',
-      url:'https://jsonplaceholder.typicode.com/posts'
-    }).then(response => setPosts(response.data))
-  })
+    axios.get('/hello')
+      .then(response => setMsg(response.data))
+      .catch(error => console.log(error))
+  }, []);
 
-  <div>
-    <ul>
-    {posts.map(post => (
-      <li key={post.id}>{post.title}</li>
-    ))}
-    </ul>
-  </div>*/
   return (
     <BrowserRouter>
       <Routes>

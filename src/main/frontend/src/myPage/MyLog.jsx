@@ -7,8 +7,24 @@ import treeLight from '../img/tree-light.png';
 import bmkBlue from '../img/bookmark-blue.png';
 import ModalGenre from '../ModalGenre';
 import "../genre.css";
+import CalendarChart from './CalendarChart';
 
 const MyLog = () => {
+  const data = [
+    { date: '2024-01-01', value: 10 },
+    { date: '2024-01-02', value: 20 },
+    { date: '2024-01-03', value: 10 },
+    { date: '2024-01-04', value: 25 },
+    { date: '2024-01-05', value: 30 },
+    { date: '2024-01-06', value: 5 },
+    { date: '2024-01-07', value: 17 },
+    { date: '2024-01-08', value: 21 },
+    { date: '2024-01-09', value: 6 },
+    { date: '2024-01-10', value: 25 },
+    { date: '2024-01-11', value: 42 },
+    { date: '2024-01-12', value: 5 },
+    // 나머지 데이터 추가...
+  ];
   const book = {
     image: 'https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791165341909.jpg',
     title: '달러구트 꿈 백화점',
@@ -63,9 +79,9 @@ const MyLog = () => {
 
   const[isLoggedIn, setIsLoggedIn] = useState(true);
   const logoutHandler = () => {
-      localStorage.removeItem("isLoggedIn");
-      setIsLoggedIn(false);
-      goToLogin();
+    localStorage.removeItem("isLoggedIn");
+    setIsLoggedIn(false);
+    goToLogin();
   }
 
   return (
@@ -79,6 +95,7 @@ const MyLog = () => {
           <img className='shortcuts' alt='logo' src={treeLight} onClick={goToBoard} />
         </span>
 
+
         <div className='header'>
           <img className='bmkGreen' alt='btn' src={bmkBlue} onClick={openModalGenre} />
           {showModalGenre && <ModalGenre onClose={closeModalGenre} onGenreSelect={handleGenreSelect} />}
@@ -86,6 +103,8 @@ const MyLog = () => {
           <button className='mypage-tab' onClick={goToMylog}>내가 쓴 구절들</button>
           <button className='mypage-tab-clicked'>my log</button>
         </div>
+
+        <CalendarChart data={data}></CalendarChart>
       </div>
     </div>
   );
