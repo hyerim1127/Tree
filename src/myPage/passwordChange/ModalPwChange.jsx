@@ -131,6 +131,7 @@ const ModalPwChange = ({ onClose }) => {
             <br />
             <h6>새로운 비밀번호를 입력해주세요</h6>
             <br />
+            <br />
 
             <div className='pw-contentWrap'>
               <div className='pw-inputWrap'>
@@ -155,6 +156,7 @@ const ModalPwChange = ({ onClose }) => {
                   onChange={handleConfirmPw} />
               </div>
             </div>
+            <br />
             <button onClick={handlePasswordChange} className="pw-bottomButton" disabled={notAllow}>비밀번호 변경</button>
           </div>
         )}
