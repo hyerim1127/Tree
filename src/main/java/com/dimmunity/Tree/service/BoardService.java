@@ -108,7 +108,10 @@ public class BoardService {
 
         // map 은 Page 객체에서 제공해주는 메소드이고, board 는 엔티티 개체다. board 에서 변수를 하나씩 꺼내서 BoardDTO로 옮겨 담는다.(즉, 바꿔주는 거다.)
         // 페이지 목록에서 보여주면 되는 데이터 : id, writer, title, hits, createdTime -> 이정보를 담을 수 있는 DTO 생성자를 추가하면 된다.
-        Page<BoardDTO> boardDTOS = boardEntities.map(board -> new BoardDTO(board.getId(), board.getBoardPhrase(), board.getBoardWriter(), board.getBoardTitle(), board.getBoardHits(), board.getCreatedTime()));
+        Page<BoardDTO> boardDTOS = boardEntities.map(board -> new BoardDTO(board.getId(),
+                board.getBoardPhrase(), board.getBoardWriter(),
+                board.getBookTitle(),board.getBookAuthor(),board.getBookCategoryName(), board.getBookImageURL(),
+                board.getBoardHits(), board.getCreatedTime()));
 //
 
         return boardDTOS; // DTO 객체를 controller 쪽으로 return 한다.

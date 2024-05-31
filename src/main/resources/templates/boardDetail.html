@@ -6,6 +6,7 @@
 
 </head>
 <body>
+<h2>글 상세 조회</h2>
 <table>
     <tr>
         <th>id</th>
@@ -13,23 +14,23 @@
     </tr>
     <tr>
         <th>title</th>
-        <td th:text="${board.bookTitle}"></td>
-    </tr>
-    <tr>
-        <th>writer</th>
-        <td th:text="${board.bookAuthor}"></td>
-    </tr>
-    <tr>
-        <th>writer</th>
-        <td th:text="${board.bookCategoryName}"></td>
-    </tr>
-    <tr>
-        <th>writer</th>
-        <td th:text="${board.bookImageURL}"></td>
+        <td th:text= "${board.bookTitle}"></td>
     </tr>
     <tr>
         <th>writer</th>
         <td th:text="${board.boardWriter}"></td>
+    </tr>
+    <tr>
+        <th>author</th>
+        <td th:text="${board.bookAuthor}"></td>
+    </tr>
+    <tr>
+        <th>category</th>
+        <td th:text="${board.bookCategoryName}"></td>
+    </tr>
+    <tr>
+        <th>bookURL</th>
+        <td th:text="${board.bookImageURL}"></td>
     </tr>
     <tr>
         <th>date</th>
@@ -75,5 +76,6 @@
         const id = [[${board.id}]];
         location.href = "/board/delete/" + id;
     }
+
 </script>
 </html>

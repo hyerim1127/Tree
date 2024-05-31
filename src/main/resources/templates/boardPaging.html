@@ -10,7 +10,7 @@
 
 <table>
     <tr>
-        <th>id</th>
+    <!--<th>id</th>-->
         <th>phrase</th>
     <!--<th>title</th>-->
     <!--<th>writer</th>-->
@@ -18,7 +18,7 @@
     <!--<th>hits</th>-->
     </tr>
     <tr th:each="board: ${boardList}">
-        <td th:text="${board.id}"></td>
+        <!--<td th:text="${board.id}"></td>-->
         <!--상세 정보 조회 시 페이지 정보를 가져감 -> 직전에 머물러 있었던 페이지로 돌아오기 위해-->
         <td><a th:href="@{|/board/${board.id}|(page=${boardList.number + 1})}" th:text="${board.boardPhrase}"></a></td>
         <!--<td th:text="${board.boardWriter}"></td>-->

@@ -1,8 +1,10 @@
 package com.dimmunity.Tree.controller;
 
 import com.dimmunity.Tree.dto.BoardDTO;
+import com.dimmunity.Tree.dto.BookDTO;
 import com.dimmunity.Tree.entity.BoardEntity;
 import com.dimmunity.Tree.service.BoardService;
+import com.dimmunity.Tree.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.query.criteria.JpaCriteriaUpdate;
 import org.springframework.data.domain.Page;
@@ -20,6 +22,7 @@ import java.util.List;
 public class BoardController {
 
     private final BoardService boardService;
+    private BookService bookService;
 
     @GetMapping("/bookSave")
     public String saveForm(){
@@ -35,13 +38,13 @@ public class BoardController {
 
     // 게시글 목록
     // 나중에 프론트랑 연결할때 / 고려해야하는지 고민
-    @GetMapping("/")
-    public String findAll(Model model) {
-        // DB에서 전체 게시글 데이터를 가져와서 phraseList.html에 보여준다.
-        List<BoardDTO> boardDTOList = boardService.findAll();
-        model.addAttribute("boardList",boardDTOList);
-        return "phraseList";
-    }
+//    @GetMapping("/")
+//    public String findAll(Model model) {
+//        // DB에서 전체 게시글 데이터를 가져와서 phraseList.html에 보여준다.
+//        List<BoardDTO> boardDTOList = boardService.findAll();
+//        model.addAttribute("boardList",boardDTOList);
+//        return "phraseList";
+//    }
 
     // 게시글 상세 조회
     @GetMapping("/{id}")
@@ -51,8 +54,10 @@ public class BoardController {
         // 두번의 메소드 호출 이뤄짐
         boardService.updateHits(id);
         BoardDTO boardDTO = boardService.findById(id);
+
         model.addAttribute("board", boardDTO);
         model.addAttribute("page", pageable.getPageNumber());
+
         return "boardDetail";
     }
 
@@ -68,7 +73,7 @@ public class BoardController {
     public String update(@ModelAttribute BoardDTO boardDTO, Model model) {
         BoardDTO board = boardService.update(boardDTO);
         model.addAttribute("board", board);
-        return "boardDetail";
+        return "redirect:/board/" + boardDTO.getId();
     }
 
     // 게시글 삭제
