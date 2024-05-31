@@ -7,8 +7,8 @@ import treeLight from '../img/tree-light.png';
 import bmkBlue from '../img/bookmark-blue.png';
 import ModalGenre from '../ModalGenre';
 import "../genre.css";
-import "./CalendarChart.css"
-import CalendarChart from './CalendarChart';
+import "./calendar/CalendarChart.css"
+import CalendarChart from './calendar/CalendarChart';
 
 const generateData = (startYear, endYear, minVal, maxVal) => {
   const data = [];
@@ -27,7 +27,7 @@ const generateData = (startYear, endYear, minVal, maxVal) => {
   return data;
 };
 
-const data = generateData(2021, 2024, 1, 50); 
+const data = generateData(2021, 2024, 1, 20); 
 
 const MyLog = () => {
 
