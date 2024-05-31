@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <style>
+      .header {
+          display: flex;
+          justify-content: flex-end;
+          background-color: #f8f9fa;
+          padding: 10px;
+      }
+      .header a {
+          margin-left: 10px;
+          text-decoration: none;
+          color: #007bff;
+          padding: 5px 10px;
+          border: 1px solid #007bff;
+          border-radius: 5px;
+      }
+      .header a:hover {
+          background-color: #007bff;
+          color: white;
+      }
+  </style>
+</head>
+<body>
+<!--<div class="header">-->
+<!--  <a th:href="@{/bookSave}">구절 작성</a>-->
+<!--  <a th:href="@{/board}">게시판</a>-->
+<!--  <a th:href="@{/myPage}">마이 페이지</a>-->
+<!--  <a th:href="@{/member/logout}">로그아웃</a>-->
+<!--</div>-->
+<div>
+<button onclick="window.location.href='/bookSave'">책 구절 작성</button>
+<button onclick="window.location.href='/board/'">게시판</button>
+<button onclick="window.location.href='/member/myPage'">마이 페이지</button>
+<button onclick="window.location.href='/member/logout'">로그아웃</button>
+</div>
+</body>
+</html>

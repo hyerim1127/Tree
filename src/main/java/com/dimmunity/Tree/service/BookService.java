@@ -31,7 +31,6 @@ public class BookService {
         for (BookDTO book : bookList) {
             String categoryInfo = getCategoryByIsbn(book.getIsbn());
             String[] categoryParts = categoryInfo.split(">");
-            System.out.println(categoryInfo);
             if (categoryParts.length > 1) {
                 book.setCategoryName(categoryParts[2]);
                 book.setCategoryId(categoryParts[0]);

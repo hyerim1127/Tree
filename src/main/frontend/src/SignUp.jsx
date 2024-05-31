@@ -1,3 +1,5 @@
+//회원가입
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import mainImg from './img/mainImage.png';
@@ -70,7 +72,7 @@ const SignUp = () => {
                 email:email,
                 password:pw
             };
-            axios.post('')
+            axios.post('http://localhost:8081/save')
             .then(response => {
                 alert("sign up success!")
                 goToLogin();
@@ -85,13 +87,6 @@ const SignUp = () => {
         } else {
             alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
         }
-        /*
-        if(pw===pwConfirm) {
-            alert('sign up success!')
-            goToLogin();
-        } else {
-            alert('sign up failed!')
-        }*/
     }
 
     const navigate = useNavigate();
