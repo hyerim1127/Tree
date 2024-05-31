@@ -26,6 +26,17 @@ public class BoardDTO {
     //게시글 수정시간
     private LocalDateTime boardUpdatedTime;
 
+    // 5개를 매개변수로 하는 생성자 생성
+    public BoardDTO(Long id, String boardPhrase, String boardWriter, String boardTitle, int boardHits, LocalDateTime boardCreatedTime) {
+        //
+        this.id = id;
+        this.boardPhrase = boardPhrase;
+        this.boardWriter = boardWriter;
+        this.boardTitle = boardTitle;
+        this.boardHits = boardHits;
+        this.boardCreatedTime = boardCreatedTime;
+    }
+
     // entity 객체를 dto 객체로 옮겨 담는 과정 (Entity -> DTO)
     public static BoardDTO toBoardDTO(BoardEntity boardEntity){
         BoardDTO boardDTO = new BoardDTO();
