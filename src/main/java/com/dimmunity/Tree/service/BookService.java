@@ -31,9 +31,10 @@ public class BookService {
         for (BookDTO book : bookList) {
             String categoryInfo = getCategoryByIsbn(book.getIsbn());
             String[] categoryParts = categoryInfo.split(">");
+            System.out.println(categoryInfo);
             if (categoryParts.length > 1) {
                 book.setCategoryName(categoryParts[2]);
-                book.setCategoryId(categoryParts[1].replace("(", "").replace(")", ""));
+                book.setCategoryId(categoryParts[0]);
             } else {
                 book.setCategoryName(categoryInfo);
                 book.setCategoryId("");
@@ -120,7 +121,7 @@ public class BookService {
             String categoryName = item.getString("categoryName");
             Object categoryIDObj = item.get("categoryId");
             String categoryId=String.valueOf(categoryIDObj);
-            return categoryName + " (" + categoryId + ")";
+            return  categoryId +">"+ categoryName  ;
         }
         return "카테고리 없음";
     }

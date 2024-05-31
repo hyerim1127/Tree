@@ -16,17 +16,17 @@
     </style>
     <script>
         function selectElement(selectedElement) {
-            const elements = selectedElement.getElementsByTagName("td");
-            const data = {
+            let elements = selectedElement.getElementsByTagName("td");
+            let data = {
                 title: elements[1].innerText,
                 author: elements[2].innerText,
-                category: elements[3].innerText,
+                categoryName: elements[3].innerText,
                 imageURL: elements[0].querySelector('img').getAttribute('src')
             };
-            opener.document.getElementById("bookTitle").value = data.title;
-            opener.document.getElementById("bookAuthor").value = data.author;
-            opener.document.getElementById("bookCategory").value = data.category;
-            opener.document.getElementById("bookImageURL").value = data.imageURL;
+            window.opener.document.getElementById("bookTitle").value = data.title;
+            window.opener.document.getElementById("bookAuthor").value = data.author;
+            window.opener.document.getElementById("bookCategoryName").value = data.categoryName;
+            window.opener.document.getElementById("bookImageURL").value = data.imageURL;
             window.close();
         }
     </script>

@@ -7,7 +7,7 @@
         function selectBook(title, author, category, imageURL) {
             opener.document.getElementById("bookTitle").value = title;
             opener.document.getElementById("bookAuthor").value = author;
-            opener.document.getElementById("bookCategory").value = category;
+            opener.document.getElementById("bookCategoryName").value = categoryName;
             opener.document.getElementById("bookImageURL").value = imageURL;
             window.close();
         }
@@ -35,6 +35,9 @@
 
     <label for="bookAuthor">저자:</label>
     <input type="text" id="bookAuthor" name="bookAuthor" readonly required>
+
+    <label for="bookCategoryName">카테고리:</label>
+    <input type="text" id="bookCategoryName" name="bookCategoryName"><br>
 
     <label for="bookImageURL">이미지 URL:</label>
     <input type="text" id="bookImageURL" name="bookImageURL" readonly required>

@@ -48,7 +48,7 @@ public class MemberController {
         if (loginResult != null) {
             // login 성공-login한 이메일정보를 session에 담아줌, 구절작성페이지로감
             session.setAttribute("loginEmail", loginResult.getMemberEmail());
-            return "bookSave";
+            return "redirect:/bookSave";
         } else {
             // login 실패, 실패창 구현필요 /member/loginfail
             return "login";

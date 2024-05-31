@@ -20,7 +20,14 @@ public class BoardEntity extends BaseEntity{
     //column 크기 지정
     @Column(length = 20, nullable = false) // 크기는 20, null 일 수 없다. (default 는 255, null 가능)
     private String boardWriter;
-
+    @Column
+    private String bookTitle;
+    @Column
+    private String bookAuthor;
+    @Column
+    private String bookCategoryName;
+    @Column
+    private String bookImageURL;
     @Column
     private String boardPass;
 

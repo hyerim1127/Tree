@@ -17,6 +17,8 @@
     <input type="hidden" name="boardHits" th:value="${boardUpdate.boardHits}">
     <input type="button" value="글 수정" onclick="boardUpdate()">
 </form>
+<button onclick="window.open('/book', '책 검색', 'width=600,height=400')">책 검색</button>
+
 <script th:inline="javascript">
 //비밀번호 검증 후 요청 보냄
   const boardUpdate = () => {
