@@ -1,58 +1,70 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import './CalendarChart.css';
 
 const CalendarChart = ({ data }) => {
     const svgRef = useRef(null);
+    const [width, setWidth] = useState(window.innerWidth);
 
     useEffect(() => {
         const handleResize = () => {
-            drawChart();
+            setWidth(window.innerWidth);
         };
 
         window.addEventListener('resize', handleResize);
-        drawChart();
 
         return () => {
             window.removeEventListener('resize', handleResize);
         };
-    }, [data]);
+    }, []);
+
+    useEffect(() => {
+        drawChart();
+    }, [data, width]);
 
     const drawChart = () => {
         const svgElement = svgRef.current;
         const containerWidth = svgElement.parentElement.offsetWidth;
-        const cellSize = 17;
-        const margin = { top: 20, right: 20, bottom: 20, left: 20 };
-        const width = Math.max(500, containerWidth - margin.left - margin.right);
-        const height = cellSize * 7 + margin.top + margin.bottom;
+        const height = 140;
+        const cellSize = 0.01*width+0.5;
 
-        d3.select(svgElement).selectAll("*").remove(); // Clear previous chart
+        // Clear previous chart
+        d3.select(svgElement).selectAll("*").remove();
+
+        const years = d3.range(d3.min(data, d => new Date(d.date).getFullYear()), d3.max(data, d => new Date(d.date).getFullYear()) + 1);
 
         const svg = d3.select(svgElement)
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
+            .selectAll("svg")
+            .data(years)
+            .enter().append("svg")
+            .attr("width", width*0.75)
+            .attr("height", height)
+            .attr("class", "year")
             .append("g")
-            .attr("transform", `translate(${margin.left},${margin.top})`);
+            .attr("transform", "translate(" + ((width*0.8 - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
 
         const format = d3.timeFormat("%Y-%m-%d");
 
         const color = d3.scaleQuantize()
             .domain([0, d3.max(data, d => d.value)])
-            .range(d3.schemeBlues[9]);
-
-        const year = new Date().getFullYear();
+            .range(d3.schemeGreens[9]);
+        
+        svg.select("svg")
+            .append("text")
+            .text("title");
 
         svg.append("text")
             .attr("transform", "translate(-6," + cellSize * 3.5 + ")rotate(-90)")
             .attr("font-weight", "bold")
             .attr("text-anchor", "middle")
-            .text(year);
+            .attr("fill", "#562E12")
+            .text(d => d);
 
         const rect = svg.append("g")
             .attr("fill", "none")
-            .attr("stroke", "#ccc")
+            .attr("stroke", "#c6a690")
             .selectAll("rect")
-            .data(d3.timeDays(new Date(year, 0, 1), new Date(year + 1, 0, 1)))
+            .data(d => d3.timeDays(new Date(d, 0, 1), new Date(d + 1, 0, 1)))
             .enter().append("rect")
             .attr("width", cellSize)
             .attr("height", cellSize)
@@ -72,9 +84,9 @@ const CalendarChart = ({ data }) => {
 
         svg.append("g")
             .attr("fill", "none")
-            .attr("stroke", "#000")
+            .attr("stroke", "#562E12")
             .selectAll("path")
-            .data(d3.timeMonths(new Date(year, 0, 1), new Date(year + 1, 0, 1)))
+            .data(d => d3.timeMonths(new Date(d, 0, 1), new Date(d + 1, 0, 1)))
             .enter().append("path")
             .attr("class", "month")
             .attr("d", d => {
@@ -88,11 +100,7 @@ const CalendarChart = ({ data }) => {
             });
     };
 
-    return (
-        <div className="calendar-chart-container">
-            <svg ref={svgRef}></svg>
-        </div>
-    );
+    return <div ref={svgRef}></div>;
 };
 
 export default CalendarChart;

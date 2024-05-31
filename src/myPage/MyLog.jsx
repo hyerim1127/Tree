@@ -7,24 +7,30 @@ import treeLight from '../img/tree-light.png';
 import bmkBlue from '../img/bookmark-blue.png';
 import ModalGenre from '../ModalGenre';
 import "../genre.css";
+import "./CalendarChart.css"
 import CalendarChart from './CalendarChart';
 
+const generateData = (startYear, endYear, minVal, maxVal) => {
+  const data = [];
+  const startDate = new Date(startYear, 0, 1);
+  const endDate = new Date(endYear + 1, 0, 1);
+  const yearCount = endYear- startYear;
+  const timeDiff = endDate - startDate;
+  
+  for (let i = 0; i < 300*yearCount; i++) {
+      const randomTime = new Date(startDate.getTime() + Math.random() * timeDiff);
+      const formattedDate = randomTime.toISOString().split('T')[0];
+      const randomValue = Math.floor(Math.random() * (maxVal - minVal + 1)) + minVal;
+      data.push({ date: formattedDate, value: randomValue });
+  }
+
+  return data;
+};
+
+const data = generateData(2021, 2024, 1, 50); 
+
 const MyLog = () => {
-  const data = [
-    { date: '2024-01-01', value: 10 },
-    { date: '2024-01-02', value: 20 },
-    { date: '2024-01-03', value: 10 },
-    { date: '2024-01-04', value: 25 },
-    { date: '2024-01-05', value: 30 },
-    { date: '2024-01-06', value: 5 },
-    { date: '2024-01-07', value: 17 },
-    { date: '2024-01-08', value: 21 },
-    { date: '2024-01-09', value: 6 },
-    { date: '2024-01-10', value: 25 },
-    { date: '2024-01-11', value: 42 },
-    { date: '2024-01-12', value: 5 },
-    // 나머지 데이터 추가...
-  ];
+
   const book = {
     image: 'https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791165341909.jpg',
     title: '달러구트 꿈 백화점',
@@ -104,7 +110,12 @@ const MyLog = () => {
           <button className='mypage-tab-clicked'>my log</button>
         </div>
         
-      <CalendarChart data={data}></CalendarChart>
+        <div className="chart-container ">
+          <div className="calendar-chart-container">
+            <h2>작성 게시글 수</h2>
+          <CalendarChart data={data}></CalendarChart>
+          </div>
+        </div>
       </div>
     </div>
   );

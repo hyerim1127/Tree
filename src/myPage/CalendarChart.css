@@ -1,21 +1,28 @@
 /*calendar chart css*/
-.calendarChart {
-    margin-top: 20px;
-    padding : 20px;
-  
-    width: 100vw;
-    align-items: center;
-  }
-  .chart-container {
+
+.chart-container {
     display: flex;
+    background-color: pink;
+    border:3px solid red;
     justify-content: center;
-    margin-top: 20px; /* 필요에 따라 조정 */
-  }
-  .calendar-chart-container {
+    padding:60px 100px;
+
+}
+.calendar-chart-container {
     display: flex;
+    flex-direction: column;
+    background-color: #F9F3EB;
     justify-content: center;
     align-items: center;
+    padding-right:50px;
     width: 100%;
-    min-width: 900px;
-  }
-  
+    min-width: 500px;
+    border:1px solid #744F36;
+    border-radius: 5px;
+    padding-bottom: 30px;
+
+}
+.calendar-chart-container h2 {
+  align-content: left;
+  padding-top: 30px;
+}
