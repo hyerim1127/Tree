@@ -1,12 +1,13 @@
-import React, { useEffect, useState, useRef } from "react";
+//로그인
+import React, { useEffect, useState } from "react";
 import logo from './img/treelogo.png';
 import mainImg from './img/mainImage.png';
 import { useNavigate } from "react-router-dom";
-
 const User = {
     email:'test@example.com',
     pw: 'test123@@@'
 }
+
 
 export default function Login() {
 
@@ -16,8 +17,19 @@ export default function Login() {
     const[emailValid, setEmailValid] = useState(false);
     const[pwValid, setPwValid] = useState(false);
     const[notAllow, setNotAllow] = useState(true);
-
-    const modalRef = useRef();
+  
+    const[isLoggedIn, setIsLoggedIn] = useState(false);
+    const loginHandler = (email, pw) => {
+        localStorage.setItem("isLoggedIn","1");
+        setIsLoggedIn(true);
+    };
+    const storedUserLoggedInInformation = localStorage.getItem("isLoggedIn");
+    useEffect(() => {
+        const storedUserLoggedInInformation = localStorage.getItem("isLoggedIn");
+        if(storedUserLoggedInInformation === "1") {
+            setIsLoggedIn(true);
+        }
+    },[]);
 
     useEffect(() => {
         if(emailValid && pwValid) {
@@ -47,17 +59,24 @@ export default function Login() {
         }
     }
 
+    //로그인버튼 온클릭함수
     const onClickConfirmButton = () => {
         if(email===User.email && pw===User.pw) {
-            navigate('/write-impression');
+            loginHandler(email, pw);
+            navigate('/board/bookSave');
         } else {
-            alert('login failedㅠㅠ')
+            alert('login failed')
         }
+    }
+    
+    const logoutHandler = () => {
+        localStorage.removeItem("isLoggedIn");
+        setIsLoggedIn(false);
     }
 
     const navigate = useNavigate();
     const goToSign = () => {
-        navigate("/sign-up");
+        navigate("/member/save");
     }
 
     return (
@@ -74,7 +93,7 @@ export default function Login() {
             </div>
             <div className='form'>
                 <center>
-                    <button className="backBtn">
+                    <button className="backBtn" onClick={logoutHandler}>
                         <img 
                         className='logo'
                         alt='treeIm'g

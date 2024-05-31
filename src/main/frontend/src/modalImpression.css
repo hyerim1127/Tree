@@ -1,0 +1,109 @@
+/* 인상깊은구절 css */
+.I-modal {
+    display: flex;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+::-webkit-scrollbar {
+    display:none;
+}
+.I-modal-content {
+    background-color: #F9F3EB;
+    color:#562E12;
+    border-radius: 10px;
+    text-align: center;
+    margin: 30vh auto;
+    padding: 30px;
+    width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+  
+.I-modal-close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+.I-modal-close:hover,
+.I-modal-close:focus {
+    color: #562E12;
+    text-decoration: none;
+    cursor: pointer;
+}
+  
+.I-modal-body {
+    flex-direction: column;
+}
+  
+.I-book-image {
+    width: 140px; 
+    height:200px;
+}
+  
+.I-book-info {
+    padding-left: 20px;
+}
+
+.I-book-text {
+    text-align: left;
+    padding : 10px;
+}
+
+.I-book-text p {
+    font-size : 11px;
+}
+/* 토글 디테일 */
+.toggle-sections {
+    margin-top: 30px;
+    color:#744F36;
+    text-align: left;
+    width: 100%;
+}
+.toggle-detail {
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 13px;
+    background-color: #F9F0E3;
+    border: 1px solid #A18774;
+}
+  
+.toggle-header {
+    cursor: pointer;
+    padding: 10px;
+    background-color: #F9F0E3;
+    border-radius: 5px;
+    font-weight: bolder;
+}
+  
+.toggle-content {
+    padding: 10px;
+    background-color: #F9F0E3;
+    border-radius: 5px;
+}
+
+.I-modal-reason-content {
+    height:auto;
+    min-height: 350px;
+    background-color: #F9F3EB;
+    color:#562E12;
+    border-radius: 10px;
+    text-align: center;
+    margin: 30vh auto;
+    padding: 30px;
+    width: 500px;
+}
+.I-book-reason {
+    text-align: left;
+    margin-top: 25px;
+    width: 100%;
+    font-size: 13px;
+}

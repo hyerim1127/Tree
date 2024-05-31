@@ -1,17 +1,20 @@
 import Login from "./Login";
-import PopUp from "./popUp";
 import SignUp from "./SignUp";
 import WriteImpression from "./WriteImpression";
+import Nothing from "./Nothing";
 import View from "./View";
-import axios from 'axios';
-import React, {useState, useEffect} from 'react';
+import Genre from "./Genre";
+import MyMain from "./myPage/MyMain";
+import MyLog from "./myPage/MyLog";
+//import axios from 'axios';
+import React from 'react';
 import {
   BrowserRouter,
   Routes,
   Route
 } from "react-router-dom";
 
-function App() {
+function App() {  
 
   /*const [posts, setPosts] = useState([]);
   useEffect(() => {
@@ -32,11 +35,15 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route index element={<Login />} />
-        <Route path="popup" element={<PopUp />} />
-        <Route path="sign-up" element={<SignUp />} />
-        <Route path="write-impression" element={<WriteImpression />} />
-        <Route path="view" element={<View />} />
-      </Routes>
+        <Route path="/member/save" element={<SignUp />} />
+        <Route path="/board/bookSave" element={<WriteImpression />} />
+        <Route path="/board" element={<View />} />
+        <Route path="/nothing" element={<Nothing />} />
+        <Route path="/board/genre" element={<Genre />} />
+        <Route path="/member" element={<MyMain />} />
+        <Route path="/member/log" element={<MyLog />} />
+       </Routes>
+       
     </BrowserRouter>
   );
 }
