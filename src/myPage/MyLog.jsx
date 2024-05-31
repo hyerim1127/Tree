@@ -7,8 +7,14 @@ import treeLight from '../img/tree-light.png';
 import bmkBlue from '../img/bookmark-blue.png';
 import ModalGenre from '../ModalGenre';
 import "../genre.css";
+import CalendarChart from './CalendarChart';
 
 const MyLog = () => {
+  const data = [
+    { date: '2023-01-01', value: 10 },
+    { date: '2023-01-02', value: 20 },
+    // 나머지 데이터 추가...
+  ];
   const book = {
     image: 'https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791165341909.jpg',
     title: '달러구트 꿈 백화점',
@@ -78,6 +84,7 @@ const MyLog = () => {
           <img className='shortcuts' alt='pencil' src={pencilLight} onClick={goToWrite} />
           <img className='shortcuts' alt='logo' src={treeLight} onClick={goToBoard} />
         </span>
+        
 
         <div className='header'>
           <img className='bmkGreen' alt='btn' src={bmkBlue} onClick={openModalGenre} />
@@ -86,6 +93,8 @@ const MyLog = () => {
           <button className='mypage-tab' onClick={goToMylog}>내가 쓴 구절들</button>
           <button className='mypage-tab-clicked'>my log</button>
         </div>
+        
+      <CalendarChart data={data}></CalendarChart>
       </div>
     </div>
   );
