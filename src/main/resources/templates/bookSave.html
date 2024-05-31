@@ -3,6 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>bookSave</title>
+    <script>
+        function selectBook(title, author, category, imageURL) {
+            opener.document.getElementById("bookTitle").value = title;
+            opener.document.getElementById("bookAuthor").value = author;
+            opener.document.getElementById("bookCategoryName").value = categoryName;
+            opener.document.getElementById("bookImageURL").value = imageURL;
+            window.close();
+        }
+    </script>
 </head>
 <body>
 <h2>글 작성</h2>
@@ -13,14 +22,36 @@
     <!--name이 정해져있어야 input에 입력한 값이 name에 담겨서 서버쪽으로 넘어갈 수 있음-->
     pass: <input type="text" name="boardPass"> <br>
     <!--onclick 함수로 책 검색 api 연결 하는 방식으로 생각하며 작성함-->
-    book search: <input type="button" name="Search" onclick=" " value="책정보 검색"> <br>
-    <!--title: <input type="text" name="boardTitle"> <br>-->
-    <!--writer: <input type="text" name="boardWriter"> <br>-->
-    phrase: <textarea name="boardPhrase" cols="30" rows="10"></textarea> <br>
-    reason: <textarea name="boardReason" cols="30" rows="10"></textarea> <br>
+<!--    book search: <input type="button" name="Search" onclick=" " value="책정보 검색"> <br>-->
+<!--    title: <input type="text" name="boardTitle"> <br>-->
+<!--    writer: <input type="text" name="boardWriter"> <br>-->
+<!--    phrase: <textarea name="boardPhrase" cols="30" rows="10"></textarea> <br>-->
+<!--    reason: <textarea name="boardReason" cols="30" rows="10"></textarea> <br>-->
+    <label for="boardWriter">작성자:</label>
+    <input type="text" id="boardWriter" name="boardWriter" readonly required>
+
+    <label for="bookTitle">책 제목:</label>
+    <input type="text" id="bookTitle" name="bookTitle" readonly required>
+
+    <label for="bookAuthor">저자:</label>
+    <input type="text" id="bookAuthor" name="bookAuthor" readonly required>
+
+    <label for="bookCategoryName">카테고리:</label>
+    <input type="text" id="bookCategoryName" name="bookCategoryName"><br>
+
+    <label for="bookImageURL">이미지 URL:</label>
+    <input type="text" id="bookImageURL" name="bookImageURL" readonly required>
+
+    <label for="boardPhrase">구절:</label>
+    <textarea id="boardPhrase" name="boardPhrase" rows="5" required></textarea>
+
+    <label for="boardReason">이유:</label>
+    <textarea id="boardReason" name="boardReason" rows="5" required></textarea>
+
     <input type="submit" value="글작성">
 
 </form>
+<button onclick="window.open('/book', '책 검색', 'width=600,height=400')">책 검색</button>
 
 </body>
 </html>

@@ -14,6 +14,10 @@ import java.time.LocalDateTime;
 
 public class BoardDTO {
     private Long id;
+    private String bookTitle;
+    private String bookAuthor;
+    private String bookCategoryName;
+    private String bookImageURL;
     private String boardWriter;
     private String boardPass;
     private String boardTitle;
