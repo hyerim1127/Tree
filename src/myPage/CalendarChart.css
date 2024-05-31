@@ -1,0 +1,21 @@
+/*calendar chart css*/
+.calendarChart {
+    margin-top: 20px;
+    padding : 20px;
+  
+    width: 100vw;
+    align-items: center;
+  }
+  .chart-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* 필요에 따라 조정 */
+  }
+  .calendar-chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-width: 900px;
+  }
+  

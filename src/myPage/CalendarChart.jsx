@@ -1,27 +1,38 @@
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
+import './CalendarChart.css';
 
 const CalendarChart = ({ data }) => {
     const svgRef = useRef(null);
 
     useEffect(() => {
+        const handleResize = () => {
+            drawChart();
+        };
+
+        window.addEventListener('resize', handleResize);
         drawChart();
-        window.addEventListener('resize', handleResize); // 화면 크기 변화 감지
-        handleResize(); // 초기 렌더링 시에도 적용
+
         return () => {
-            window.removeEventListener('resize', handleResize); // cleanup
+            window.removeEventListener('resize', handleResize);
         };
     }, [data]);
 
-    const handleResize = () => {
-        const width = svgRef.current.parentNode.offsetWidth; // 부모 요소의 너비 가져오기
-        drawChart(width); // drawChart 호출 시에 너비 전달
-    };
-
-    const drawChart = (width) => {
-        width = width || 700; // 기본값 설정
-        const height = 136;
+    const drawChart = () => {
+        const svgElement = svgRef.current;
+        const containerWidth = svgElement.parentElement.offsetWidth;
         const cellSize = 17;
+        const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+        const width = Math.max(500, containerWidth - margin.left - margin.right);
+        const height = cellSize * 7 + margin.top + margin.bottom;
+
+        d3.select(svgElement).selectAll("*").remove(); // Clear previous chart
+
+        const svg = d3.select(svgElement)
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
 
         const format = d3.timeFormat("%Y-%m-%d");
 
@@ -29,27 +40,19 @@ const CalendarChart = ({ data }) => {
             .domain([0, d3.max(data, d => d.value)])
             .range(d3.schemeBlues[9]);
 
-        const svg = d3.select(svgRef.current)
-            .selectAll("svg")
-            .data(d3.range(2023, 2024))
-            .enter().append("svg")
-            .attr("width", width)
-            .attr("height", height)
-            .attr("class", "year")
-            .append("g")
-            .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
+        const year = new Date().getFullYear();
 
         svg.append("text")
             .attr("transform", "translate(-6," + cellSize * 3.5 + ")rotate(-90)")
             .attr("font-weight", "bold")
             .attr("text-anchor", "middle")
-            .text(d => d);
+            .text(year);
 
         const rect = svg.append("g")
             .attr("fill", "none")
             .attr("stroke", "#ccc")
             .selectAll("rect")
-            .data(d => d3.timeDays(new Date(d, 0, 1), new Date(d + 1, 0, 1)))
+            .data(d3.timeDays(new Date(year, 0, 1), new Date(year + 1, 0, 1)))
             .enter().append("rect")
             .attr("width", cellSize)
             .attr("height", cellSize)
@@ -71,7 +74,7 @@ const CalendarChart = ({ data }) => {
             .attr("fill", "none")
             .attr("stroke", "#000")
             .selectAll("path")
-            .data(d => d3.timeMonths(new Date(d, 0, 1), new Date(d + 1, 0, 1)))
+            .data(d3.timeMonths(new Date(year, 0, 1), new Date(year + 1, 0, 1)))
             .enter().append("path")
             .attr("class", "month")
             .attr("d", d => {
@@ -85,7 +88,11 @@ const CalendarChart = ({ data }) => {
             });
     };
 
-    return <div ref={svgRef}></div>;
+    return (
+        <div className="calendar-chart-container">
+            <svg ref={svgRef}></svg>
+        </div>
+    );
 };
 
 export default CalendarChart;

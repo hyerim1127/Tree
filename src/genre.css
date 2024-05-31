@@ -109,17 +109,3 @@ h1 {
    text-decoration-thickness: 3px;
    text-underline-offset: 5px;
 }
-
-/*calendar chart css*/
-.calendarChart {
-  margin-top: 20px;
-  padding : 20px;
-
-  width: 100vw;
-  align-items: center;
-}
-.chart-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px; /* 필요에 따라 조정 */
-}

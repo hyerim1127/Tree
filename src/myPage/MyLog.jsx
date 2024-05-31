@@ -11,8 +11,18 @@ import CalendarChart from './CalendarChart';
 
 const MyLog = () => {
   const data = [
-    { date: '2023-01-01', value: 10 },
-    { date: '2023-01-02', value: 20 },
+    { date: '2024-01-01', value: 10 },
+    { date: '2024-01-02', value: 20 },
+    { date: '2024-01-03', value: 10 },
+    { date: '2024-01-04', value: 25 },
+    { date: '2024-01-05', value: 30 },
+    { date: '2024-01-06', value: 5 },
+    { date: '2024-01-07', value: 17 },
+    { date: '2024-01-08', value: 21 },
+    { date: '2024-01-09', value: 6 },
+    { date: '2024-01-10', value: 25 },
+    { date: '2024-01-11', value: 42 },
+    { date: '2024-01-12', value: 5 },
     // 나머지 데이터 추가...
   ];
   const book = {
