@@ -1,3 +1,5 @@
+//인상깊은구절 작성
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import mainImg from './img/mainImage.png';
@@ -8,6 +10,7 @@ import btn from './img/btn.png';
 const WriteImpression = () => {
 
     const navigate = useNavigate();
+
 
     const [title, setTitle] = useState('');
     const handleTitle = (e) => {
@@ -28,10 +31,9 @@ const WriteImpression = () => {
     const handleReason = (e) => {
         setReason(e.target.value);
     }
-
-    const onClickConfirmButton = () => {
-        navigate('/view');
-    }
+    const goToLogin = () => navigate("/");
+    const goToBoard = () => navigate("/board");
+    const goToMypage = () => navigate("/member");
     
     const[notAllow, setNotAllow] = useState(true);
     useEffect(() => {
@@ -43,13 +45,19 @@ const WriteImpression = () => {
     }, );
 
     const goToPageR = () => {
-        navigate("/view");
+        navigate("/board");
+    }
+    const[isLoggedIn, setIsLoggedIn] = useState(true);
+    const logoutHandler = () => {
+        localStorage.removeItem("isLoggedIn");
+        setIsLoggedIn(false);
+        goToLogin();
     }
 
     return (
         <div className='page'>
             <div>
-                <inline><img className='shortcuts' alt='logout' src={logoutLight} /><img className='shortcuts' alt='person' src={personLight} /></inline>
+                <inline><img className='shortcuts' alt='logout' src={logoutLight}  onClick={logoutHandler}/><img className='shortcuts' alt='person' src={personLight} onClick={goToMypage} /></inline>
                 <img className='mainImg' alt='main' src={mainImg} />
                 <img className='btnR' alt='btn' src={btn} onClick={goToPageR} />
                 <div className='description'>
@@ -101,7 +109,7 @@ const WriteImpression = () => {
                     </div>
 
                     <div>
-                        <button onClick={onClickConfirmButton}
+                        <button onClick={goToBoard}
                         disabled={notAllow}
                         className='bottomButton'>
                             확인

@@ -1,0 +1,358 @@
+/*전체 css*/
+
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
+/*전체에 적용*/
+* {
+  font-family : "Nanum Myeongjo", serif;
+  /*background-color: #F1E4D1;*/
+}
+/*전체 페이지*/
+.page { 
+  background-color: #F1E4D1;
+  flex-direction : row;
+  color:#562E12;
+}
+html, body {
+  margin:0;
+  padding:0;
+  height:100%;
+}
+/*인상 깊은 구절 확인*/
+.pageView {
+  width:100vw;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  opacity: 0.9;
+  background-color: #F1E4D1;
+  background-image:url(./img/page-line.png);
+}
+/*사진 배경*/
+.mainImg {
+  z-index: 1;
+  position:absolute;
+  top:0;
+  right:0;
+  height: 100%;
+  width: 50vw;
+  object-fit:cover;
+}
+/*그루터기 설명 설명 배경*/
+.description {
+  background-color: #E5D1B2;
+  position:fixed;
+  opacity: 0.8;
+  top: 25vh;
+  text-align: right;
+  font-size: smaller;
+  right: 7.5vw;
+  width: 35vw;
+  z-index: 3;
+}
+/*버튼 왼쪽, 오른쪽+hover*/
+.btnL {
+  position: absolute;
+  width: 5vh;
+  left: 0px;
+  transform:scaleX(-1);
+  background-color: transparent;
+  top: 45vh;
+  z-index: 5;
+}
+.btnL:hover {
+  width: 6vh;
+}
+.btnR {
+  position: absolute;
+  width: 5vh;
+  right: 0px;
+  background-color: transparent;
+  top: 45vh;
+  z-index: 5;
+}
+.btnR:hover {
+  width: 6vh;
+}
+/*그루터기 서비스 설명 텍스트*/
+.descriptionText {
+  padding: 50px;
+  color: #562E12;
+}
+/*좌측 페이지 전체*/
+.form {
+  position:fixed;
+  left: 0;
+  top: 0;
+  width:50vw;
+  height: 100vh;
+  display : flex;
+  flex-direction : column;
+  background-color:#F1E4D1;
+  vertical-align: center;
+}
+/*되돌아가는 버튼, 로고와 연결*/
+.backBtn {
+  margin-top: 20vh;
+  margin-bottom: 10px;
+  border: none;
+  background-color:transparent;
+}
+/*로고*/
+.logo {
+  width: 100px;
+  background-color: #F1E4D1;
+}
+/*우측 상단 단축키 버튼*/
+.shortcuts {
+  position:relative;
+  float: right;
+  background-color: transparent;
+  z-index: 2;
+  right:1%;
+  top:1%;
+  width:5vh;
+}
+/*로그인,회원가입 시 input창~버튼 묶은 div*/
+.contentWrap {
+  padding: 0 10%;
+  flex: 1;
+}
+
+/*로그인,회원가입 시 input창 배경+focus*/
+.inputWrap {
+  display: flex;
+  height: 3vh;
+  border-radius: 5px;
+  padding: 15px;
+  margin-top: 20px;
+  background-color: #FFFAF3;
+}
+.inputWrap:focus-within {
+  border:2px solid #DABF98;
+}
+/*로그인,회원가입 시 실제 input창+placeholder*/
+.input {
+  width:100%;
+  outline:none;
+  border:none;
+  border-radius: 5px;
+  height : 3vh;
+  background-color: #FFFAF3;
+  vertical-align: center;
+  font-size: 18px;
+}
+.input::placeholder {
+  color : #b5947e;
+}
+/*에러 발생 시 메세지*/
+.errorMessageWrap {
+  margin-top : 5px;
+  margin-bottom : -5px;
+  margin-left : 10px;
+  color : #853602;
+  font-size: 15px;
+}
+/*로그인 / 회원가입 버튼+disabled*/
+.bottomButton {
+  width: 100%;
+  height: 6vh;
+  border: none;
+  font-size: 25px;
+  font-weight: 800;
+  border-radius: 40px;
+  margin-top : 30px;
+  cursor: pointer;
+  background-color: #562E12;
+  color:#F9F0E3;
+}
+.bottomButton:disabled {
+  background-color: #DABF98;
+  color:#562E12;
+}
+
+/*로그인 창에서 회원가입 텍스트*/
+.joinText {
+  padding : 20px 0;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  color:#562E12;
+}
+/*회원가입 페이지로 이동하는 버튼*/
+.joinBtn {
+  padding : 0 10px;
+  border : none;
+  font-size: 18px;
+  text-decoration: 2px underline;
+  font-weight:bolder;
+  background-color: #F1E4D1;
+  color:#562E12;
+}
+
+/*회원가입 중복 체크+hover*/
+.duplicationCheck {
+  width: 30%;
+  height: 3vh;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 40px;
+  cursor: pointer;
+  background-color: #DABF98;
+  color:#562E12;
+}
+.duplicationCheck:hover {
+  background-color: #744F36;
+  color:#F9F0E3;
+}
+/*인상 깊은 구절 작성 페이지 제목*/
+.descriptionPhrase {
+  margin-top:5vh;
+  padding: 10px;
+  color: #562E12;
+}
+/*인상 깊은 구절 작성 - 제목,작가+focus*/
+.inputTextWrap {
+  display: flex;
+  height: 110px;
+  border-radius: 5px;
+  padding: 15px;
+  margin-top: 15px;
+  background-color: #FFFAF3;
+}
+.inputTextWrap:focus-within {
+  border:2px solid #DABF98;
+}
+/*인상 깊은 구절 작성 - 구절+focus*/
+.inputTextWrap2 {
+  display: flex;
+  height: 150px;
+  border-radius: 5px;
+  padding: 15px;
+  margin-top: 15px;
+  background-color: #FFFAF3;
+}
+.inputTextWrap2:focus-within {
+  border:2px solid #DABF98;
+}
+/*인상 깊은 구절 작성 - 이유+focus*/
+.inputText2 {
+  width:100%;
+  outline:none;
+  border:none;
+  border-radius: 5px;
+  height : 150px;
+  background-color: #FFFAF3;
+  vertical-align: center;
+  font-size: 18px;
+  resize:none;
+}
+.inputText2::placeholder {
+  color : #b5947e;
+}
+/*인상깊은구절 작성 페이지 실제 input창*/
+.inputText {
+  width:100%;
+  outline:none;
+  border:none;
+  border-radius: 5px;
+  height : 110px;
+  background-color: #FFFAF3;
+  vertical-align: center;
+  font-size: 18px;
+  resize:none;
+}
+.inputText::placeholder {
+  color : #b5947e;
+}
+/*인상깊은구절 조회 페이지 - 구절 hover 시 효과*/
+.phrases:hover {
+  position: absolute;
+  padding:10px;
+  border: none;
+  font-size: 1.05em;
+  border-radius: 5px;
+  font-weight: 700;
+  background-color: #FDEEE4;
+  box-shadow: 0px 0px 35px 20px #FDEEE4;
+  border-radius: 50%;
+  filter: blur(2px);
+  word-wrap: break-word;
+}
+/*인상깊은구절 조회 페이지 - 구절 애니메이션 효과*/
+.phrases { 
+  animation: bounce 1s infinite alternate;
+}
+@keyframes bounce {
+  0% {
+    transform : translateY(-5px);
+  }
+  100% {
+    transform : translateY(5px);
+  }
+}
+/*회원가입 페이지로 이동하는 버튼*/
+.showAllBtn {
+  position: absolute;
+  right: 3vw;
+  bottom: 4vh;
+  padding : 0 10px;
+  border : none;
+  font-size: 18px;
+  text-decoration: 2px underline;
+  font-weight:bolder;
+  background-color: transparent;
+  color:#562E12;
+}
+/*북마크 - 레드*/
+.bmkRed {
+  position:absolute;
+  width:3vw;
+  left:52vw;
+}
+/*모달 관련 구현*/
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.4);
+}
+.modal-content {
+  background-color: #F9F3EB;
+  color:#562E12;
+  border-radius: 10px;
+  text-align: center;
+  margin: 25vh auto;
+  padding: 40px 20px;
+  width: 700px;
+}
+.modal-close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.modal-close:hover,
+.modal-close:focus {
+  color: #562E12;
+  text-decoration: none;
+  cursor: pointer;
+}
+.modal-genreBtn {
+  color :#BDA594;
+  background-color: #FFFAF3;
+  width: 20vh;
+  border: none;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 20px;
+  font-size: 1em;
+  transition: background-color 0.3s;
+}
+.modal-genreBtn:hover {
+  color :#F9F0E3;
+  background-color: #744F36;
+}
