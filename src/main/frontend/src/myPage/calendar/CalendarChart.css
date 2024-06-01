@@ -1,0 +1,25 @@
+/*calendar chart css*/
+
+.chart-container {
+    display: flex;
+    justify-content: center;
+    padding:40px 100px;
+
+}
+.calendar-chart-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFFFF;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-width: 500px;
+    border:1px solid #744F36;
+    border-radius: 5px;
+    padding-bottom: 35px;
+
+}
+.calendar-chart-container h2 {
+  align-content: left;
+  padding-top: 35px;
+}
