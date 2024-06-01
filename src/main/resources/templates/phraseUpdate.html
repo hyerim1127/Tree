@@ -18,16 +18,11 @@
     reason: <input type="text" id="boardReason" name="boardReason" th:value="${boardUpdate.boardReason}"> <br>
 <!--    수정하지 않는 정보라도 hidden 으로 가지고 있어야 한다.-->
     <input type="hidden" name="boardHits" th:value="${boardUpdate.boardHits}">
-    <input type="button" value="글 수정" onclick="submitForm()">
+    <input type="submit" value="글 수정">
 </form>
 <button onclick="window.open('/book', '책 검색', 'width=600,height=400')">책 검색</button>
 
-<script th:inline="javascript">
-//비밀번호 검증 후 요청 보냄
-    const submitForm = () => {
-        document.updateForm.submit(); // 폼 제출
-    }
-
+<script>
 </script>
 </body>
 </html>

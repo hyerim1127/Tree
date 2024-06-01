@@ -22,7 +22,7 @@ import java.util.List;
 public class BoardController {
 
     private final BoardService boardService;
-    private BookService bookService;
+    private final BookService bookService;
 
     @GetMapping("/bookSave")
     public String saveForm(){
@@ -33,7 +33,7 @@ public class BoardController {
     @PostMapping("/bookSave")
     public String save(@ModelAttribute BoardDTO boardDTO){
         boardService.save(boardDTO); // board bookSave 완료
-        return "index";
+        return "redirect:/board/paging";
     }
 
     // 게시글 목록
@@ -80,7 +80,7 @@ public class BoardController {
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") Long id){
         boardService.delete(id);
-        return "redirect:/board/";
+        return "redirect:/board/paging";
     }
 
     // 페이징 처리
