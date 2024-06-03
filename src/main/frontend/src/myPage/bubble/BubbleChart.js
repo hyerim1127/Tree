@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3';
+import branchImg from '../../img/tree-branch.png'
 
 const BubbleChart = ({ data }) => {
     const svgRef = useRef();
@@ -12,6 +13,11 @@ const BubbleChart = ({ data }) => {
         const height = 400;
 
         svg.attr('width', width).attr('height', height);
+
+        svg.append("image")
+        .attr("href", branchImg)
+        .attr("width", 500)
+        .attr("height", 400);
 
         const bubble = d3.pack().size([width, height]).padding(10);
 

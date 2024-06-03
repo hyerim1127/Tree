@@ -6,10 +6,10 @@ import logoutLight from '../img/logout-light.png';
 import pencilLight from '../img/pencil-light.png';
 import treeLight from '../img/tree-light.png';
 import bmkBlue from '../img/bookmark-blue.png';
-import ModalGenre from '../ModalGenre';
+import ModalGenre from '../genreSelectModal/ModalGenre';
 import ModalMyImpression from './ModalMyImpression';
 import ModalPwChange from './passwordChange/ModalPwChange';
-import "../genre.css";
+import "./mypage.css";
 
 const MyMain = () => {
   const book = {
@@ -102,8 +102,8 @@ const MyMain = () => {
           <img className='shortcuts' alt='logo' src={treeLight} onClick={goToBoard} />
         </span>
 
-        <div className='header'>
-          <img className='bmkGreen' alt='btn' src={bmkBlue} onClick={openModalGenre} />
+        <div className='mypage-header'>
+          <img className='bmkBlue' alt='btn' src={bmkBlue} onClick={openModalGenre} />
           {showModalGenre && <ModalGenre onClose={closeModalGenre} onGenreSelect={handleGenreSelect} />}
           <h1>마이페이지</h1>
           <button className='mypage-tab-clicked'>내가 쓴 구절들</button>

@@ -5,8 +5,8 @@ import logoutLight from '../img/logout-light.png';
 import pencilLight from '../img/pencil-light.png';
 import treeLight from '../img/tree-light.png';
 import bmkBlue from '../img/bookmark-blue.png';
-import ModalGenre from '../ModalGenre';
-import "../genre.css";
+import ModalGenre from '../genreSelectModal/ModalGenre';
+import "./mypage.css";
 import "./calendar/CalendarChart.css"
 import CalendarChart from './calendar/CalendarChart';
 import BubbleChart from './bubble/BubbleChart';
@@ -66,7 +66,7 @@ const MyLog = () => {
   };
 
   const closeModalPwChange = () => {
-    setShowModalPwChange(false); // 비밀번호 변경 모달 닫기
+    setShowModalPwChange(false); 
   };
 
   const navigate = useNavigate();
@@ -86,7 +86,6 @@ const MyLog = () => {
   return (
     <div className='genrePage'>
       <div>
-
         <span>
           <img className='shortcuts' alt='logout' src={logoutLight} onClick={logoutHandler} />
           <img className='shortcuts' alt='lock' src={lockLight}  onClick={openModalPwChange} />
@@ -96,8 +95,8 @@ const MyLog = () => {
         </span>
         
 
-        <div className='header'>
-          <img className='bmkGreen' alt='btn' src={bmkBlue} onClick={openModalGenre} />
+        <div className='mypage-header'>
+          <img className='bmkBlue' alt='btn' src={bmkBlue} onClick={openModalGenre} />
           {showModalGenre && <ModalGenre onClose={closeModalGenre} onGenreSelect={handleGenreSelect} />}
           <h1>마이페이지</h1>
           <button className='mypage-tab' onClick={goToMylog}>내가 쓴 구절들</button>
