@@ -9,6 +9,7 @@ import ModalGenre from '../ModalGenre';
 import "../genre.css";
 import "./calendar/CalendarChart.css"
 import CalendarChart from './calendar/CalendarChart';
+import BubbleChart from './bubble/BubbleChart';
 import ModalPwChange from './passwordChange/ModalPwChange';
 
 const generateData = (startYear, endYear, minVal, maxVal) => {
@@ -29,6 +30,18 @@ const generateData = (startYear, endYear, minVal, maxVal) => {
 };
 
 const data = generateData(2021, 2024, 1, 20); 
+
+const genreData = [
+  { name: '고전', value: 30 },
+  { name: '소설/시/희곡', value: 20 },
+  { name: '에세이', value: 10 },
+  { name: '과학', value: 15 },
+  { name: '사회과학', value: 25 },
+  { name: '경제경영', value: 10 },
+  { name: '역사', value: 15 },
+  { name: '인문학', value: 25 },
+  { name: '자기계발', value: 10 },
+];
 
 const MyLog = () => {
   const [showModalPwChange, setShowModalPwChange] = useState(false);
@@ -91,10 +104,16 @@ const MyLog = () => {
           <button className='mypage-tab-clicked'>my log</button>
         </div>
         
-        <div className="chart-container ">
+        <div className="chart-container">
           <div className="calendar-chart-container">
             <h2>작성 게시글 수</h2>
           <CalendarChart data={data}></CalendarChart>
+          </div>
+        </div>
+        <div className="chart-container">
+          <div className="calendar-chart-container">
+            <h2>장르별 독서 이력</h2>
+          <BubbleChart data={genreData}></BubbleChart>
           </div>
         </div>
       </div>
