@@ -7,7 +7,7 @@ import logoutLight from './img/logout-light.png';
 import pencilLight from './img/pencil-light.png';
 import treeLight from './img/tree-light.png';
 import bmkGreen from './img/bookmark-green.png';
-import ModalGenre from './ModalGenre';
+import ModalGenre from './genreSelectModal/ModalGenre';
 import ModalImpressionReason from './ModalImpressionReason';
 import "./genre.css";
 
@@ -87,7 +87,7 @@ const Genre = () => {
           <img className='shortcuts' alt='pencil' src={pencilLight} onClick={goToWrite} />
           <img className='shortcuts' alt='logo' src={treeLight} onClick={goToBoard} />
         </span>
-        <div className='header'>
+        <div className='genre-header'>
           <img className='bmkGreen' alt='btn' src={bmkGreen} onClick={openModalGenre} />
           {showModalGenre && <ModalGenre onClose={closeModalGenre} onGenreSelect={handleGenreSelect} />}
           <h1>구절 전체보기 - {selectedGenre}</h1>

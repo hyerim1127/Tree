@@ -72,18 +72,8 @@ const SignUp = () => {
                 email:email,
                 password:pw
             };
-            axios.post('http://localhost:8081/save')
-            .then(response => {
-                alert("sign up success!")
-                goToLogin();
-            })
-            .catch(error => {
-                alert("sign up failed!")
-                console.log(userData.email);
-                console.log(userData.pw);
-                console.log(userData.pwConfirm);
-                console.log('error:',error);
-            });
+            navigate("/");
+            
         } else {
             alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
         }

@@ -5,34 +5,46 @@ import logoutLight from '../img/logout-light.png';
 import pencilLight from '../img/pencil-light.png';
 import treeLight from '../img/tree-light.png';
 import bmkBlue from '../img/bookmark-blue.png';
-import ModalGenre from '../ModalGenre';
-import "../genre.css";
-import CalendarChart from './CalendarChart';
+import ModalGenre from '../genreSelectModal/ModalGenre';
+import "./mypage.css";
+import "./calendar/CalendarChart.css"
+import CalendarChart from './calendar/CalendarChart';
+import BubbleChart from './bubble/BubbleChart';
+import ModalPwChange from './passwordChange/ModalPwChange';
+
+const generateData = (startYear, endYear, minVal, maxVal) => {
+  const data = [];
+  const startDate = new Date(startYear, 0, 1);
+  const endDate = new Date(endYear + 1, 0, 1);
+  const yearCount = endYear- startYear;
+  const timeDiff = endDate - startDate;
+  
+  for (let i = 0; i < 300*yearCount; i++) {
+      const randomTime = new Date(startDate.getTime() + Math.random() * timeDiff);
+      const formattedDate = randomTime.toISOString().split('T')[0];
+      const randomValue = Math.floor(Math.random() * (maxVal - minVal + 1)) + minVal;
+      data.push({ date: formattedDate, value: randomValue });
+  }
+
+  return data;
+};
+
+const data = generateData(2021, 2024, 1, 20); 
+
+const genreData = [
+  { name: '고전', value: 30 },
+  { name: '소설/시/희곡', value: 20 },
+  { name: '에세이', value: 10 },
+  { name: '과학', value: 15 },
+  { name: '사회과학', value: 25 },
+  { name: '경제경영', value: 10 },
+  { name: '역사', value: 15 },
+  { name: '인문학', value: 25 },
+  { name: '자기계발', value: 10 },
+];
 
 const MyLog = () => {
-  const data = [
-    { date: '2024-01-01', value: 10 },
-    { date: '2024-01-02', value: 20 },
-    { date: '2024-01-03', value: 10 },
-    { date: '2024-01-04', value: 25 },
-    { date: '2024-01-05', value: 30 },
-    { date: '2024-01-06', value: 5 },
-    { date: '2024-01-07', value: 17 },
-    { date: '2024-01-08', value: 21 },
-    { date: '2024-01-09', value: 6 },
-    { date: '2024-01-10', value: 25 },
-    { date: '2024-01-11', value: 42 },
-    { date: '2024-01-12', value: 5 },
-    // 나머지 데이터 추가...
-  ];
-  const book = {
-    image: 'https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791165341909.jpg',
-    title: '달러구트 꿈 백화점',
-    author: '이미예',
-    description: '잠들어야만 입장 가능한 꿈 백화점에서 일어나는 비밀스럽고도 기묘하며 가슴 뭉클한 판타지 소설 여기는 잠들어야만 입장할 수 있는 ‘달러구트 꿈 백화점’입니다. 잠들어야만 입장할 수 있는 독특한 마을. 그곳에 들어온 잠든 손님들에게 가장 인기 있는 곳은, 온갖 꿈을 한데 모아 판매하는 ‘달러구트의 꿈 백화점’이다. 긴 잠을 자는 사람들은 물론이고, 짧은 낮잠을 자는 사람들과 동물들로 매일매일 대성황을 이룬다.',
-    reason: '문서 디자인에 의미가 있는 글을 담으면 사람들은 양식을 보지 않고 글의 내용에 집중하는 경향이 있다. 예를 들어 나무위키의 서버는 파라과이에 있다.라는 문장을 적으면 대부분의 사람들은 글씨체에 집중하지 않고 글의 내용에 집중하게 될 것이다. 그렇다고 의미 없이 아무런 글자를 무작위로 입력해도 안 된다. 그렇다고 의미 없이 아무런 글자를 입력해도 안 된다. 그렇다고 의미 없이 아무런 글자를 무작위로 입력해도 안 된다. 그렇다고 의미 없이 아무런 글자를 입력해도 안 된다. 그렇다고 의미 없이 아무런 글자를 무작위로 입력해도 안 된다. '
-  };
-
+  const [showModalPwChange, setShowModalPwChange] = useState(false);
 
   const [showModalGenre, setShowModalGenre] = useState(false);
 
@@ -49,26 +61,13 @@ const MyLog = () => {
     navigate(`/board/genre?genre=${genre}`);
   };
 
-  const dummyImpressions = [
-    "문서 디자인에 의미가 있는 글을 담으면 사람들은 양식을 보지 않고 글의 내용에 집중하는 경향이 있다. 예를 들어 나무위키의 서버는 파라과이에 있다.라는 문장을 적으면 대부분의 사람들은 글씨체에 집중하지 않고 글의 내용에 집중하게 될 것이다. 그렇다고 의미 없이 아무런 글자를 무작위로 입력해도 안 된다. 그렇다고 의미 없이 아무런 글자를 입력해도 안 된다.",
-    "문학 구절 2",
-    "문학 구절 3",
-    "문학 구절 1",
-    "문학 구절 2",
-    "문학 구절 3",
-    "문학 구절 1",
-    "문학 구절 2",
-    "문학 구절 3",
-    "문학 구절 1",
-    "문학 구절 2",
-    "문학 구절 3",
-    "문학 구절 1",
-    "문학 구절 2"
-  ];
+  const openModalPwChange = () => {
+    setShowModalPwChange(true); // 비밀번호 변경 모달 열기
+  };
 
-
-  const impressions = dummyImpressions;
-
+  const closeModalPwChange = () => {
+    setShowModalPwChange(false); 
+  };
 
   const navigate = useNavigate();
 
@@ -79,32 +78,43 @@ const MyLog = () => {
 
   const[isLoggedIn, setIsLoggedIn] = useState(true);
   const logoutHandler = () => {
-    localStorage.removeItem("isLoggedIn");
-    setIsLoggedIn(false);
-    goToLogin();
+      localStorage.removeItem("isLoggedIn");
+      setIsLoggedIn(false);
+      goToLogin();
   }
 
   return (
     <div className='genrePage'>
       <div>
-
         <span>
           <img className='shortcuts' alt='logout' src={logoutLight} onClick={logoutHandler} />
-          <img className='shortcuts' alt='lock' src={lockLight} />
+          <img className='shortcuts' alt='lock' src={lockLight}  onClick={openModalPwChange} />
+          {showModalPwChange && <ModalPwChange onClose={closeModalPwChange} />}
           <img className='shortcuts' alt='pencil' src={pencilLight} onClick={goToWrite} />
           <img className='shortcuts' alt='logo' src={treeLight} onClick={goToBoard} />
         </span>
+        
 
-
-        <div className='header'>
-          <img className='bmkGreen' alt='btn' src={bmkBlue} onClick={openModalGenre} />
+        <div className='mypage-header'>
+          <img className='bmkBlue' alt='btn' src={bmkBlue} onClick={openModalGenre} />
           {showModalGenre && <ModalGenre onClose={closeModalGenre} onGenreSelect={handleGenreSelect} />}
           <h1>마이페이지</h1>
           <button className='mypage-tab' onClick={goToMylog}>내가 쓴 구절들</button>
           <button className='mypage-tab-clicked'>my log</button>
         </div>
-
-        <CalendarChart data={data}></CalendarChart>
+        
+        <div className="chart-container">
+          <div className="calendar-chart-container">
+            <h2>작성 게시글 수</h2>
+          <CalendarChart data={data}></CalendarChart>
+          </div>
+        </div>
+        <div className="chart-container">
+          <div className="calendar-chart-container">
+            <h2>장르별 독서 이력</h2>
+          <BubbleChart data={genreData}></BubbleChart>
+          </div>
+        </div>
       </div>
     </div>
   );
