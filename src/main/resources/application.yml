@@ -29,6 +29,5 @@ spring:
     hibernate:
       ddl-auto: update #테이블유지
 
-  spring:
-    mvc:
-      static-path-pattern: /src/main/resources/static
+  mvc:
+      static-path-pattern: /**
