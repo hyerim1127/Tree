@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Phrase Paging</title>
+</head>
+<body>
+<h2>Phrase Paging</h2>
+<form action="/phrase-paging" method="post">
+    <select name="category">
+        <option value="소설/시/희곡">소설/시/희곡</option>
+        <option value="과학">과학</option>
+        <!-- 다른 카테고리 옵션 추가 -->
+    </select>
+    <button type="submit">검색</button>
+</form>
+<div th:if="${bookList}">
+    <table>
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Phrase</th>
+            <th>Reason</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${bookList}">
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.phrase}"></td>
+            <td th:text="${book.reason}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

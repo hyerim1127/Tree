@@ -102,5 +102,18 @@ public class BoardController {
         return "boardPaging";
     }
 
+
+    @GetMapping("/phrase-paging")
+    public String showPhrasePaging() {
+        return "phrasePaging";
+    }
+
+    @PostMapping("/phrase-paging")
+    public String processPhrasePaging(@RequestParam("category") String category, Model model) {
+        List<BoardDTO> bookList = boardService.getBooksByCategory(category);
+        model.addAttribute("bookList", bookList);
+        return "phrasePaging";
+    }
+
 }
 

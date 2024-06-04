@@ -116,4 +116,21 @@ public class BoardService {
 
         return boardDTOS; // DTO 객체를 controller 쪽으로 return 한다.
     }
+
+    public List<BoardDTO> getBooksByCategory(String category) {
+        List<BoardDTO> bookList = new ArrayList<>();
+
+        if (category.equals("소설/시/희곡")) {
+            bookList.add(new BoardDTO("소설1", "작가1", "소설/시/희곡", "구절1", "이유1"));
+            bookList.add(new BoardDTO("소설2", "작가2", "소설/시/희곡", "구절2", "이유2"));
+            // 추가적인 책 정보 추가
+        } else if (category.equals("과학")) {
+            bookList.add(new BoardDTO("과학1", "작가1", "과학", "구절1", "이유1"));
+            bookList.add(new BoardDTO("과학2", "작가2", "과학", "구절2", "이유2"));
+            // 추가적인 책 정보 추가
+        }
+        // 다른 카테고리에 대한 책 정보 추가
+
+        return bookList;
+    }
 }
