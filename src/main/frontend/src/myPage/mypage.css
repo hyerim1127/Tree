@@ -1,0 +1,40 @@
+.mypage-header {
+    display: flex;
+    align-items: center;
+    padding-left: 6vw;
+}
+.mypage-tab-clicked {
+    border:none;
+    font-size: 15px;
+    background-color: transparent;
+    color:#562E12;
+    text-decoration: underline;
+    text-decoration-color: #a1948c;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 5px;
+    margin:10px;
+}
+.mypage-tab {
+    border:none;
+    font-size: 15px;
+    background-color: transparent;
+    color:#562E12;
+    margin:10px;
+}
+.mypage-tab:hover {
+    text-decoration: underline;
+    text-decoration-color: #a1948c;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 5px;
+}
+.bmkBlue {
+    position: absolute;
+    width:3vw;
+    top: 0;
+    left: 3vw;
+    padding-right: 10px;
+    transition: width 0.3s;
+}
+.bmkBlue:hover {
+    width:3.3vw;
+}
