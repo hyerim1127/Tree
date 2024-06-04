@@ -8,7 +8,7 @@ import pencilLight from './img/pencil-light.png';
 import treeLight from './img/tree-light.png';
 import btn from './img/btn.png';
 import bmkRed from './img/bookmark-red.png';
-import ModalGenre from './ModalGenre';
+import ModalGenre from './genreSelectModal/ModalGenre';
 import ModalImpression from './impression/ModalImpression';
 import './modalImpression.css';
 

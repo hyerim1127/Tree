@@ -1,4 +1,5 @@
 //장르 선택 팝업창
+import './ModalGenre.css';
 
 const ModalGenre = ({ onClose, onGenreSelect }) => {
   const handleGenreClick = (genre) => {

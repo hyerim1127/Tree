@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3';
+import branchImg from '../../img/tree-branch.png'
 
 const BubbleChart = ({ data }) => {
     const svgRef = useRef();
@@ -12,6 +13,11 @@ const BubbleChart = ({ data }) => {
         const height = 400;
 
         svg.attr('width', width).attr('height', height);
+
+        svg.append("image")
+        .attr("href", branchImg)
+        .attr("width", 500)
+        .attr("height", 400);
 
         const bubble = d3.pack().size([width, height]).padding(10);
 
@@ -36,7 +42,7 @@ const BubbleChart = ({ data }) => {
                     .attr('r', d => d.r + 5); // 버블 크기 증가
                 d3.select(this.parentNode)
                     .select('text')
-                    .attr('font-size', '1.5em'); // 텍스트 크기 증가
+                    .attr('font-size', '1.2em'); // 텍스트 크기 증가
             })
             .on('mouseleave', function (event, d) {
                 d3.select(this)
@@ -50,18 +56,24 @@ const BubbleChart = ({ data }) => {
         // 중간 생략
         function getColor(genre) {
             switch (genre) {
-                case '문학':
+                case '과학':
                     return '#456D4F';
-                case '경제/경영':
+                case '경제경영':
                     return '#76A081';
-                case '인문':
+                case '인문학':
                     return '#77955E';
-                case '예술':
+                case '고전':
                     return '#B6BC6D';
-                case '기술/공학':
+                case '소설/시/희곡':
                     return '#78824E';
                 case '자기계발':
                     return '#385500';
+                case '사회과학':
+                    return '#6f9424';
+                case '에세이':
+                    return '#a3c168';
+                case '역사':
+                    return '#565d06';
                 default:
                     return 'gray';
             }
