@@ -3,9 +3,11 @@ import React, { useEffect, useState } from "react";
 import logo from './img/treelogo.png';
 import mainImg from './img/mainImage.png';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { geoAzimuthalEquidistantRaw } from "d3";
 const User = {
-    email:'test@example.com',
-    pw: 'test123@@@'
+    email:'',
+    pw: ''
 }
 
 
@@ -14,70 +16,89 @@ export default function Login() {
     const [email, setEmail] = useState('');
     const [pw, setPw] = useState('');
 
-    const[emailValid, setEmailValid] = useState(false);
-    const[pwValid, setPwValid] = useState(false);
-    const[notAllow, setNotAllow] = useState(true);
-  
-    const[isLoggedIn, setIsLoggedIn] = useState(false);
+    const [emailValid, setEmailValid] = useState(false);
+    const [pwValid, setPwValid] = useState(false);
+    const [notAllow, setNotAllow] = useState(true);
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const navigate = useNavigate();
+
     const loginHandler = (email, pw) => {
-        localStorage.setItem("isLoggedIn","1");
-        setIsLoggedIn(true);
+        localStorage.setItem("isLoggedIn", "1");
     };
-    const storedUserLoggedInInformation = localStorage.getItem("isLoggedIn");
-    useEffect(() => {
-        const storedUserLoggedInInformation = localStorage.getItem("isLoggedIn");
-        if(storedUserLoggedInInformation === "1") {
-            setIsLoggedIn(true);
-        }
-    },[]);
 
     useEffect(() => {
-        if(emailValid && pwValid) {
+        const storedUserLoggedInInformation = localStorage.getItem("isLoggedIn");
+        if (storedUserLoggedInInformation === "1") {
+            setIsLoggedIn(true);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (emailValid && pwValid) {
             setNotAllow(false);
             return;
         }
         setNotAllow(true);
-    }, [emailValid,pwValid]);
+    }, [emailValid, pwValid]);
 
     const handleEmail = (e) => {
         setEmail(e.target.value);
         const regex = /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-        if(regex.test(email)) {
-            setEmailValid(true);
-        } else {
-            setEmailValid(false);
-        }
-    }
+        setEmailValid(regex.test(e.target.value));
+    };
 
     const handlePw = (e) => {
         setPw(e.target.value);
         const regex = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/;
-        if(regex.test(pw)) {
-            setPwValid(true);
-        } else {
-            setPwValid(false);
-        }
-    }
+        setPwValid(regex.test(e.target.value));
+    };
 
-    //로그인버튼 온클릭함수
     const onClickConfirmButton = () => {
-        if(email===User.email && pw===User.pw) {
-            loginHandler(email, pw);
-            navigate('/board/bookSave');
+        if (email.trim() === '' || pw.trim() === '') {
+            alert('id 또는 pw 확인');
         } else {
-            alert('login failed')
+            loginHandler(email, pw);
+            console.log('click LOGIN');
+            console.log('email:', email);
+            console.log('password:', pw);
+            setIsLoggedIn(true);
+            axios.post('http://localhost:8081/member/login', {
+
+                    memberEmail: email,
+                    memberPassword: pw
+                
+            })
+                .then((res) => {
+                    console.log(res);
+                    console.log('res.status :: ', res.status);
+                    console.log('res.data.email :: ', res.data.userId)
+                    console.log('res.data.pw :: ', res.data.msg)
+                    if (res.status === 200) {
+                        console.log('=====', res.status);
+                        navigate('/board/bookSave');
+                    } else if (res.status === 204) {
+                        console.log('=====', res.status);
+                        alert('id 또는 pw 확인');
+                        navigate('/member/login');
+                    }
+                })
+                .catch(err => {
+                    console.error('Login error: ', err);
+                    alert('서버와의 통신 중 오류가 발생했습니다.');
+                });
         }
-    }
-    
+    };
+
     const logoutHandler = () => {
         localStorage.removeItem("isLoggedIn");
         setIsLoggedIn(false);
-    }
+    };
 
-    const navigate = useNavigate();
     const goToSign = () => {
         navigate("/member/save");
-    }
+    };
 
     return (
         <div className='page'>
@@ -91,12 +112,12 @@ export default function Login() {
                     </p>
                 </div>
             </div>
-            <div className='form'>
+            <div method="POST" action="http://localhost:3000/" className='form'>
                 <center>
                     <button className="backBtn" onClick={logoutHandler}>
                         <img 
                         className='logo'
-                        alt='treeIm'g
+                        alt='treeImg'
                         src={logo} />
                     </button>
                 </center>
