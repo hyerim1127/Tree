@@ -64,7 +64,7 @@ export default function Login() {
             console.log('email:', email);
             console.log('password:', pw);
             setIsLoggedIn(true);
-            axios.post('http://localhost:8081/member/login', {
+            axios.post('http://localhost:8081/', {
 
                     memberEmail: email,
                     memberPassword: pw
