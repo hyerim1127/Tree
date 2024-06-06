@@ -64,30 +64,32 @@ export default function Login() {
             console.log('email:', email);
             console.log('password:', pw);
             setIsLoggedIn(true);
-            axios.post('http://localhost:8081/', {
+            axios.post('http://localhost:8081/member/login', {
 
                     memberEmail: email,
                     memberPassword: pw
                 
+            }, {
+                withCredentials: true
             })
-                .then((res) => {
-                    console.log(res);
-                    console.log('res.status :: ', res.status);
-                    console.log('res.data.email :: ', res.data.userId)
-                    console.log('res.data.pw :: ', res.data.msg)
-                    if (res.status === 200) {
-                        console.log('=====', res.status);
-                        navigate('/board/bookSave');
-                    } else if (res.status === 204) {
-                        console.log('=====', res.status);
-                        alert('id 또는 pw 확인');
-                        navigate('/member/login');
-                    }
-                })
-                .catch(err => {
-                    console.error('Login error: ', err);
-                    alert('서버와의 통신 중 오류가 발생했습니다.');
-                });
+            .then((res) => {
+                console.log(res);
+                console.log('res.status :: ', res.status);
+                console.log('res.data.email :: ', res.data.userId)
+                console.log('res.data.pw :: ', res.data.msg)
+                if (res.status === 200) {
+                    console.log('=====', res.status);
+                    navigate('/board/bookSave');
+                } else if (res.status === 204) {
+                    console.log('=====', res.status);
+                    alert('id 또는 pw 확인');
+                    navigate('/');
+                }
+            })
+            .catch(err => {
+                console.error('Login ERROR: ', err);
+                alert('서버와의 통신 중 오류가 발생했습니다.');
+            });
         }
     };
 
