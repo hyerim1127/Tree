@@ -3,6 +3,7 @@
 
     "main.css": "/static/css/main.58e611bf.css",
     "main.js": "/static/js/main.153350ad.js",
+
     "static/media/btn.png": "/static/media/btn.f977a9dc42b4d32b46ee.png",
     "static/media/page-line.png": "/static/media/page-line.8067bc555ae827e209e4.png",
     "static/media/mainImage.png": "/static/media/mainImage.6e3b27f16bd2ab4dadcb.png",
@@ -20,6 +21,7 @@
   "entrypoints": [
     "static/css/main.58e611bf.css",
     "static/js/main.153350ad.js"
+
 
   ]
 }
