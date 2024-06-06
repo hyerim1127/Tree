@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.58e611bf.css",
+    "main.js": "/static/js/main.7d094d62.js",
+    "main.css": "/static/css/main.b929e76e.css",
+    "main.js": "/static/js/main.e3869501.js",
+    "static/media/tree-branch.png": "/static/media/tree-branch.2d62881c9805effd1dee.png",
+
+    "static/media/tree-branch.png": "/static/media/tree-branch.652efa12d3ce6e290f8c.png",
+
+    "main.58e611bf.css.map": "/static/css/main.58e611bf.css.map",
+    "main.7d094d62.js.map": "/static/js/main.7d094d62.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.58e611bf.css",
+    "static/js/main.7d094d62.js"
+
+  ]
+}
