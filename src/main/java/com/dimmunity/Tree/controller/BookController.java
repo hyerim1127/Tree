@@ -24,13 +24,14 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
+
     @GetMapping("/book")
     public String home(Model model) {
         model.addAttribute("board", new BookDTO());
         return "bookSearch";
     }
     @GetMapping("/bookSave")
-    public String bookSave() {
+    public String bookSave(){
         return "bookSave";
     }
     @GetMapping("/book-search")
