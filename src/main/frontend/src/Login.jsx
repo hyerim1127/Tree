@@ -1,18 +1,15 @@
-//로그인
 import React, { useEffect, useState } from "react";
 import logo from './img/treelogo.png';
 import mainImg from './img/mainImage.png';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { geoAzimuthalEquidistantRaw } from "d3";
-const User = {
-    email:'',
-    pw: ''
-}
 
+const User = {
+    email: '',
+    pw: ''
+};
 
 export default function Login() {
-
     const [email, setEmail] = useState('');
     const [pw, setPw] = useState('');
 
@@ -68,26 +65,29 @@ export default function Login() {
 
                     memberEmail: email,
                     memberPassword: pw
-                
+            }, {
+                withCredentials: true
             })
-                .then((res) => {
-                    console.log(res);
-                    console.log('res.status :: ', res.status);
-                    console.log('res.data.email :: ', res.data.userId)
-                    console.log('res.data.pw :: ', res.data.msg)
-                    if (res.status === 200) {
-                        console.log('=====', res.status);
-                        navigate('/board/bookSave');
-                    } else if (res.status === 204) {
-                        console.log('=====', res.status);
-                        alert('id 또는 pw 확인');
-                        navigate('/member/login');
-                    }
-                })
-                .catch(err => {
-                    console.error('Login error: ', err);
-                    alert('서버와의 통신 중 오류가 발생했습니다.');
-                });
+            .then((res) => {
+                console.log(res);
+                console.log('res.status :: ', res.status);
+
+                console.log('res.data.email :: ', res.data.userId)
+                console.log('res.data.pw :: ', res.data.msg)
+
+                if (res.status === 200) {
+                    console.log('=====', res.status);
+                    navigate('/board/bookSave');
+                } else if (res.status === 204) {
+                    console.log('=====', res.status);
+                    alert('id 또는 pw 확인');
+                    navigate('/');
+                }
+            })
+            .catch(err => {
+                console.error('Login ERROR: ', err);
+                alert('서버와의 통신 중 오류가 발생했습니다.');
+            });
         }
     };
 
@@ -112,7 +112,7 @@ export default function Login() {
                     </p>
                 </div>
             </div>
-            <div method="POST" action="http://localhost:3000/" className='form'>
+            <form method="POST" action="http://localhost:8081/member/login" className='form'>
                 <center>
                     <button className="backBtn" onClick={logoutHandler}>
                         <img 
@@ -153,17 +153,17 @@ export default function Login() {
                         } 
                     </div>
                     <div>
-                        <button onClick={onClickConfirmButton} disabled={notAllow} className='bottomButton'>
+                        <button type="button" onClick={onClickConfirmButton} disabled={notAllow} className='bottomButton'>
                             로그인
                         </button>
                     </div>
                     <div className='joinText'>
                         아직 회원이 아니신가요?
-                        <button className='joinBtn'
+                        <button type="button" className='joinBtn'
                         onClick={goToSign}>회원가입</button>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     )
 }
