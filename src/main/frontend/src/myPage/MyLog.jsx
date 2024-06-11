@@ -32,14 +32,14 @@ const generateData = (startYear, endYear, minVal, maxVal) => {
 const data = generateData(2021, 2024, 1, 20); 
 
 const genreData = [
-  { name: '고전', value: 30 },
-  { name: '소설/시/희곡', value: 20 },
-  { name: '에세이', value: 10 },
-  { name: '과학', value: 15 },
-  { name: '사회과학', value: 25 },
-  { name: '경제경영', value: 10 },
+  { name: '고전', value: 10 },
+  { name: '소설/시/희곡', value: 55 },
+  { name: '에세이', value: 20 },
+  { name: '사회과학', value: 45 },
+  { name: '경제경영', value: 13 },
   { name: '역사', value: 15 },
   { name: '인문학', value: 25 },
+  { name: '과학', value: 15 },
   { name: '자기계발', value: 10 },
 ];
 
