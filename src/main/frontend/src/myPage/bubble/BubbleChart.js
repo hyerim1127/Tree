@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3';
-import branchImg from '../../img/tree-branch.png'
+import branchImg from '../../img/tree-branch.png';
 
 const BubbleChart = ({ data }) => {
     const svgRef = useRef();
@@ -10,16 +10,26 @@ const BubbleChart = ({ data }) => {
         svg.selectAll('*').remove();
 
         const width = 500;
-        const height = 400;
+        const height = 650;  // SVG의 높이를 나무 줄기의 높이와 맞춤
 
         svg.attr('width', width).attr('height', height);
 
-        svg.append("image")
-        .attr("href", branchImg)
-        .attr("width", 500)
-        .attr("height", 400);
+        const imgW = 400;  // 나무 줄기 이미지의 너비
+        const imgH = 900;  // 나무 줄기 이미지의 높이
+        const imgX = 45;   // 나무 줄기 이미지의 x 좌표
+        const imgY = 0;    // 나무 줄기 이미지의 y 좌표
 
-        const bubble = d3.pack().size([width, height]).padding(10);
+        // 나무 줄기 이미지 추가 및 위치 조정
+        svg.append("image")
+            .attr("href", branchImg)
+            .attr("width", imgW)
+            .attr("height", imgH)
+            .attr("x", imgX)
+            .attr("y", imgY);
+
+        const bubble = d3.pack()
+            .size([width, height])
+            .padding(10);
 
         const root = d3.hierarchy({ children: data }).sum(d => d.value);
 
@@ -46,14 +56,21 @@ const BubbleChart = ({ data }) => {
             })
             .on('mouseleave', function (event, d) {
                 d3.select(this)
-                .attr('fill', getColor(d.data.name))
-                .attr('r', d => d.r); // 원래 크기로 복원
+                    .attr('fill', getColor(d.data.name))
+                    .attr('r', d => d.r); // 원래 크기로 복원
                 d3.select(this.parentNode)
-                .select('text')
-                .attr('font-size', '1em'); // 원래 크기로 복원
+                    .select('text')
+                    .attr('font-size', '1em'); // 원래 크기로 복원
             });
-        
-        // 중간 생략
+
+        node
+            .append('text')
+            .attr('dy', '0.3em')
+            .attr('text-anchor', 'middle')
+            .style('font-family', 'Gothic, sans-serif')
+            .style('fill', 'white')
+            .text(d => d.data.name);
+
         function getColor(genre) {
             switch (genre) {
                 case '과학':
@@ -78,23 +95,15 @@ const BubbleChart = ({ data }) => {
                     return 'gray';
             }
         }
-    
+
         // 색상을 더 어둡게 만드는 함수
         function darkenColor(color) {
-        return d3.color(color).darker(0.5).toString();
+            return d3.color(color).darker(0.5).toString();
         }
 
-        node
-        .append('text')
-        .attr('dy', '0.3em')
-        .attr('text-anchor', 'middle')
-        .style('font-family', 'Gothic, sans-serif')
-        .style('fill', 'white')
-        .text(d => d.data.name);
+    }, [data]);
 
-        }, [data]);
-
-  return <svg ref={svgRef}></svg>;
+    return <svg ref={svgRef}></svg>;
 };
 
 export default BubbleChart;

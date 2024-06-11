@@ -3,19 +3,20 @@ package com.dimmunity.Tree.controller;
 import com.dimmunity.Tree.dto.MemberDTO;
 import com.dimmunity.Tree.service.MemberService;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import jakarta.validation.Valid;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
 
 @Controller
+@RequestMapping("/member")
 @RequiredArgsConstructor
 public class MemberController {
 
@@ -23,12 +24,12 @@ public class MemberController {
     private final MemberService memberService;
 
     // 회원가입 페이지 출력 요청
-    @GetMapping("/member/save")
+    @GetMapping("/save")
     public String saveForm() {
         return "save";
     }
 
-    @PostMapping("/member/save")    // name값을 requestparam에 담아온다
+    @PostMapping("/save")    // name값을 requestparam에 담아온다
 
     public String save(@ModelAttribute MemberDTO memberDTO, Errors errors, Model model) {
         System.out.println("MemberController.save");
@@ -38,25 +39,26 @@ public class MemberController {
     }
 
     //로그인
-    @GetMapping("/member/login")
+    @GetMapping("/login")
     public String loginForm(){
         return "login";
     }
-    @PostMapping("/member/login") // session : 로그인 유지
-    public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
+    @PostMapping("/login") // session : 로그인 유지
+    public ResponseEntity<Object> login(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
+        System.out.println("Received MemberDTO: " + memberDTO);
         MemberDTO loginResult = memberService.login(memberDTO);
         if (loginResult != null) {
             // login 성공-login한 이메일정보를 session에 담아줌, 구절작성페이지로감
             session.setAttribute("loginEmail", loginResult.getMemberEmail());
-            return "redirect:/bookSave";
+            return ResponseEntity.status(HttpStatus.OK).build();
         } else {
             // login 실패, 실패창 구현필요 /member/loginfail
-            return "login";
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
     }
 
     //회원리스트-나중에 없앨예정
-    @GetMapping("/member/")
+    @GetMapping("/")
     public String findAll(Model model) {
         List<MemberDTO> memberDTOList = memberService.findAll();
         // html로 가져갈 데이터->model 사용

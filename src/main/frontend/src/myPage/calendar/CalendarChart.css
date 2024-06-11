@@ -3,7 +3,8 @@
 .chart-container {
     display: flex;
     justify-content: center;
-    padding:40px 100px;
+    /*margin:10px 100px;*/
+    /*padding:40px 120px;*/
 
 }
 .calendar-chart-container {
@@ -14,6 +15,7 @@
     align-items: center;
     width: 100%;
     min-width: 500px;
+    margin:10px 120px;
     border:1px solid #744F36;
     border-radius: 5px;
     padding-bottom: 35px;
@@ -22,4 +24,5 @@
 .calendar-chart-container h2 {
   align-content: left;
   padding-top: 35px;
+  padding-bottom: -20px;
 }
