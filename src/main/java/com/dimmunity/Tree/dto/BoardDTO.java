@@ -65,7 +65,8 @@ public class BoardDTO {
         return boardDTO;
     }
 
-    public BoardDTO(String bookTitle, String bookAuthor, String bookCategoryName, String boardPhrase, String boardReason) {
+    public BoardDTO(String bookTitle, String bookAuthor, String bookCategoryName,
+                    String boardPhrase, String boardReason) {
         this.bookTitle = bookTitle;
         this.bookAuthor = bookAuthor;
         this.bookCategoryName = bookCategoryName;

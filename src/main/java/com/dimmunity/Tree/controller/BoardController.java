@@ -103,16 +103,18 @@ public class BoardController {
     }
 
 
-    @GetMapping("/phrase-paging")
+
+    //카테고리별 책정보 매핑
+    @GetMapping("/category-searching")
     public String showPhrasePaging() {
-        return "phrasePaging";
+        return "categorySearch";
     }
 
-    @PostMapping("/phrase-paging")
+    @PostMapping("/category-searching")
     public String processPhrasePaging(@RequestParam("category") String category, Model model) {
         List<BoardDTO> bookList = boardService.getBooksByCategory(category);
         model.addAttribute("bookList", bookList);
-        return "phrasePaging";
+        return "categorySearch";
     }
 
 }
