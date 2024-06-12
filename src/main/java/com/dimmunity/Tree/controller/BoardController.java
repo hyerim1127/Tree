@@ -102,5 +102,20 @@ public class BoardController {
         return "boardPaging";
     }
 
+
+
+    //카테고리별 책정보 매핑
+    @GetMapping("/category-searching")
+    public String showPhrasePaging() {
+        return "categorySearch";
+    }
+
+    @PostMapping("/category-searching")
+    public String processPhrasePaging(@RequestParam("category") String category, Model model) {
+        List<BoardDTO> bookList = boardService.getBooksByCategory(category);
+        model.addAttribute("bookList", bookList);
+        return "categorySearch";
+    }
+
 }
 

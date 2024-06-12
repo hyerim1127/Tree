@@ -97,15 +97,6 @@ public class BoardService {
         Page<BoardEntity> boardEntities =
                 boardRepository.findAll(PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC,"id")));
 
-        System.out.println("boardEntities.getContent() = " + boardEntities.getContent()); // 요청 페이지에 해당하는 글
-        System.out.println("boardEntities.getTotalElements() = " + boardEntities.getTotalElements()); // 전체 글 갯수
-        System.out.println("boardEntities.getNumber() = " + boardEntities.getNumber()); // DB로 요청한 페이지 번호 (사용자가 1p 요청했다면, DB로는 0)
-        System.out.println("boardEntities.getTotalPages() = " + boardEntities.getTotalPages()); // 전체 페이지 갯수 (글 갯수 14개일때, 3개씩 보여주면 5개 페이지 존재해야함)
-        System.out.println("boardEntities.getSize() = " + boardEntities.getSize()); // 한 페이지에 보여지는 글 갯수
-        System.out.println("boardEntities.hasPrevious() = " + boardEntities.hasPrevious()); // 이전 페이지 존재 여부 (T,F)
-        System.out.println("boardEntities.isFirst() = " + boardEntities.isFirst()); // 첫 페이지 여부 (T,F)
-        System.out.println("boardEntities.isLast() = " + boardEntities.isLast()); // 마지막 페이지 여부 (T,F)
-
         // map 은 Page 객체에서 제공해주는 메소드이고, board 는 엔티티 개체다. board 에서 변수를 하나씩 꺼내서 BoardDTO로 옮겨 담는다.(즉, 바꿔주는 거다.)
         // 페이지 목록에서 보여주면 되는 데이터 : id, writer, title, hits, createdTime -> 이정보를 담을 수 있는 DTO 생성자를 추가하면 된다.
         Page<BoardDTO> boardDTOS = boardEntities.map(board -> new BoardDTO(board.getId(),
@@ -115,5 +106,23 @@ public class BoardService {
 //
 
         return boardDTOS; // DTO 객체를 controller 쪽으로 return 한다.
+    }
+
+    public List<BoardDTO> getBooksByCategory(String category) {
+        List<BoardDTO> bookList = new ArrayList<>();
+
+        if (category.equals("소설/시/희곡")) {
+            bookList.add(new BoardDTO("소설1", "작가1", "소설/시/희곡", "구절1", "이유1"));
+            bookList.add(new BoardDTO("소설2", "작가2", "소설/시/희곡", "구절2", "이유2"));
+            // 추가적인 책 정보 추가
+        } else if (category.equals("과학")) {
+            bookList.add(new BoardDTO("과학1", "작가1", "과학", "구절1", "이유1"));
+            bookList.add(new BoardDTO("과학2", "작가2", "과학", "구절2", "이유2"));
+            // 추가적인 책 정보 추가
+        } else if (category.equals(" "))
+
+        // 다른 카테고리에 대한 책 정보 추가
+
+        return bookList;
     }
 }
