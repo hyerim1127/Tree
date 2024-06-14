@@ -27,7 +27,7 @@ const SignUp = () => {
           .catch(err => {
               console.error('Email check ERROR: ', err);
               alert('서버와의 통신 중 오류가 발생했습니다.');
-          });
+          });   
     }
 
     useEffect(() => {
@@ -82,6 +82,7 @@ const SignUp = () => {
                   console.error('Signup ERROR: ', err);
                   alert('서버와의 통신 중 오류가 발생했습니다.');
               });
+
         }
     }
 
