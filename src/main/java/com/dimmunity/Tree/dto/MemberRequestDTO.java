@@ -3,11 +3,13 @@ package com.dimmunity.Tree.dto;
 import com.dimmunity.Tree.entity.MemberEntity;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Data
+@NoArgsConstructor
 public class MemberRequestDTO {
     private String MemberEmail;
     private String memberPassword;
