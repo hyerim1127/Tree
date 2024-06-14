@@ -3,15 +3,12 @@ package com.dimmunity.Tree.dto;
 import com.dimmunity.Tree.entity.MemberEntity;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
+@Data
 @NoArgsConstructor
-@ToString
 public class MemberDTO { //회원 정보를 필드로 정의
     private Long id;  //pk로 등록
     private String memberEmail;
@@ -21,7 +18,7 @@ public class MemberDTO { //회원 정보를 필드로 정의
 
     public static MemberDTO toMemberDTO(MemberEntity memberEntity){
         MemberDTO memberDTO = new MemberDTO();
-        //memberDTO.setId(memberRequestDTO.getId());
+        memberDTO.setId(memberEntity.getId());
         memberDTO.setMemberEmail(memberEntity.getMemberEmail());
         memberDTO.setMemberPassword(memberEntity.getMemberPassword());
 

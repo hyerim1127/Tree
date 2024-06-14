@@ -31,7 +31,7 @@ public class MemberController {
     }
 
     @PostMapping("/save")    // name값을 requestparam에 담아온다
-    public String save(@ModelAttribute MemberDTO memberDTO, Errors errors, Model model) {
+    public String save(@RequestBody MemberDTO memberDTO, Errors errors, Model model) {
         System.out.println("MemberController.save");
         System.out.println("MemberDTO= "+ memberDTO);
         memberService.save(memberDTO);
