@@ -79,6 +79,7 @@ public class MemberController {
     }
 
 
+
     //회원정보수정
     // 수정완료시 로그인페이지로 가도록
     @GetMapping("/member/update")
