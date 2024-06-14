@@ -38,7 +38,7 @@ const ModalBookSearch = ({ show, onClose, onSelect }) => {
                 <div className="bs-modal-body">
                     <div className="bs-title">도서 검색</div>
                     <div>
-                        <form onSubmit={handleSearch}>
+                        <form method="post" action="/board/book-search" onSubmit={handleSearch}>
                             <input 
                                 className="bs-input"
                                 type="text"
