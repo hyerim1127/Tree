@@ -9,10 +9,10 @@ const ModalBookSearch = ({ show, onClose, onSelect }) => {
     const handleSearch = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8081/book-search', { keyword });
-            console.log(response.data);
+            const response = await axios.get('http://localhost:8081/book-search', { keyword });
+            //console.log(response.data); // 서버에서 받은 데이터 확인
             if (Array.isArray(response.data)) {
-                setBooks(response.data);
+                setBooks(response.data); // 배열 형태로 데이터를 books 상태에 저장
             } else {
                 console.error('Expected an array but got:', response.data);
             }
