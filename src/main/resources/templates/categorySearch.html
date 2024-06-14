@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Category Search</title>
@@ -69,10 +69,11 @@
     }
 
     // 카테고리 선택 후 폼 제출
-    document.getElementById('categoryForm').onsubmit = function(event) {
+    document.getElementById('catego5ryForm').onsubmit = function(event) {
         event.preventDefault(); // 폼 제출 기본 동작 막기
         var selectedCategory = document.getElementById('category').value;
         window.location.href = '/board/category-searching?category=' + encodeURIComponent(selectedCategory);
+
     }
 </script>
 
