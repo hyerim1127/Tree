@@ -34,9 +34,12 @@ function App() {
         <Route path="/member" element={<MyMain />} />
         <Route path="/member/log" element={<MyLog />} />
        </Routes>
-       
+
     </BrowserRouter>
   );
 }
 
 export default App;
+
+
+

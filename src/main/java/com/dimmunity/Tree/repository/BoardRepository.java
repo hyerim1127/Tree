@@ -1,5 +1,6 @@
 package com.dimmunity.Tree.repository;
 
+import com.dimmunity.Tree.dto.BoardDTO;
 import com.dimmunity.Tree.entity.BoardEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

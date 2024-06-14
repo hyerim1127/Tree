@@ -30,10 +30,12 @@ public class BookController {
         model.addAttribute("board", new BookDTO());
         return "bookSearch";
     }
+
     @GetMapping("/bookSave")
-    public String bookSave(){
+    public String bookSave() {
         return "bookSave";
     }
+
     @GetMapping("/book-search")
     public String BookSearchHome(Model model) {
         String keyword = "";
@@ -43,7 +45,7 @@ public class BookController {
 
     @PostMapping("/book-search")
     public String search(@ModelAttribute("keyword") String keyword, Model model) {
-        List<BookDTO> bookDtoList= bookService.searchBooksWithCategories(keyword);
+        List<BookDTO> bookDtoList = bookService.searchBooksWithCategories(keyword);
         model.addAttribute("bookDtoList", bookDtoList);
         return "bookSearch";
     }
