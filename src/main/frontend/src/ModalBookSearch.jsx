@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './modalBookSearch.css';
 import axios from 'axios';
 
 const ModalBookSearch = ({ show, onClose, onSelect }) => {
-    const [keyword, setKeyword] = useState('');
-    const [books, setBooks] = useState([]); // 빈 배열로 초기화
+    const [keyword, setKeyword] = React.useState('');
+    const [books, setBooks] = React.useState([]);
 
     if (!show) {
         return null;
@@ -12,22 +12,18 @@ const ModalBookSearch = ({ show, onClose, onSelect }) => {
 
     const handleSearch = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8081/api/book-search', keyword, { // JSON 형식으로 전송
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => {
-            console.log(response.data); // 응답 데이터를 콘솔에 출력하여 확인
-            if (Array.isArray(response.data)) {
-                setBooks(response.data);
-            } else {
-                console.error('Expected an array but got:', response.data);
-            }
-        })
-        .catch(error => {
-            console.error('There was an error searching for books!', error);
-        });
+        axios.post('http://localhost:8081/book-search', { keyword })
+            .then(response => {
+                console.log(response.data);
+                if (Array.isArray(response.data)) {
+                    setBooks(response.data);
+                } else {
+                    console.error('Expected an array but got:', response.data);
+                }
+            })
+            .catch(error => {
+                console.error('There was an error searching for books!', error);
+            });
     };
 
     const selectElement = (book) => {
