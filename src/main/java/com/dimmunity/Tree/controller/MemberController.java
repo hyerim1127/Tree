@@ -32,17 +32,14 @@ public class MemberController {
 
     @PostMapping("/save")    // name값을 requestparam에 담아온다
     public ResponseEntity<String> save(@RequestBody MemberDTO memberDTO, Errors errors, Model model) {
-        System.out.println("MemberController.save");
-        System.out.println("MemberDTO= "+ memberDTO);
         memberService.save(memberDTO);
         return new ResponseEntity<>("Member registered successfully", HttpStatus.CREATED);
     }
     @GetMapping("/check-email")
-    public ResponseEntity<Boolean> checkEmail(@RequestParam String email) {
-        boolean isEmailAvailable = memberService.isEmailAvailable(email);
-        return new ResponseEntity<>(isEmailAvailable, HttpStatus.OK);
+    public ResponseEntity<Boolean> checkEmail(@RequestParam("email") String email) {
+        boolean isEmailTaken = memberService.isEmailTaken(email);
+        return ResponseEntity.ok(isEmailTaken);
     }
-
     //로그인
     @GetMapping("/login")
     public String loginForm(){
@@ -82,13 +79,6 @@ public class MemberController {
 
     //회원정보수정
     // 수정완료시 로그인페이지로 가도록
-    @GetMapping("/member/update")
-    public String updateForm(HttpSession session, Model model){
-        String myEmail=(String) session.getAttribute("loginEmail");
-        MemberDTO memberDTO=memberService.updateForm(myEmail);
-        model.addAttribute("updateMember", memberDTO);
-        return "update";
-    }
     @PostMapping("/validate")
     public ResponseEntity<Boolean> validateUser(@RequestBody MemberDTO memberDTO) {
         boolean isValid = memberService.validateUser(memberDTO);
@@ -100,6 +90,8 @@ public class MemberController {
         memberService.changePassword(memberDTO);
         return new ResponseEntity<>("Password updated successfully", HttpStatus.OK);
     }
+
+
     //로그아웃
     @GetMapping("/member/logout")
     public String logout(HttpSession session){

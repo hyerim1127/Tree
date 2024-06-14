@@ -11,81 +11,78 @@ const SignUp = () => {
     const [emailValid, setEmailValid] = useState(false);
     const [pwValid, setPwValid] = useState(false);
     const [notAllow, setNotAllow] = useState(true);
+    const [emailError, setEmailError] = useState('');
 
-    const navigate = useNavigate();
-
-    const duplicateEmail = (e) => {
-        e.preventDefault();
-        axios.get(`http://localhost:8081/member/check-email?email=${email}`)
+    const duplicateEmail = () => {
+        axios.get(`http://localhost:8081/member/check-email`, {
+            params: { email: email }
+        })
           .then((res) => {
               if (res.data) {
-                  alert('이메일 이용 가능^.^');
+                  setEmailError('이메일이 이미 사용 중입니다.');
               } else {
-                  alert('이메일 이용 불가능ㅜ.ㅜ');
+                  setEmailError('이메일을 사용할 수 있습니다.');
               }
           })
-          .catch(err => {
+          .catch((err) => {
               console.error('Email check ERROR: ', err);
-              alert('서버와의 통신 중 오류가 발생했습니다.');
-          });   
+              setEmailError('서버와의 통신 중 오류가 발생했습니다.');
+          });
     }
 
     useEffect(() => {
-        if(emailValid && pwValid) {
+        if (emailValid && pwValid) {
             setNotAllow(false);
-        } else {
-            setNotAllow(true);
+            return;
         }
+        setNotAllow(true);
     }, [emailValid, pwValid]);
 
     const handleEmail = (e) => {
-        setEmail(e.target.value);
+        const value = e.target.value;
+        setEmail(value);
         const regex = /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-        setEmailValid(regex.test(e.target.value));
+        setEmailValid(regex.test(value));
     }
 
     const handlePw = (e) => {
-        setPw(e.target.value);
-        const regex = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\$begin:math:text$\\$end:math:text$\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/;
-        setPwValid(regex.test(e.target.value));
+        const value = e.target.value;
+        setPw(value);
+        const regex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\$begin:math:text$\\$end:math:text$\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/;
+        setPwValid(regex.test(value));
     }
 
     const handlePwConfirm = (e) => {
         setPwConfirm(e.target.value);
     }
 
-    const onClickConfirmButton = (e) => {
-        e.preventDefault();
-        if(email.trim() === '' || pw.trim() === '') {
-            alert('올바르게 입력');
-            navigate("/member/save");
-        } else {
-            console.log('email : ', email);
-            console.log('pw : ', pw);
-            axios.post('http://localhost:8081/member/save', {
-                memberEmail: email,
-                memberPassword: pw
-            }, {
-                withCredentials: true
-            })
-              .then((res) => {
-                  console.log('res.status :: ', res.status);
-                  if (res.status === 201) {
-                      console.log('회원가입 성공');
-                      navigate('/member/login');
-                  } else {
-                      console.log('회원가입 실패');
-                      alert('회원가입에 실패했습니다.');
-                  }
-              })
-              .catch(err => {
-                  console.error('Signup ERROR: ', err);
-                  alert('서버와의 통신 중 오류가 발생했습니다.');
-              });
-
+    const onClickConfirmButton = () => {
+        if (pw !== pwConfirm) {
+            alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+            return;
         }
+        axios.post('http://localhost:8081/member/save', {
+            memberEmail: email,
+            memberPassword: pw
+        }, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+          .then((res) => {
+              if (res.status === 201) {
+                  navigate('/member/login');
+              } else {
+                  alert('회원가입에 실패했습니다.');
+              }
+          })
+          .catch(err => {
+              console.error('Sign up ERROR: ', err);
+              alert('서버와의 통신 중 오류가 발생했습니다.');
+          });
     }
 
+    const navigate = useNavigate();
     const goToLogin = () => {
         navigate('/');
     };
@@ -102,7 +99,7 @@ const SignUp = () => {
                   </p>
               </div>
           </div>
-          <form method="post" className='form'>
+          <form method="post" action="/member/save" className='form'>
               <center>
                   <button className="backBtn" onClick={goToLogin}>
                       <img
@@ -118,14 +115,12 @@ const SignUp = () => {
                         placeholder='email'
                         value={email}
                         onChange={handleEmail} />
-                      <button className='duplicationCheck' onClick={duplicateEmail}>중복확인</button>
+                      <button className='duplicationCheck' type="button" onClick={duplicateEmail}>중복확인</button>
                   </div>
                   <div className='errorMessageWrap'>
-                      {
-                        !emailValid && email.length > 0 && (
-                          <div>올바른 이메일을 입력해주세요.</div>
-                        )
-                      }
+                      {emailError && (
+                        <div>{emailError}</div>
+                      )}
                   </div>
 
                   <div className='inputWrap'>
@@ -152,9 +147,7 @@ const SignUp = () => {
                         onChange={handlePwConfirm} />
                   </div>
                   <div>
-                      <button onClick={onClickConfirmButton}
-                              disabled={notAllow}
-                              className='bottomButton'>
+                      <button type="button" onClick={onClickConfirmButton} disabled={notAllow} className='bottomButton'>
                           회원가입
                       </button>
                   </div>
@@ -163,5 +156,4 @@ const SignUp = () => {
       </div>
     )
 }
-
 export default SignUp;

@@ -28,6 +28,10 @@ public class MemberService {
         MemberEntity memberEntity = MemberEntity.toMemberEntity(memberDTO);
         memberRepository.save(memberEntity); //jpa가 제공하는 save메소드 사용
     }
+    public boolean isEmailTaken(String email) {
+        Optional<MemberEntity> member = memberRepository.findByMemberEmail(email);
+        return member.isPresent();
+    }
     public boolean isEmailAvailable(String email) {
         return memberRepository.findByMemberEmail(email).isEmpty();
     }
@@ -86,6 +90,7 @@ public class MemberService {
         }
     }
 
+    //비번 변경시 인증
     public boolean validateUser(MemberDTO memberDTO) {
         Optional<MemberEntity> member = memberRepository.findByMemberEmail(memberDTO.getMemberEmail());
         if (member.isPresent()) {
@@ -102,7 +107,5 @@ public class MemberService {
             memberRepository.save(memberEntity);
         }
     }
-
-
 
 }
