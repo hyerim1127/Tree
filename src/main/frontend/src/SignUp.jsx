@@ -7,8 +7,8 @@ import logo from './img/treelogo.png';
 import axios from 'axios';
 
 const User = {
-    email:'test@example.com',
-    pw: 'test123@@@'
+    email:'',
+    pw: '',
 }
 
 const SignUp = () => {
@@ -67,14 +67,15 @@ const SignUp = () => {
     }
 
     const onClickConfirmButton = () => {
-        if(pw===pwConfirm) {
-            const userData = {
-                email:email,
-                password:pw
-            };
-            navigate("/");
+        if(email.trim() === '' || pw.trim() === '') {
+            alert('올바르게 입력')
+            navigate("/member/save");
+            return;
             
         } else {
+            console.log('email:',email);
+            console.log('email:',pw);
+            axios.post('member/save')
             alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
         }
     }
