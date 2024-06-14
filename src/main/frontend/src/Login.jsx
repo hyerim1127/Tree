@@ -54,34 +54,25 @@ export default function Login() {
 
     const onClickConfirmButton = () => {
         if (email.trim() === '' || pw.trim() === '') {
-            alert('id 또는 pw 확인');
+            alert('ID 또는 PW를 확인해주세요.');
+            return; 
         } else {
-            loginHandler(email, pw);
-            console.log('click LOGIN');
-            console.log('email:', email);
-            console.log('password:', pw);
-            setIsLoggedIn(true);
             axios.post('http://localhost:8081/member/login', {
-
-                    memberEmail: email,
-                    memberPassword: pw
+                memberEmail: email,
+                memberPassword: pw
             }, {
                 withCredentials: true
             })
             .then((res) => {
-                console.log(res);
                 console.log('res.status :: ', res.status);
-
-                console.log('res.data.email :: ', res.data.userId)
-                console.log('res.data.pw :: ', res.data.msg)
-
+    
                 if (res.status === 200) {
-                    console.log('=====', res.status);
+                    console.log('로그인 성공');
                     navigate('/board/bookSave');
                 } else if (res.status === 204) {
-                    console.log('=====', res.status);
-                    alert('id 또는 pw 확인');
-                    navigate('/');
+                    console.log('로그인 실패');
+                    alert('ID 또는 PW를 확인해주세요.');
+                    navigate('/member/login');
                 }
             })
             .catch(err => {
@@ -112,7 +103,7 @@ export default function Login() {
                     </p>
                 </div>
             </div>
-            <form method="POST" action="http://localhost:8081/member/login" className='form'>
+            <form method="post" action="/member/login" className='form'>
                 <center>
                     <button className="backBtn" onClick={logoutHandler}>
                         <img 
