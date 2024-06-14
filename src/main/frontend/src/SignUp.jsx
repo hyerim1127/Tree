@@ -73,12 +73,33 @@ const SignUp = () => {
             return;
             
         } else {
-            console.log('email:',email);
-            console.log('email:',pw);
-            axios.post('member/save')
-            alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+            console.log('email : ', email);
+            console.log('pw : ', pw);
+            axios.post('http://localhost:8081/member/save', {
+                memberEmail: email,
+                memberPassword: pw
+            }, {
+                withCredentials: true
+            })
+            .then((res) => {
+                console.log('res.status :: ', res.status);
+    
+                if (res.status === 200) {
+                    console.log('로그인 성공');
+                    navigate('/member/login');
+                } else if (res.status === 204) {
+                    console.log('로그인 실패');
+                    alert('ID 또는 PW를 확인해주세요.');
+                    navigate('/member/login');
+                }
+            })
+            .catch(err => {
+                console.error('Login ERROR: ', err);
+                alert('서버와의 통신 중 오류가 발생했습니다.');
+            });
+            }
         }
-    }
+
 
     const navigate = useNavigate();
     const goToLogin = () => {
@@ -97,7 +118,7 @@ const SignUp = () => {
                     </p>
                 </div>
             </div>
-            <div className="form">
+            <form method="post" action="/member/save" className='form'>
                 <center>
                     <button className="backBtn" onClick={goToLogin}>
                         <img 
@@ -154,9 +175,8 @@ const SignUp = () => {
                         </button>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     )
 }
-
 export default SignUp;
