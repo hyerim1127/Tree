@@ -27,7 +27,9 @@ public class MemberService {
         //(조건.jpa를 사용하기때문에 entity객체를 넘겨줘야 함)
         MemberEntity memberEntity = MemberEntity.toMemberEntity(memberDTO);
         memberRepository.save(memberEntity); //jpa가 제공하는 save메소드 사용
-
+    }
+    public boolean isEmailAvailable(String email) {
+        return memberRepository.findByMemberEmail(email).isEmpty();
     }
 
     public MemberDTO login(MemberRequestDTO memberRequestDTO){
@@ -84,9 +86,21 @@ public class MemberService {
         }
     }
 
-    public void update(MemberDTO memberDTO) {
-        memberRepository.save(MemberEntity.toUpdateMemberEntity(memberDTO));
-        //db에 이미 있는 id라면 update쿼리를 날림, 그냥 memberentity로 하면 insert가 되므로 주의
+    public boolean validateUser(MemberDTO memberDTO) {
+        Optional<MemberEntity> member = memberRepository.findByMemberEmail(memberDTO.getMemberEmail());
+        if (member.isPresent()) {
+            return member.get().getMemberPassword().equals(memberDTO.getMemberPassword());
+        }
+        return false;
+    }
+
+    public void changePassword(MemberDTO memberDTO) {
+        Optional<MemberEntity> member = memberRepository.findByMemberEmail(memberDTO.getMemberEmail());
+        if (member.isPresent()) {
+            MemberEntity memberEntity = member.get();
+            memberEntity.setMemberPassword(memberDTO.getMemberPassword());
+            memberRepository.save(memberEntity);
+        }
     }
 
 

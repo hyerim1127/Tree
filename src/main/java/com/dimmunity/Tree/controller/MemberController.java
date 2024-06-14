@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@Controller
+@RestController
 @RequestMapping("/member")
 @RequiredArgsConstructor
 public class MemberController {
@@ -31,11 +31,16 @@ public class MemberController {
     }
 
     @PostMapping("/save")    // name값을 requestparam에 담아온다
-    public String save(@ModelAttribute MemberDTO memberDTO, Errors errors, Model model) {
+    public ResponseEntity<String> save(@RequestBody MemberDTO memberDTO, Errors errors, Model model) {
         System.out.println("MemberController.save");
         System.out.println("MemberDTO= "+ memberDTO);
         memberService.save(memberDTO);
-        return "login";
+        return new ResponseEntity<>("Member registered successfully", HttpStatus.CREATED);
+    }
+    @GetMapping("/check-email")
+    public ResponseEntity<Boolean> checkEmail(@RequestParam String email) {
+        boolean isEmailAvailable = memberService.isEmailAvailable(email);
+        return new ResponseEntity<>(isEmailAvailable, HttpStatus.OK);
     }
 
     //로그인
@@ -58,7 +63,7 @@ public class MemberController {
     }
 
     //회원리스트-나중에 없앨예정
-    @GetMapping("/")
+    @GetMapping("/list")
     public String findAll(Model model) {
         List<MemberDTO> memberDTOList = memberService.findAll();
         // html로 가져갈 데이터->model 사용
@@ -74,6 +79,7 @@ public class MemberController {
     }
 
 
+
     //회원정보수정
     // 수정완료시 로그인페이지로 가도록
     @GetMapping("/member/update")
@@ -83,10 +89,16 @@ public class MemberController {
         model.addAttribute("updateMember", memberDTO);
         return "update";
     }
-    @PostMapping("/member/update")
-    public String update(@ModelAttribute MemberDTO memberDTO){
-        memberService.update(memberDTO);
-        return "redirect:/member/login";
+    @PostMapping("/validate")
+    public ResponseEntity<Boolean> validateUser(@RequestBody MemberDTO memberDTO) {
+        boolean isValid = memberService.validateUser(memberDTO);
+        return new ResponseEntity<>(isValid, HttpStatus.OK);
+    }
+
+    @PostMapping("/change-password")
+    public ResponseEntity<String> changePassword(@RequestBody MemberDTO memberDTO) {
+        memberService.changePassword(memberDTO);
+        return new ResponseEntity<>("Password updated successfully", HttpStatus.OK);
     }
     //로그아웃
     @GetMapping("/member/logout")
