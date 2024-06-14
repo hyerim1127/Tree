@@ -25,7 +25,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route index element={<Login />} />
+        <Route path="/member/login" element={<Login />} />
         <Route path="/member/save" element={<SignUp />} />
         <Route path="/board/bookSave" element={<WriteImpression />} />
         <Route path="/board" element={<View />} />
@@ -33,9 +34,12 @@ function App() {
         <Route path="/member" element={<MyMain />} />
         <Route path="/member/log" element={<MyLog />} />
        </Routes>
-       
+
     </BrowserRouter>
   );
 }
 
 export default App;
+
+
+

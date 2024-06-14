@@ -1,6 +1,7 @@
 package com.dimmunity.Tree.service;
 
 import com.dimmunity.Tree.dto.MemberDTO;
+import com.dimmunity.Tree.dto.MemberRequestDTO;
 import com.dimmunity.Tree.entity.MemberEntity;
 import com.dimmunity.Tree.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,19 +27,25 @@ public class MemberService {
         //(조건.jpa를 사용하기때문에 entity객체를 넘겨줘야 함)
         MemberEntity memberEntity = MemberEntity.toMemberEntity(memberDTO);
         memberRepository.save(memberEntity); //jpa가 제공하는 save메소드 사용
-
+    }
+    public boolean isEmailTaken(String email) {
+        Optional<MemberEntity> member = memberRepository.findByMemberEmail(email);
+        return member.isPresent();
+    }
+    public boolean isEmailAvailable(String email) {
+        return memberRepository.findByMemberEmail(email).isEmpty();
     }
 
-    public MemberDTO login(MemberDTO memberDTO){
-        Optional<MemberEntity> byMemeberEmail=memberRepository.findByMemberEmail(memberDTO.getMemberEmail());
+    public MemberDTO login(MemberRequestDTO memberRequestDTO){
+        Optional<MemberEntity> byMemeberEmail=memberRepository.findByMemberEmail(memberRequestDTO.getMemberEmail());
         if(byMemeberEmail.isPresent()){ //조회결과있음
             MemberEntity memberEntity=byMemeberEmail.get();
-            if(memberEntity.getMemberPassword().equals(memberDTO.getMemberPassword())){
+            if(memberEntity.getMemberPassword().equals(memberRequestDTO.getMemberPassword())){
                 //비번일치
                 //entity->dto 변환 후 리턴, dto에 메소드생성
-                MemberDTO dto=MemberDTO.toMemberDTO((memberEntity));
+                MemberDTO dto = MemberDTO.toMemberDTO(memberEntity);
                 return dto;
-            } else{ //비번불일치
+            } else { //비번불일치
                 return null;
                 }
         } else { //조회결과없을때
@@ -83,11 +90,22 @@ public class MemberService {
         }
     }
 
-    public void update(MemberDTO memberDTO) {
-        memberRepository.save(MemberEntity.toUpdateMemberEntity(memberDTO));
-        //db에 이미 있는 id라면 update쿼리를 날림, 그냥 memberentity로 하면 insert가 되므로 주의
+    //비번 변경시 인증
+    public boolean validateUser(MemberDTO memberDTO) {
+        Optional<MemberEntity> member = memberRepository.findByMemberEmail(memberDTO.getMemberEmail());
+        if (member.isPresent()) {
+            return member.get().getMemberPassword().equals(memberDTO.getMemberPassword());
+        }
+        return false;
     }
 
-
+    public void changePassword(MemberDTO memberDTO) {
+        Optional<MemberEntity> member = memberRepository.findByMemberEmail(memberDTO.getMemberEmail());
+        if (member.isPresent()) {
+            MemberEntity memberEntity = member.get();
+            memberEntity.setMemberPassword(memberDTO.getMemberPassword());
+            memberRepository.save(memberEntity);
+        }
+    }
 
 }
