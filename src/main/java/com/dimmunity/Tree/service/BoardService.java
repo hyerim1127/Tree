@@ -12,6 +12,7 @@ import ch.qos.logback.core.net.SyslogOutputStream;
 import com.dimmunity.Tree.dto.BoardDTO;
 import com.dimmunity.Tree.entity.BoardEntity;
 import com.dimmunity.Tree.repository.BoardRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -23,13 +24,14 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class BoardService {
     private final BoardRepository boardRepository;
 
-    public void save(BoardDTO boardDTO){
+    public void save(BoardDTO boardDTO) {
         // 메소드 호출한 결과가 boardEntity로 받아오고 그것을 save 메소드로 넘겨주면 insert query가 나가게 된다.
         BoardEntity boardEntity = BoardEntity.toSaveEntity(boardDTO);
         boardRepository.save(boardEntity);
@@ -42,7 +44,7 @@ public class BoardService {
         // return 할 list 객체 선언
         List<BoardDTO> boardDTOList = new ArrayList<>();
         // List<BoardEntity>에 담긴 데이터를 List<BoardDTO>에 옮겨 담기 (즉, entity객체를 dto 객체로 옮겨 담기)
-        for (BoardEntity boardEntity: boardEntityList){
+        for (BoardEntity boardEntity : boardEntityList) {
             // boardEntity 객체를 DTO로 변환하고(BoardDTO.toBoardDTO(boardEntity) boardDTOList에 담는 과정
             boardDTOList.add(BoardDTO.toBoardDTO(boardEntity));
         }
@@ -51,14 +53,14 @@ public class BoardService {
 
     // 조회수 증가 메소드
     @Transactional
-    public void updateHits(Long id){
+    public void updateHits(Long id) {
         boardRepository.updateHits(id);
     }
 
 
-    public BoardDTO findById(Long id){
+    public BoardDTO findById(Long id) {
         Optional<BoardEntity> optionalBoardEntity = boardRepository.findById(id);
-        if(optionalBoardEntity.isPresent()) {
+        if (optionalBoardEntity.isPresent()) {
             BoardEntity boardEntity = optionalBoardEntity.get();
             BoardDTO boardDTO = BoardDTO.toBoardDTO(boardEntity);
             return boardDTO;
@@ -68,18 +70,18 @@ public class BoardService {
 
     }
 
-    public BoardDTO update(BoardDTO boardDTO){
+    public BoardDTO update(BoardDTO boardDTO) {
         BoardEntity boardEntity = BoardEntity.toUpdateEntity(boardDTO);
         boardRepository.save(boardEntity);
         return findById(boardDTO.getId());
     }
 
-    public void delete(Long id){
+    public void delete(Long id) {
         boardRepository.deleteById(id);
     }
 
     // DB 로부터 paging 처리된 db 가져옴
-    public Page<BoardDTO> paging(Pageable pageable){
+    public Page<BoardDTO> paging(Pageable pageable) {
         // getPageNumber() 메소드를 사용해서 몇페이지를 요청했는지 가져올 수 있다.
         // page 위치에 있는 값은 0부터 시작이기 때문에 -1 을 해준다.
         int page = pageable.getPageNumber() - 1;
@@ -95,13 +97,13 @@ public class BoardService {
          */
         // 지금은 List 객체가 아니라 Page 객체다.
         Page<BoardEntity> boardEntities =
-                boardRepository.findAll(PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC,"id")));
+                boardRepository.findAll(PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "id")));
 
         // map 은 Page 객체에서 제공해주는 메소드이고, board 는 엔티티 개체다. board 에서 변수를 하나씩 꺼내서 BoardDTO로 옮겨 담는다.(즉, 바꿔주는 거다.)
         // 페이지 목록에서 보여주면 되는 데이터 : id, writer, title, hits, createdTime -> 이정보를 담을 수 있는 DTO 생성자를 추가하면 된다.
         Page<BoardDTO> boardDTOS = boardEntities.map(board -> new BoardDTO(board.getId(),
                 board.getBoardPhrase(), board.getBoardWriter(),
-                board.getBookTitle(),board.getBookAuthor(),board.getBookCategoryName(), board.getBookImageURL(),
+                board.getBookTitle(), board.getBookAuthor(), board.getBookCategoryName(), board.getBookImageURL(),
                 board.getBoardHits(), board.getCreatedTime()));
 //
 
@@ -119,12 +121,24 @@ public class BoardService {
             bookList.add(new BoardDTO("과학1", "작가1", "과학", "구절1", "이유1"));
             bookList.add(new BoardDTO("과학2", "작가2", "과학", "구절2", "이유2"));
             // 추가적인 책 정보 추가
-        } //else if (category.equals(" "))
-
-
-        // 다른 카테고리에 대한 책 정보 추가
+        } else if (category.equals("고전")){
+            bookList.add(new BoardDTO("과학1", "작가1", "과학", "구절1", "이유1"));
+        } else if (category.equals("사회과학")){
+            bookList.add(new BoardDTO("과학1", "작가1", "과학", "구절1", "이유1"));
+        }else if (category.equals("경제경영")){
+            bookList.add(new BoardDTO("과학1", "작가1", "과학", "구절1", "이유1"));
+        }else if (category.equals("에세이")){
+            bookList.add(new BoardDTO("과학1", "작가1", "과학", "구절1", "이유1"));
+        }else if (category.equals("역사")){
+            bookList.add(new BoardDTO("과학1", "작가1", "과학", "구절1", "이유1"));
+        }else if (category.equals("인문학")){
+            bookList.add(new BoardDTO("과학1", "작가1", "과학", "구절1", "이유1"));
+        }else if(category.equals("자기계발")){
+            bookList.add(new BoardDTO("과학1", "작가1", "과학", "구절1", "이유1"));
+        }
 
         return bookList;
     }
-
 }
+
+
