@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import axios from 'axios';
 import './pwModal.css';
-
-const User = {
-  email: 'test@example.com',
-  pw: 'test123@@@'
-};
 
 const ModalPwChange = ({ onClose }) => {
   const navigate = useNavigate();
@@ -18,6 +14,7 @@ const ModalPwChange = ({ onClose }) => {
   const [pw, setPw] = useState('');
   const [newPw, setNewPw] = useState('');
   const [confirmPw, setConfirmPw] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   // Check for initial step validation
   useEffect(() => {
@@ -47,14 +44,14 @@ const ModalPwChange = ({ onClose }) => {
   const handlePw = (e) => {
     const value = e.target.value;
     setPw(value);
-    const regex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-Z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/;
+    const regex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\$begin:math:text$\\$end:math:text$\-_=+])(?!.*[^a-zA-Z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/;
     setPwValid(regex.test(value));
   };
 
   const handleNewPw = (e) => {
     const value = e.target.value;
     setNewPw(value);
-    const regex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-Z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/;
+    const regex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\$begin:math:text$\\$end:math:text$\-_=+])(?!.*[^a-zA-Z0-9$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/;
     setNewPwValid(regex.test(value));
   };
 
@@ -63,20 +60,43 @@ const ModalPwChange = ({ onClose }) => {
   };
 
   const handleNextStep = () => {
-    if (step === 1 && email === User.email && pw === User.pw) {
-      setStep(2);
-      setNotAllow(true);  // Disable button initially on step 2
-    } else {
-      alert('로그인 실패');
-    }
+    axios.post('http://localhost:8081/member/validate', {
+      memberEmail: email,
+      memberPassword: pw
+    })
+      .then((res) => {
+        if (res.data) {
+          setStep(2);
+          setNotAllow(true);  // Disable button initially on step 2
+          setErrorMessage('');
+        } else {
+          setErrorMessage('로그인 실패');
+        }
+      })
+      .catch(err => {
+        console.error('Validation error: ', err);
+        setErrorMessage('서버와의 통신 중 오류가 발생했습니다.');
+      });
   };
 
   const handlePasswordChange = () => {
-    if (newPw === confirmPw) {
-      onClose();
-      navigate("/");
+    if (newPw === pw) {
+      setErrorMessage('새 비밀번호는 기존 비밀번호와 달라야 합니다.');
+    } else if (newPw === confirmPw) {
+      axios.post('http://localhost:8081/member/change-password', {
+        memberEmail: email,
+        memberPassword: newPw
+      })
+        .then(() => {
+          onClose();
+          navigate("/");
+        })
+        .catch(err => {
+          console.error('Password change error: ', err);
+          setErrorMessage('서버와의 통신 중 오류가 발생했습니다.');
+        });
     } else {
-      alert("새 비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+      setErrorMessage('새 비밀번호와 비밀번호 확인이 일치하지 않습니다.');
     }
   };
 
@@ -91,6 +111,7 @@ const ModalPwChange = ({ onClose }) => {
             <h6>비밀번호를 변경하기 전,
               <br />본인 인증을 먼저 진행해주세요.</h6>
             <br />
+            {errorMessage && <div className='pw-errorMessageWrap'>{errorMessage}</div>}
             <div className='pw-contentWrap'>
               <div className='pw-inputWrap'>
                 <input
@@ -131,7 +152,7 @@ const ModalPwChange = ({ onClose }) => {
             <h6>새로운 비밀번호를 입력해주세요</h6>
             <br />
             <br />
-
+            {errorMessage && <div className='pw-errorMessageWrap'>{errorMessage}</div>}
             <div className='pw-contentWrap'>
               <div className='pw-inputWrap'>
                 <input
