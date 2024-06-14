@@ -29,6 +29,7 @@ const SignUp = () => {
     const duplicateEmail = () => {
         if(User.email===email || email==='') {
             alert('이메일 이용 불가능ㅜ.ㅜ')
+            navigate("/member/save");
         } else {
             alert('이메일 이용 가능^.^')
         }
@@ -90,7 +91,7 @@ const SignUp = () => {
                 } else if (res.status === 204) {
                     console.log('로그인 실패');
                     alert('ID 또는 PW를 확인해주세요.');
-                    navigate('/member/login');
+                    navigate('/member/save');
                 }
             })
             .catch(err => {
