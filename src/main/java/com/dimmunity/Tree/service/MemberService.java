@@ -27,7 +27,9 @@ public class MemberService {
         //(조건.jpa를 사용하기때문에 entity객체를 넘겨줘야 함)
         MemberEntity memberEntity = MemberEntity.toMemberEntity(memberDTO);
         memberRepository.save(memberEntity); //jpa가 제공하는 save메소드 사용
-
+    }
+    public boolean isEmailAvailable(String email) {
+        return memberRepository.findByMemberEmail(email).isEmpty();
     }
 
     public MemberDTO login(MemberRequestDTO memberRequestDTO){

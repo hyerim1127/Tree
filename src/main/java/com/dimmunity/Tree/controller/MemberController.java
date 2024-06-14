@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@Controller
+@RestController
 @RequestMapping("/member")
 @RequiredArgsConstructor
 public class MemberController {
@@ -31,11 +31,16 @@ public class MemberController {
     }
 
     @PostMapping("/save")    // name값을 requestparam에 담아온다
-    public String save(@RequestBody MemberDTO memberDTO, Errors errors, Model model) {
+    public ResponseEntity<String> save(@RequestBody MemberDTO memberDTO, Errors errors, Model model) {
         System.out.println("MemberController.save");
         System.out.println("MemberDTO= "+ memberDTO);
         memberService.save(memberDTO);
-        return "login";
+        return new ResponseEntity<>("Member registered successfully", HttpStatus.CREATED);
+    }
+    @GetMapping("/check-email")
+    public ResponseEntity<Boolean> checkEmail(@RequestParam String email) {
+        boolean isEmailAvailable = memberService.isEmailAvailable(email);
+        return new ResponseEntity<>(isEmailAvailable, HttpStatus.OK);
     }
 
     //로그인
