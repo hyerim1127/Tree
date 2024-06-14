@@ -82,6 +82,7 @@ const WriteImpression = () => {
                         value={title}
                         placeholder='책의 제목을 입력해 주세요'
                         onChange={handleTitle} />
+                        <button className='duplicationCheck'>책 검색</button>
                     </div>
 
                     <div className='inputWrap'>

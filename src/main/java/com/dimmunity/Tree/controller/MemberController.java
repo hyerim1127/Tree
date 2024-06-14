@@ -63,7 +63,7 @@ public class MemberController {
     }
 
     //회원리스트-나중에 없앨예정
-    @GetMapping("/")
+    @GetMapping("/list")
     public String findAll(Model model) {
         List<MemberDTO> memberDTOList = memberService.findAll();
         // html로 가져갈 데이터->model 사용
