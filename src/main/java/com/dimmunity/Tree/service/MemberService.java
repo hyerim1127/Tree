@@ -86,9 +86,21 @@ public class MemberService {
         }
     }
 
-    public void update(MemberDTO memberDTO) {
-        memberRepository.save(MemberEntity.toUpdateMemberEntity(memberDTO));
-        //db에 이미 있는 id라면 update쿼리를 날림, 그냥 memberentity로 하면 insert가 되므로 주의
+    public boolean validateUser(MemberDTO memberDTO) {
+        Optional<MemberEntity> member = memberRepository.findByMemberEmail(memberDTO.getMemberEmail());
+        if (member.isPresent()) {
+            return member.get().getMemberPassword().equals(memberDTO.getMemberPassword());
+        }
+        return false;
+    }
+
+    public void changePassword(MemberDTO memberDTO) {
+        Optional<MemberEntity> member = memberRepository.findByMemberEmail(memberDTO.getMemberEmail());
+        if (member.isPresent()) {
+            MemberEntity memberEntity = member.get();
+            memberEntity.setMemberPassword(memberDTO.getMemberPassword());
+            memberRepository.save(memberEntity);
+        }
     }
 
 
