@@ -1,35 +1,34 @@
 import React from 'react';
-import './modalBookSearch.css';
 import axios from 'axios';
+import './modalBookSearch.css';
 
 const ModalBookSearch = ({ show, onClose, onSelect }) => {
     const [keyword, setKeyword] = React.useState('');
     const [books, setBooks] = React.useState([]);
 
-    if (!show) {
-        return null;
-    }
-
-    const handleSearch = (e) => {
+    const handleSearch = async (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8081/book-search', { keyword })
-            .then(response => {
-                console.log(response.data);
-                if (Array.isArray(response.data)) {
-                    setBooks(response.data);
-                } else {
-                    console.error('Expected an array but got:', response.data);
-                }
-            })
-            .catch(error => {
-                console.error('There was an error searching for books!', error);
-            });
+        try {
+            const response = await axios.post('http://localhost:8081/book-search', { keyword });
+            console.log(response.data);
+            if (Array.isArray(response.data)) {
+                setBooks(response.data);
+            } else {
+                console.error('Expected an array but got:', response.data);
+            }
+        } catch (error) {
+            console.error('There was an error searching for books!', error);
+        }
     };
 
     const selectElement = (book) => {
         onSelect(book);
         onClose();
     };
+
+    if (!show) {
+        return null;
+    }
 
     return (
         <div className="bs-modal">
@@ -38,20 +37,23 @@ const ModalBookSearch = ({ show, onClose, onSelect }) => {
                 <div className="bs-modal-body">
                     <div className="bs-title">도서 검색</div>
                     <div>
-                        <form method="post" action="/board/book-search" onSubmit={handleSearch}>
-                            <input 
+                        <form onSubmit={handleSearch}>
+                            <input
                                 className="bs-input"
                                 type="text"
                                 value={keyword}
                                 onChange={(e) => setKeyword(e.target.value)}
-                                placeholder="도서명을 입력해주세요." 
-                                required />
-                            <button type="submit" className='bs-btn'>검색</button>
+                                placeholder="도서명을 입력해주세요."
+                                required
+                            />
+                            <button type="submit" className="bs-btn">
+                                검색
+                            </button>
                         </form>
                     </div>
                     <hr />
                     <div>
-                        <table className='bs-table'>
+                        <table className="bs-table">
                             <thead>
                                 <tr>
                                     <th>이미지</th>
@@ -65,7 +67,7 @@ const ModalBookSearch = ({ show, onClose, onSelect }) => {
                             <tbody>
                                 {books.map(book => (
                                     <tr key={book.isbn} onClick={() => selectElement(book)} style={{ cursor: 'pointer' }}>
-                                        <td><img src={book.imageURL} width="100" height="150" alt="책 이미지"/></td>
+                                        <td><img src={book.imageURL} width="100" height="150" alt="책 이미지" /></td>
                                         <td>{book.title}</td>
                                         <td>{book.author}</td>
                                         <td>{book.categoryName}</td>
