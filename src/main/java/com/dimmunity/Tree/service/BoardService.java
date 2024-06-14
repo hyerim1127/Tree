@@ -119,10 +119,12 @@ public class BoardService {
             bookList.add(new BoardDTO("과학1", "작가1", "과학", "구절1", "이유1"));
             bookList.add(new BoardDTO("과학2", "작가2", "과학", "구절2", "이유2"));
             // 추가적인 책 정보 추가
-        } else if (category.equals(" "))
+        } //else if (category.equals(" "))
+
 
         // 다른 카테고리에 대한 책 정보 추가
 
         return bookList;
     }
+
 }
