@@ -63,7 +63,7 @@ public class MemberController {
     }
 
     //회원리스트-나중에 없앨예정
-    @GetMapping("/")
+    @GetMapping("/list")
     public String findAll(Model model) {
         List<MemberDTO> memberDTOList = memberService.findAll();
         // html로 가져갈 데이터->model 사용
@@ -88,10 +88,16 @@ public class MemberController {
         model.addAttribute("updateMember", memberDTO);
         return "update";
     }
-    @PostMapping("/member/update")
-    public String update(@ModelAttribute MemberDTO memberDTO){
-        memberService.update(memberDTO);
-        return "redirect:/member/login";
+    @PostMapping("/validate")
+    public ResponseEntity<Boolean> validateUser(@RequestBody MemberDTO memberDTO) {
+        boolean isValid = memberService.validateUser(memberDTO);
+        return new ResponseEntity<>(isValid, HttpStatus.OK);
+    }
+
+    @PostMapping("/change-password")
+    public ResponseEntity<String> changePassword(@RequestBody MemberDTO memberDTO) {
+        memberService.changePassword(memberDTO);
+        return new ResponseEntity<>("Password updated successfully", HttpStatus.OK);
     }
     //로그아웃
     @GetMapping("/member/logout")

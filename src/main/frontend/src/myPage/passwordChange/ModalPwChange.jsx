@@ -13,7 +13,6 @@ const ModalPwChange = ({ onClose }) => {
   const [pwValid, setPwValid] = useState(false);
   const [newPwValid, setNewPwValid] = useState(false);
   const [notAllow, setNotAllow] = useState(true);
-
   const [step, setStep] = useState(1);
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
