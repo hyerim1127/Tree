@@ -10,24 +10,11 @@ const WriteImpression = () => {
     const navigate = useNavigate();
 
     const [title, setTitle] = useState('');
-    const handleTitle = (e) => {
-        setTitle(e.target.value);
-    }
-
     const [writer, setWriter] = useState('');
-    const handleWriter = (e) => {
-        setWriter(e.target.value);
-    }
-
+    const [category, setCategory] = useState('');
+    const [imageURL, setImageURL] = useState('');
     const [phrase, setPhrase] = useState('');
-    const handlePhrase = (e) => {
-        setPhrase(e.target.value);
-    }
-
     const [reason, setReason] = useState('');
-    const handleReason = (e) => {
-        setReason(e.target.value);
-    }
     
     const goToLogin = () => navigate("/");
     const goToBoard = () => navigate("/board");
@@ -35,7 +22,7 @@ const WriteImpression = () => {
 
     const [notAllow, setNotAllow] = useState(true);
     useEffect(() => {
-        if (title === "" || writer === "" || phrase === "" || reason === "") {
+        if (phrase === "" || reason === "") {
             setNotAllow(true);
             return;
         }
@@ -61,64 +48,87 @@ const WriteImpression = () => {
         setShowModal(false);
     };
 
+    const handleBookSelect = (book) => {
+        setTitle(book.title);
+        setWriter(book.author);
+        setCategory(book.categoryName);
+        setImageURL(book.imageURL);
+    };
+
     return (
-        <div className='page'>
-            <Description goToPageR={goToPageR} />
+        <div className='bs-page'>
             <div>
                 <inline>
                     <img className='shortcuts' alt='logout' src={logoutLight} onClick={logoutHandler} />
                     <img className='shortcuts' alt='person' src={personLight} onClick={goToMypage} />
                 </inline>
-                <div className="form">
-                    <center>
-                        <div className="descriptionPhrase">
-                            <h1>인상 깊은 구절</h1>
-                            <h5>최근 독서를 하면서 다른 사람들과 공유하고 싶었던<br /> 마음에 남는 구절을 작성해 주세요</h5>
-                        </div>
-                    </center>
-                    <div className='contentWrap'>
-                        <div className='inputWrap'>
-                            <input 
-                                className='input'
-                                value={title}
-                                placeholder='책의 제목을 입력해 주세요'
-                                onChange={handleTitle} />
-                            <button onClick={openModalBookSearch} className='duplicationCheck'>책 검색</button>
-                            <ModalBookSearch show={showModal} onClose={closeModalBookSearch} />
-                        </div>
-
-                        <div className='inputWrap'>
-                            <input 
-                                className='input'
-                                value={writer}
-                                placeholder='책의 작가를 입력해 주세요'
-                                onChange={handleWriter} />
-                        </div>
-
-                        <div className='inputTextWrap'>
-                            <textarea 
-                                className='inputText'
-                                value={phrase}
-                                placeholder='인상 깊었던 구절을 200자 이내로 작성해주세요.'
-                                onChange={handlePhrase} />
-                        </div>
-
-                        <div className='inputTextWrap2'>
-                            <textarea 
-                                className='inputText2'
-                                value={reason}
-                                placeholder='해당 구절이 인상 깊었던 이유를 300자 이내로 작성해 주세요.'
-                                onChange={handleReason} />
-                        </div>
-
-                        <div>
-                            <button onClick={goToBoard}
-                                disabled={notAllow}
-                                className='bottomButton'>
-                                확인
-                            </button>
-                        </div>
+                
+            </div>
+            <div className="bs-descriptionPhrase">
+                <h1 style={{fontSize:"40px", fontWeight:"bolder"}} >인상 깊은 구절</h1>
+                <h5>최근 독서를 하면서 다른 사람들과 공유하고 싶었던<br /> 마음에 남는 구절을 작성해 주세요</h5>
+            </div>
+            <div className="bs-form-container">
+            <div className="bs-form-left">
+                <div className='contentWrap'>
+                    <div className='inputWrap'>
+                        <input 
+                            className='input'
+                            value={title}
+                            placeholder='책의 제목을 입력해 주세요'
+                            readOnly />
+                        <button onClick={openModalBookSearch} className='duplicationCheck'>책 검색</button>
+                    <ModalBookSearch show={showModal} onClose={closeModalBookSearch} onSelect={handleBookSelect} />
                     </div>
+                    <div className='inputWrap'>
+                        <input 
+                            className='input'
+                            value={writer}
+                            placeholder='책의 작가를 입력해 주세요'
+                            readOnly />
+                    </div>
+                    <div className='inputWrap'>
+                        <input 
+                            className='input'
+                            value={category}
+                            placeholder='카테고리'
+                            readOnly />
+                    </div>
+                    <div className='inputWrap'>
+                        <img 
+                            src={imageURL}
+                            width="100"
+                            height="150"
+                            alt="책 이미지"
+                            id="bookImage"/>
+                    </div>
+                </div>
+            </div>
+
+            <div className="bs-form-right">
+                <div className='contentWrap'>
+                    <div className='inputTextWrap'>
+                        <textarea 
+                            className='inputText'
+                            value={phrase}
+                            placeholder='인상 깊었던 구절을 200자 이내로 작성해주세요.'
+                            onChange={(e) => setPhrase(e.target.value)} />
+                    </div>
+                    <div className='inputTextWrap2'>
+                        <textarea 
+                            className='inputText2'
+                            value={reason}
+                            placeholder='해당 구절이 인상 깊었던 이유를 300자 이내로 작성해 주세요.'
+                            onChange={(e) => setReason(e.target.value)} />
+                    </div>
+                    <div>
+                        <button onClick={goToBoard}
+                            disabled={notAllow}
+                            className='bs-bottomButton'>
+                            확인
+                        </button>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>
