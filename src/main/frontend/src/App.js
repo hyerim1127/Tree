@@ -16,11 +16,11 @@ import {
 function App() {
   const [msg, setMsg] = useState('')
 
-  useEffect(() => {
+  /*useEffect(() => {
     axios.get('/hello')
       .then(response => setMsg(response.data))
       .catch(error => console.log(error))
-  }, []);
+  }, []);*/
 
   return (
     <BrowserRouter>

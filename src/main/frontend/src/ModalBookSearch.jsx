@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './modalBookSearch.css';
 import axios from 'axios';
 
 const ModalBookSearch = ({ show, onClose, onSelect }) => {
-    const [keyword, setKeyword] = useState('');
-    const [books, setBooks] = useState([]);
+    const [keyword, setKeyword] = React.useState('');
+    const [books, setBooks] = React.useState([]);
 
     if (!show) {
         return null;
@@ -14,7 +14,12 @@ const ModalBookSearch = ({ show, onClose, onSelect }) => {
         e.preventDefault();
         axios.post('http://localhost:8081/book-search', { keyword })
             .then(response => {
-                setBooks(response.data);
+                console.log(response.data);
+                if (Array.isArray(response.data)) {
+                    setBooks(response.data);
+                } else {
+                    console.error('Expected an array but got:', response.data);
+                }
             })
             .catch(error => {
                 console.error('There was an error searching for books!', error);
