@@ -1,6 +1,7 @@
 package com.dimmunity.Tree.service;
 
 import com.dimmunity.Tree.dto.MemberDTO;
+import com.dimmunity.Tree.dto.MemberRequestDTO;
 import com.dimmunity.Tree.entity.MemberEntity;
 import com.dimmunity.Tree.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,16 +30,16 @@ public class MemberService {
 
     }
 
-    public MemberDTO login(MemberDTO memberDTO){
-        Optional<MemberEntity> byMemeberEmail=memberRepository.findByMemberEmail(memberDTO.getMemberEmail());
+    public MemberDTO login(MemberRequestDTO memberRequestDTO){
+        Optional<MemberEntity> byMemeberEmail=memberRepository.findByMemberEmail(memberRequestDTO.getMemberEmail());
         if(byMemeberEmail.isPresent()){ //조회결과있음
             MemberEntity memberEntity=byMemeberEmail.get();
-            if(memberEntity.getMemberPassword().equals(memberDTO.getMemberPassword())){
+            if(memberEntity.getMemberPassword().equals(memberRequestDTO.getMemberPassword())){
                 //비번일치
                 //entity->dto 변환 후 리턴, dto에 메소드생성
-                MemberDTO dto=MemberDTO.toMemberDTO((memberEntity));
+                MemberDTO dto = MemberDTO.toMemberDTO(memberEntity);
                 return dto;
-            } else{ //비번불일치
+            } else { //비번불일치
                 return null;
                 }
         } else { //조회결과없을때

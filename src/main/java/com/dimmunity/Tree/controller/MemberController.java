@@ -1,6 +1,7 @@
 package com.dimmunity.Tree.controller;
 
 import com.dimmunity.Tree.dto.MemberDTO;
+import com.dimmunity.Tree.dto.MemberRequestDTO;
 import com.dimmunity.Tree.service.MemberService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
@@ -30,7 +31,6 @@ public class MemberController {
     }
 
     @PostMapping("/save")    // name값을 requestparam에 담아온다
-
     public String save(@ModelAttribute MemberDTO memberDTO, Errors errors, Model model) {
         System.out.println("MemberController.save");
         System.out.println("MemberDTO= "+ memberDTO);
@@ -44,9 +44,9 @@ public class MemberController {
         return "login";
     }
     @PostMapping("/login") // session : 로그인 유지
-    public ResponseEntity<Object> login(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
-        System.out.println("Received MemberDTO: " + memberDTO);
-        MemberDTO loginResult = memberService.login(memberDTO);
+    public ResponseEntity<Object> login(@RequestBody MemberRequestDTO memberRequestDTO, HttpSession session) {
+        //System.out.println("Received MemberDTO: " + memberDTO);
+        MemberDTO loginResult = memberService.login(memberRequestDTO);
         if (loginResult != null) {
             // login 성공-login한 이메일정보를 session에 담아줌, 구절작성페이지로감
             session.setAttribute("loginEmail", loginResult.getMemberEmail());
