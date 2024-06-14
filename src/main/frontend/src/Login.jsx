@@ -54,49 +54,31 @@ export default function Login() {
 
     const onClickConfirmButton = () => {
         if (email.trim() === '' || pw.trim() === '') {
-            alert('id 또는 pw 확인');
-            window.location.href = '/';
+            alert('ID 또는 PW를 확인해주세요.');
+            return; 
         } else {
-            loginHandler(email, pw);
-            console.log('click LOGIN');
-            console.log('email:', email);
-            console.log('password:', pw);
-            setIsLoggedIn(true);
-            axios.post('http://localhost:8081/member/login', { // 백엔드 주소
-                    memberEmail: email,
-                    memberPassword: pw
-                }, {
-                    withCredentials: true
-                })
-                .then((res) => {
-                    console.log(res);
-                    console.log('res.status :: ', res.status);
+            axios.post('http://localhost:8081/member/login', {
+                memberEmail: email,
+                memberPassword: pw
+            }, {
+                withCredentials: true
+            })
+            .then((res) => {
+                console.log('res.status :: ', res.status);
     
-                    if (res.status === 200) {
-                        console.log('=====', res.status);
-                        navigate('/board/bookSave');
-                    } else if (res.status === 204) {
-                        console.log('=====', res.status);
-                        alert('id 또는 pw 확인');
-                        navigate('/');
-                    }
-                })
-                .catch(err => {
-                    console.error('Login ERROR: ', err);
-                    if (err.response) {
-                        if (err.response.status === 504) {
-                            alert('서버와의 통신 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
-                        } else if (err.response.status === 204) {
-                            alert('id 또는 pw 확인');
-                        } else {
-                            alert('로그인 중 오류가 발생했습니다. 다시 시도해주세요.');
-                        }
-                    } else if (err.request) {
-                        alert('서버에 연결할 수 없습니다. 네트워크를 확인해주세요.');
-                    } else {
-                        alert('예기치 않은 오류가 발생했습니다.');
-                    }
-                });
+                if (res.status === 200) {
+                    console.log('로그인 성공');
+                    navigate('/board/bookSave');
+                } else if (res.status === 204) {
+                    console.log('로그인 실패');
+                    alert('ID 또는 PW를 확인해주세요.');
+                    navigate('/member/login');
+                }
+            })
+            .catch(err => {
+                console.error('Login ERROR: ', err);
+                alert('서버와의 통신 중 오류가 발생했습니다.');
+            });
         }
     };
 
