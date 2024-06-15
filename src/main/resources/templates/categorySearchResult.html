@@ -8,14 +8,20 @@
 
 <h2>카테고리별 책 목록</h2>
 
-<div th:each="book : ${books}">
-    <div>
-        <h3 th:text="${book.title}"></h3>
-        <p th:text="${book.author}"></p>
-        <p th:text="${book.description}"></p>
-        <img th:src="${book.imageURL}" style="max-width: 200px;"/>
-    </div>
-</div>
+<table>
+    <tr th:each="book : ${books}">
+
+
+        <!--        <h3 th:text="${book.bookTitle}"></h3>-->
+        <!--        <p th:text="${book.bookAuthor}"></p>-->
+        <td><a th:href="@{/board/{id}(id=${book.id})}" th:text="${book.boardPhrase}"></a></td>
+        <!--        <img th:src="${book.bookImageURL}" style="max-width: 200px;"/>-->
+
+    </tr>
+</table>
+
+
+
 
 </body>
 </html>
