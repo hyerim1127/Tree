@@ -3,6 +3,7 @@ package com.dimmunity.Tree.controller;
 
 import com.dimmunity.Tree.dto.BookDTO;
 import com.dimmunity.Tree.service.BookService;
+import lombok.RequiredArgsConstructor;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,11 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
-@Controller
+@RestController
+@RequiredArgsConstructor
 public class BookController {
 
     @Autowired
@@ -44,9 +47,8 @@ public class BookController {
     }
 
     @PostMapping("/book-search")
-    public String search(@ModelAttribute("keyword") String keyword, Model model) {
-        List<BookDTO> bookDtoList = bookService.searchBooksWithCategories(keyword);
-        model.addAttribute("bookDtoList", bookDtoList);
-        return "bookSearch";
+    public List<BookDTO> search(@RequestBody Map<String, String> requestBody) {
+        String keyword = requestBody.get("keyword");
+        return bookService.searchBooksWithCategories(keyword);
     }
 }
