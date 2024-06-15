@@ -22,6 +22,7 @@ import java.util.List;
 @RequestMapping("/board") // /board가 상위 주소인데, 계속 부를테니까 아예 구분하여 선언해놓음
 public class BoardController {
 
+
     private final BoardService boardService;
     private final BookService bookService;
 
@@ -103,37 +104,13 @@ public class BoardController {
         return "boardPaging";
     }
 
+    // 카테고리별 인상깊은 구절 매핑
     @GetMapping("/category-searching")
     public String getBooksByCategory(@RequestParam("category") String category, Model model) {
         List<BoardDTO> bookList = boardService.findByCategory(category);
         model.addAttribute("books", bookList);
         return "categorySearchResult";
     }
-
-
-    //카테고리별 책정보 매핑
-
-
-//    public String showPhrasePaging() {
-//        return "categorySearch";
-//    }
-//
-//    @GetMapping("/category-searching(category=과학)")
-//    public String getBooksByCategory(@RequestParam("category") String category, Model model) {
-//        List<BoardDTO> bookList = boardService.getBooksByCategory(category);
-//        model.addAttribute("bookList", bookList);
-//        return "categorySearchResult"; // 결과를 보여줄 Thymeleaf 템플릿 이름
-//    }
-
-
-
-
-//    @PostMapping("/category-searching")
-//    public String processPhrasePaging(@RequestParam("category") String category, Model model) {
-//        List<BoardDTO> bookList = boardService.getBooksByCategory(category);
-//        model.addAttribute("bookList", bookList);
-//        return "categorySearch";
-//    }
 
 }
 
