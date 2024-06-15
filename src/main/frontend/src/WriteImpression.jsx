@@ -81,28 +81,35 @@ const WriteImpression = () => {
                           <button onClick={openModalBookSearch} className="duplicationCheck">책 검색</button>
                           <ModalBookSearch show={showModal} onClose={closeModalBookSearch} onSelect={handleBookSelect} />
                       </div>
-                      <div className="inputWrap">
+                      <div style={{ display: 'flex', alignItems: 'stretch' }}>
+                        <div className="inputWrap-img">
+                            <img
+                                src={imageURL}
+                                width="100"
+                                height="150"
+                                alt="책 이미지"
+                                id="bookImage" />
+                        </div>
+                        <div style={{paddingLeft:"20px"}}>
+                        <div className="inputWrap-etc">
                           <input
                             className="input"
                             value={writer}
                             placeholder="책의 작가를 입력해 주세요"
                             readOnly />
+                        </div>
+                        
+                        <div className="inputWrap-etc">
+                            <input
+                                className="input"
+                                value={category}
+                                placeholder="카테고리"
+                                readOnly />
+                        </div>
+                        </div>
+                        
                       </div>
-                      <div className="inputWrap">
-                          <input
-                            className="input"
-                            value={category}
-                            placeholder="카테고리"
-                            readOnly />
-                      </div>
-                      <div className="inputWrap">
-                          <img
-                            src={imageURL}
-                            width="100"
-                            height="150"
-                            alt="책 이미지"
-                            id="bookImage" />
-                      </div>
+                      
                   </div>
               </div>
               <div className="bs-form-right">
@@ -125,7 +132,7 @@ const WriteImpression = () => {
                   <div>
                       <button onClick={goToBoard}
                               disabled={notAllow}
-                              className="bottomButton">
+                              className="wi-bottomButton">
                           확인
                       </button>
                   </div>

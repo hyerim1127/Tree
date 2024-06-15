@@ -1,4 +1,128 @@
-/* 인상깊은구절 css */
+.inputWrap {
+    display: flex;
+    align-items: center;
+    height: 4vh;
+    width: 35vw;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 30px;
+    background-color: #FFFAF3;
+}
+.inputWrap-etc {
+    display: flex;
+    align-items: center;
+    height: 4vh;
+    width: 23vw;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 30px;
+    background-color: #FFFAF3;
+}
+
+.inputWrap-etc:focus-within {
+    border: 2px solid #DABF98;
+}
+
+.inputWrap-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 17vh;
+    width: 8vw;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 20px;
+    background-color: #FFFAF3;
+}
+
+.inputWrap-img:focus-within {
+    border: 2px solid #DABF98;
+}
+.inputText {
+    display: flex;
+    height: 9.5vh;
+    width: 50vw;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #FFFAF3;
+    outline:none;
+    border:none;
+    border-radius: 5px;
+    vertical-align: center;
+    font-size: 17px;
+    resize:none;
+}
+.inputText::placeholder {
+    color : #b5947e;
+}
+.inputText2 {
+    display: flex;
+    height: 13.5vh;
+    width: 50vw;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #FFFAF3;
+    outline:none;
+    border:none;
+    border-radius: 5px;
+    vertical-align: center;
+    font-size: 17px;
+    resize:none;
+}
+.inputText2::placeholder {
+    color : #b5947e;
+}
+.wi-bottomButton {
+    width: 40vw;
+    height: 6vh;
+    border: none;
+    font-size: 25px;
+    font-weight: 800;
+    border-radius: 40px;
+    margin-top : 30px;
+    margin-left:7vw;
+    cursor: pointer;
+    background-color: #562E12;
+    color:#F9F0E3;
+}
+.wi-bottomButton:disabled {
+    background-color: #DABF98;
+    color:#562E12;
+}
+
+
+.bs-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.bs-table th, .bs-table td {
+    padding: 10px;
+    text-align: left;
+}
+.bs-table tbody tr:hover {
+    background-color: #f4ebdc;
+}
+
+.bs-table .etc {
+    display: flex;
+    align-items: center;
+    height: auto; /* Adjust height as needed */
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #FFFAF3;
+}
+
+.bs-table .img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto; /* Adjust height as needed */
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #FFFAF3;
+}
+
 .bs-page {
     background-color: #F1E4D1;
     display: flex;
@@ -88,7 +212,14 @@
 .bs-table th {
     text-align: center;
     align-items: center;
-    padding: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.bs-table-category {
+    width:10vw;
+}
+.bs-table-description {
+    width: 20vw;
 }
 /* 모달 크기 */
 .bs-modal-reason-content {
@@ -96,9 +227,10 @@
     color: #562E12;
     border-radius: 10px;
     text-align: center;
-    margin: 30vh auto;
+    margin: 15vh auto;
     padding: 30px;
     width: 50vw;
+    height: 60vh;
     max-height: 80vh;
     overflow-y: auto;
 
