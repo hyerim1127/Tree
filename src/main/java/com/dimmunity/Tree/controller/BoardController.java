@@ -7,6 +7,7 @@ import com.dimmunity.Tree.service.BoardService;
 import com.dimmunity.Tree.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.query.criteria.JpaCriteriaUpdate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -20,6 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/board") // /board가 상위 주소인데, 계속 부를테니까 아예 구분하여 선언해놓음
 public class BoardController {
+
 
     private final BoardService boardService;
     private final BookService bookService;
@@ -86,7 +88,7 @@ public class BoardController {
     // 페이징 처리
     @GetMapping("/paging")
     public String paging(@PageableDefault(page=1) Pageable pageable, Model model){
-//        pageable.getPageNumber();
+        //pageable.getPageNumber();
         // 페이지 값을 가져오기 위함
         Page<BoardDTO> boardList = boardService.paging(pageable);
 
@@ -102,25 +104,13 @@ public class BoardController {
         return "boardPaging";
     }
 
-
-
-    //카테고리별 책정보 매핑
-    @GetMapping("/category-searching?category=' + encodeURIComponent(selectedCategory)")
-//    public String showPhrasePaging() {
-//        return "categorySearch";
-//    }
-
+    // 카테고리별 인상깊은 구절 매핑
+    @GetMapping("/category-searching")
     public String getBooksByCategory(@RequestParam("category") String category, Model model) {
-        List<BoardDTO> bookList = boardService.getBooksByCategory(category);
-        model.addAttribute("bookList", bookList);
-        return "categorySearchResult"; // 결과를 보여줄 Thymeleaf 템플릿 이름
+        List<BoardDTO> bookList = boardService.findByCategory(category);
+        model.addAttribute("books", bookList);
+        return "categorySearchResult";
     }
-//    @PostMapping("/category-searching")
-//    public String processPhrasePaging(@RequestParam("category") String category, Model model) {
-//        List<BoardDTO> bookList = boardService.getBooksByCategory(category);
-//        model.addAttribute("bookList", bookList);
-//        return "categorySearch";
-//    }
 
 }
 
