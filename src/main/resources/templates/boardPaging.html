@@ -32,7 +32,6 @@
 </head>
 <body>
 <h2>인상깊은 구절 플로팅</h2>
-<!--<a href ="/board/bookSave">글 작성</a>-->
 <button id="openPopup">카테고리별 보기</button>
 <button onclick="location.href='/board/bookSave'">글 작성</button>
 
@@ -60,20 +59,11 @@
 
 <table>
     <tr>
-    <!--<th>id</th>-->
         <th>phrase</th>
-    <!--<th>title</th>-->
-    <!--<th>writer</th>-->
-    <!--<th>date</th>-->
-    <!--<th>hits</th>-->
     </tr>
     <tr th:each="board: ${boardList}">
-        <!--<td th:text="${board.id}"></td>-->
         <!--상세 정보 조회 시 페이지 정보를 가져감 -> 직전에 머물러 있었던 페이지로 돌아오기 위해-->
         <td><a th:href="@{|/board/${board.id}|(page=${boardList.number + 1})}" th:text="${board.boardPhrase}"></a></td>
-        <!--<td th:text="${board.boardWriter}"></td>-->
-        <!--<td th:text="*{#temporals.format(board.boardCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></td>-->
-        <!--<td th:text="${board.boardHits}"></td>-->
     </tr>
 </table>
 <!-- 첫번째 페이지로 이동 -->

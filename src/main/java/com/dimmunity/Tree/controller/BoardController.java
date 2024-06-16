@@ -38,16 +38,6 @@ public class BoardController {
         return "redirect:/board/paging";
     }
 
-    // 게시글 목록
-    // 나중에 프론트랑 연결할때 / 고려해야하는지 고민
-//    @GetMapping("/")
-//    public String findAll(Model model) {
-//        // DB에서 전체 게시글 데이터를 가져와서 phraseList.html에 보여준다.
-//        List<BoardDTO> boardDTOList = boardService.findAll();
-//        model.addAttribute("boardList",boardDTOList);
-//        return "phraseList";
-//    }
-
     // 게시글 상세 조회
     @GetMapping("/{id}")
     public String findById(@PathVariable("id") Long id, Model model,
