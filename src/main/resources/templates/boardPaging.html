@@ -33,7 +33,7 @@
 <body>
 <h2>인상깊은 구절 플로팅</h2>
 <button id="openPopup">카테고리별 보기</button>
-<button onclick="location.href='/board/bookSave'">글 작성</button>
+<button onclick="location.href='/bookSave'">글 작성</button>
 
 <!-- 팝업 내용 -->
 <div id="categoryPopup" class="popup">
@@ -63,7 +63,7 @@
     </tr>
     <tr th:each="board: ${boardList}">
         <!--상세 정보 조회 시 페이지 정보를 가져감 -> 직전에 머물러 있었던 페이지로 돌아오기 위해-->
-        <td><a th:href="@{|/board/${board.id}|(page=${boardList.number + 1})}" th:text="${board.boardPhrase}"></a></td>
+        <td><a th:href="@{|/${board.id}|(page=${boardList.number + 1})}" th:text="${board.boardPhrase}"></a></td>
     </tr>
 </table>
 <!-- 첫번째 페이지로 이동 -->
@@ -72,7 +72,7 @@
 
 <!-- 이전 링크 활성화 비활성화 -->
 <!-- 서비스 메소드에서 boardList.getNumber() ex) 사용자:2페이지 -> getNumber()=1 -->
-<a th:href="${boardList.first} ? '#' : @{/board/paging(page=${boardList.number})}">prev</a>
+<a th:href="${boardList.first} ? '#' : @{/paging(page=${boardList.number})}">prev</a>
 
 
 <!-- 페이지 번호 링크(현재 페이지는 숫자만)
@@ -82,14 +82,14 @@
     <span th:if="${page == boardList.number + 1}" th:text="${page}"></span>
     <!-- 현재페이지 번호가 아닌 다른 페이지번호에는 링크를 보여줌 -->
     <span th:unless="${page == boardList.number + 1}">
-        <a th:href="@{/board/paging(page=${page})}" th:text="${page}"></a>
+        <a th:href="@{/paging(page=${page})}" th:text="${page}"></a>
     </span>
 </span>
 
 
 <!-- 다음 링크 활성화 비활성화
     ex) 사용자: 2페이지, getNumber: 1, 3페이지-->
-<a th:href="${boardList.last} ? '#' : @{/board/paging(page=${boardList.number + 2})}">next</a>
+<a th:href="${boardList.last} ? '#' : @{/paging(page=${boardList.number + 2})}">next</a>
 
 <!-- 마지막 페이지로 이동 -->
 <!--<a th:href="@{/board/paging(page=${boardList.totalPages})}">Last</a>-->
@@ -111,7 +111,7 @@
         event.preventDefault(); // 폼 제출 기본 동작 막기
         var selectedCategory = document.getElementById('category').value;
         // 새로운 페이지로 이동
-        window.location.href = '/board/category-searching?category=' + encodeURIComponent(selectedCategory);
+        window.location.href = '/category-searching?category=' + encodeURIComponent(selectedCategory);
     }
 </script>
 </html>

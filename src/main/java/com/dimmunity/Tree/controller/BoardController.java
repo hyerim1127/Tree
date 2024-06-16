@@ -19,12 +19,8 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/board") // /board가 상위 주소인데, 계속 부를테니까 아예 구분하여 선언해놓음
 public class BoardController {
-
-
     private final BoardService boardService;
-    private final BookService bookService;
 
     @GetMapping("/bookSave")
     public String saveForm(){
@@ -35,7 +31,7 @@ public class BoardController {
     @PostMapping("/bookSave")
     public String save(@ModelAttribute BoardDTO boardDTO){
         boardService.save(boardDTO); // board bookSave 완료
-        return "redirect:/board/paging";
+        return "redirect:/paging";
     }
 
     // 게시글 상세 조회
@@ -65,14 +61,14 @@ public class BoardController {
     public String update(@ModelAttribute BoardDTO boardDTO, Model model) {
         BoardDTO board = boardService.update(boardDTO);
         model.addAttribute("board", board);
-        return "redirect:/board/" + boardDTO.getId();
+        return "redirect:/" + boardDTO.getId();
     }
 
     // 게시글 삭제
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") Long id){
         boardService.delete(id);
-        return "redirect:/board/paging";
+        return "redirect:/paging";
     }
 
     // 페이징 처리

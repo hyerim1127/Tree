@@ -10,7 +10,7 @@
 
 <table>
     <tr th:each="book : ${books}">
-        <td><a th:href="@{/board/{id}(id=${book.id})}" th:text="${book.boardPhrase}"></a></td>
+        <td><a th:href="@{/{id}(id=${book.id})}" th:text="${book.boardPhrase}"></a></td>
     </tr>
 </table>
 </body>
