@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import personLight from './img/person-light.png';
 import logoutLight from './img/logout-light.png';
+import treeLight from './img/tree-light.png';
 import ModalBookSearch from './ModalBookSearch';
-import Description from './Description';
 import './modalBookSearch.css';
 import axios from 'axios';
 
@@ -24,14 +24,12 @@ const WriteImpression = () => {
     useEffect(() => {
         if (phrase === "" || reason === "") {
             setNotAllow(true);
-            return;
+        } else {
+            setNotAllow(false);
         }
-        setNotAllow(false);
     }, [phrase, reason]);
 
-    const goToPageR = () => {
-        navigate("/board");
-    }
+    const goToBoard = () => navigate("/board");
 
     const [isLoggedIn, setIsLoggedIn] = useState(true);
     const logoutHandler = () => {
@@ -57,13 +55,12 @@ const WriteImpression = () => {
 
     const onClickPhrase = () => {
         axios.post('http://localhost:8081/board/bookSave', {
-            bookAuthor:writer,
-            bookCategoryName:category,
-            bookTitle:title,
-            bookImageURL:imageURL,
-            bookPhrase:phrase,
-            bookReason:reason,
-            
+            bookAuthor: writer,
+            bookCategoryName: category,
+            bookTitle: title,
+            bookImageURL: imageURL,
+            bookPhrase: phrase,
+            bookReason: reason,
         }, {
             headers: {
                 'Content-Type': 'application/json'
@@ -73,11 +70,11 @@ const WriteImpression = () => {
             if (res.status === 200) {
                 navigate("/board");
             } else {
-                alert('회원가입에 실패했습니다.');
+                alert('구절 저장에 실패했습니다.');
             }
         })
         .catch(err => {
-            console.error('Sign up ERROR: ', err);
+            console.error('ERROR: ', err);
             alert('서버와의 통신 중 오류가 발생했습니다.');
         });
     }
@@ -88,6 +85,7 @@ const WriteImpression = () => {
               <inline>
                   <img className="shortcuts" alt="logout" src={logoutLight} onClick={logoutHandler} />
                   <img className="shortcuts" alt="person" src={personLight} onClick={goToMypage} />
+                  <img className='shortcuts' alt='logo' src={treeLight} onClick={goToBoard} />
               </inline>
           </div>
           <center>
