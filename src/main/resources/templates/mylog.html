@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>category Counts</title>
+</head>
+<body>
+<h2>카테고리별 글 작성 빈도수</h2>
+<table>
+    <thread>
+        <tr>
+            <th>카테고리</th>
+            <th>글 작성 수</th>
+        </tr>
+    </thread>
+    <tbody>
+        <tr th:each="count : ${categoryCounts}">
+            <td th:text = "${count.bookCategoryName}"></td>
+            <td th:text="${count.postCount}"></td>
+        </tr>
+    </tbody>
+
+</table>
+</body>
+</html>

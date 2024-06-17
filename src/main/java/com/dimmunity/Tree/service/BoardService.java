@@ -11,6 +11,7 @@ package com.dimmunity.Tree.service;
 import ch.qos.logback.core.net.SyslogOutputStream;
 import com.dimmunity.Tree.dto.BoardDTO;
 import com.dimmunity.Tree.entity.BoardEntity;
+import com.dimmunity.Tree.dto.BoardDTO.CategoryCount;
 import com.dimmunity.Tree.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import jakarta.transaction.Transactional;
@@ -22,6 +23,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -114,6 +116,17 @@ public class BoardService {
         List<BoardEntity> entities = boardRepository.findByBookCategoryName(genre);
         return entities.stream()
                 .map(BoardDTO::fromEntity)
+                .collect(Collectors.toList());
+    }
+
+    // 장르 고정
+    private final List<String> genres = Arrays.asList(
+            "소설/시/희곡", "과학", "고전","사회과학","경제경영","에세이","역사","인문학","자기계발"
+    );
+    public List<CategoryCount> getCategoryCounts(){
+        List<CategoryCount> allCounts = boardRepository.findCategoryCount();
+        return allCounts.stream()
+                .filter(count -> genres.contains(count.getBookCategoryName()))
                 .collect(Collectors.toList());
     }
 }

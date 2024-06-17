@@ -82,5 +82,13 @@ public class BoardDTO {
 
         return boardDTO;
     }
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class CategoryCount{
+        private String bookCategoryName;
+        private Long postCount;
+    }
 
 }

@@ -1,11 +1,13 @@
 package com.dimmunity.Tree.repository;
 
 import com.dimmunity.Tree.dto.BoardDTO;
+import com.dimmunity.Tree.dto.BoardDTO.CategoryCount;
 import com.dimmunity.Tree.entity.BoardEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 import java.util.List;
 
 public interface BoardRepository extends JpaRepository<BoardEntity,Long> {
@@ -19,5 +21,8 @@ public interface BoardRepository extends JpaRepository<BoardEntity,Long> {
     void updateHits(@Param("id") Long id);
 
     List<BoardEntity> findByBookCategoryName(String bookCategoryName);
+
+    @Query("SELECT new com.dimmunity.Tree.dto.BoardDTO$CategoryCount(b.bookCategoryName, COUNT(b))" + "FROM BoardEntity b GROUP BY b.bookCategoryName")
+    List<CategoryCount> findCategoryCount();
 }
 

@@ -3,6 +3,7 @@ package com.dimmunity.Tree.controller;
 import com.dimmunity.Tree.dto.BoardDTO;
 import com.dimmunity.Tree.dto.BookDTO;
 import com.dimmunity.Tree.entity.BoardEntity;
+import com.dimmunity.Tree.dto.BoardDTO.CategoryCount;
 import com.dimmunity.Tree.service.BoardService;
 import com.dimmunity.Tree.service.BookService;
 import lombok.RequiredArgsConstructor;
@@ -23,13 +24,13 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("/board/bookSave")
-    public String saveForm(){
+    public String saveForm() {
         return "bookSave";
     }
 
     //post로 보냈기 때문에 postmapping 사용
     @PostMapping("/board/bookSave")
-    public String save(@ModelAttribute BoardDTO boardDTO){
+    public String save(@ModelAttribute BoardDTO boardDTO) {
         boardService.save(boardDTO); // board bookSave 완료
         return "redirect:/board";
     }
@@ -37,7 +38,7 @@ public class BoardController {
     // 게시글 상세 조회
     @GetMapping("/board/{id}")
     public String findById(@PathVariable("id") Long id, Model model,
-                           @PageableDefault(page=1) Pageable pageable){
+                           @PageableDefault(page = 1) Pageable pageable) {
         // 해당 게시글의 조회수를 하나 올리고, 게시글 데이터를 가져와서 detail.html에 출력
         // 두번의 메소드 호출 이뤄짐
         boardService.updateHits(id);
@@ -51,9 +52,9 @@ public class BoardController {
 
     // 게시글 수정
     @GetMapping("/board/phraseUpdate/{id}")
-    public String updateForm(@PathVariable("id") Long id, Model model){
+    public String updateForm(@PathVariable("id") Long id, Model model) {
         BoardDTO boardDTO = boardService.findById(id);
-        model.addAttribute("boardUpdate",boardDTO);
+        model.addAttribute("boardUpdate", boardDTO);
         return "phraseUpdate";
     }
 
@@ -66,22 +67,22 @@ public class BoardController {
 
     // 게시글 삭제
     @GetMapping("/board/delete/{id}")
-    public String delete(@PathVariable("id") Long id){
+    public String delete(@PathVariable("id") Long id) {
         boardService.delete(id);
         return "redirect:/board";
     }
 
-    // 페이징 처리
+    // 인상깊은 구절 플로팅
     @GetMapping("/board")
-    public String paging(@PageableDefault(page=1) Pageable pageable, Model model){
+    public String paging(@PageableDefault(page = 1) Pageable pageable, Model model) {
         //pageable.getPageNumber();
         // 페이지 값을 가져오기 위함
         Page<BoardDTO> boardList = boardService.paging(pageable);
 
         // page 가 몇개까지 보여지게 될건지 설정 -> 우리는 전페이지, 현재페이지, 이후페이지 (이렇게 3페이지만 보여지게 될것)
         int blockLimit = 3;
-        int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1; // 1 4 7 10 ~ 이렇게 계산되어 나올것
-        int endPage = ((startPage + blockLimit -1) < boardList.getTotalPages()) ? startPage + blockLimit -1 : boardList.getTotalPages();
+        int startPage = (((int) (Math.ceil((double) pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1; // 1 4 7 10 ~ 이렇게 계산되어 나올것
+        int endPage = ((startPage + blockLimit - 1) < boardList.getTotalPages()) ? startPage + blockLimit - 1 : boardList.getTotalPages();
 
         model.addAttribute("boardList", boardList);
         model.addAttribute("startPage", startPage);
@@ -98,5 +99,14 @@ public class BoardController {
         return "categorySearchResult";
     }
 
+    // mylog - 카테고리별 글 작성 빈도
+    @GetMapping("/mylog")
+    public String getCategoryCounts(Model model) {
+        List<CategoryCount> categoryCounts = boardService.getCategoryCounts();
+        model.addAttribute("categoryCounts", categoryCounts);
+        return "mylog";
+    }
 }
+
+
 
