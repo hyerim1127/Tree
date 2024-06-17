@@ -110,8 +110,8 @@ public class BoardService {
         return boardDTOS; // DTO 객체를 controller 쪽으로 return 한다.
     }
 
-    public List<BoardDTO> findByCategory(String category) {
-        List<BoardEntity> entities = boardRepository.findByBookCategoryName(category);
+    public List<BoardDTO> findByCategory(String genre) {
+        List<BoardEntity> entities = boardRepository.findByBookCategoryName(genre);
         return entities.stream()
                 .map(BoardDTO::fromEntity)
                 .collect(Collectors.toList());
