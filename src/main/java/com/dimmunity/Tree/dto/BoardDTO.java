@@ -29,6 +29,24 @@ public class BoardDTO {
     //게시글 수정시간
     private LocalDateTime boardUpdatedTime;
 
+
+    public static BoardDTO fromEntity(BoardEntity entity) {
+        return new BoardDTO(
+                entity.getId(),
+                entity.getBookTitle(),
+                entity.getBookAuthor(),
+                entity.getBookCategoryName(),
+                entity.getBookImageURL(),
+                entity.getBoardWriter(),
+                entity.getBoardPass(),
+                entity.getBoardPhrase(),
+                entity.getBoardReason(),
+                entity.getBoardHits(),
+                entity.getCreatedTime(),
+                entity.getUpdatedTime()
+        );
+    }
+
     // 5개를 매개변수로 하는 생성자 생성
     public BoardDTO(Long id, String boardPhrase, String boardWriter, String bookAuthor,
                     String bookCategoryName, String bookTitle, String bookImageURL, int boardHits, LocalDateTime boardCreatedTime) {
@@ -63,15 +81,6 @@ public class BoardDTO {
         boardDTO.setBookImageURL(boardEntity.getBookImageURL());
 
         return boardDTO;
-    }
-
-    public BoardDTO(String bookTitle, String bookAuthor, String bookCategoryName,
-                    String boardPhrase, String boardReason) {
-        this.bookTitle = bookTitle;
-        this.bookAuthor = bookAuthor;
-        this.bookCategoryName = bookCategoryName;
-        this.boardPhrase = boardPhrase;
-        this.boardReason = boardReason;
     }
 
 }
