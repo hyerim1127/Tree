@@ -103,7 +103,7 @@ public class BoardService {
         // 페이지 목록에서 보여주면 되는 데이터 : id, writer, title, hits, createdTime -> 이정보를 담을 수 있는 DTO 생성자를 추가하면 된다.
         Page<BoardDTO> boardDTOS = boardEntities.map(board -> new BoardDTO(board.getId(),
                 board.getBoardPhrase(), board.getBoardWriter(),
-                board.getBookTitle(), board.getBookAuthor(), board.getBookCategoryName(), board.getBookImageURL(),
+                board.getBookTitle(), board.getBookAuthor(), board.getBookCategoryName(), board.getBookImageURL(),board.getBoardReason(),
                 board.getBoardHits(), board.getCreatedTime()));
 //
 

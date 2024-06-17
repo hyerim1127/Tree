@@ -5,6 +5,7 @@ import logoutLight from './img/logout-light.png';
 import ModalBookSearch from './ModalBookSearch';
 import Description from './Description';
 import './modalBookSearch.css';
+import axios from 'axios';
 
 const WriteImpression = () => {
     const navigate = useNavigate();
@@ -17,7 +18,6 @@ const WriteImpression = () => {
     const [reason, setReason] = useState('');
 
     const goToLogin = () => navigate("/");
-    const goToBoard = () => navigate("/board");
     const goToMypage = () => navigate("/member");
 
     const [notAllow, setNotAllow] = useState(true);
@@ -54,6 +54,33 @@ const WriteImpression = () => {
         setCategory(book.categoryName);
         setImageURL(book.imageURL);
     };
+
+    const onClickPhrase = () => {
+        axios.post('http://localhost:8081/board/bookSave', {
+            bookAuthor:writer,
+            bookCategoryName:category,
+            bookTitle:title,
+            bookImageURL:imageURL,
+            bookPhrase:phrase,
+            bookReason:reason,
+            
+        }, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then((res) => {
+            if (res.status === 200) {
+                navigate("/board");
+            } else {
+                alert('회원가입에 실패했습니다.');
+            }
+        })
+        .catch(err => {
+            console.error('Sign up ERROR: ', err);
+            alert('서버와의 통신 중 오류가 발생했습니다.');
+        });
+    }
 
     return (
       <div className="bs-page">
@@ -130,7 +157,7 @@ const WriteImpression = () => {
                       </div>
                   </div>
                   <div>
-                      <button onClick={goToBoard}
+                      <button onClick={onClickPhrase}
                               disabled={notAllow}
                               className="wi-bottomButton">
                           확인

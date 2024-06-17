@@ -48,8 +48,17 @@ public class BoardDTO {
     }
 
     // 5개를 매개변수로 하는 생성자 생성
-    public BoardDTO(Long id, String boardPhrase, String boardWriter, String bookAuthor,
-                    String bookCategoryName, String bookTitle, String bookImageURL, int boardHits, LocalDateTime boardCreatedTime) {
+    public BoardDTO(
+        Long id, 
+        String boardPhrase, 
+        String boardWriter, 
+        String bookAuthor,
+        String bookCategoryName, 
+        String bookTitle, 
+        String bookImageURL, 
+        String boardReason,
+        int boardHits, 
+        LocalDateTime boardCreatedTime) {
         //
         this.id = id;
         this.boardPhrase = boardPhrase;
@@ -59,6 +68,7 @@ public class BoardDTO {
         this.bookCategoryName = bookCategoryName;
         this.bookImageURL = bookImageURL;
         this.boardHits = boardHits;
+        this.boardReason = boardReason;
         this.boardCreatedTime = boardCreatedTime;
     }
 
