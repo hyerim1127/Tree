@@ -19,37 +19,23 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/board") // /board가 상위 주소인데, 계속 부를테니까 아예 구분하여 선언해놓음
 public class BoardController {
-
-
     private final BoardService boardService;
-    private final BookService bookService;
 
-    @GetMapping("/bookSave")
+    @GetMapping("/board/bookSave")
     public String saveForm(){
         return "bookSave";
     }
 
     //post로 보냈기 때문에 postmapping 사용
-    @PostMapping("/bookSave")
+    @PostMapping("/board/bookSave")
     public String save(@ModelAttribute BoardDTO boardDTO){
         boardService.save(boardDTO); // board bookSave 완료
-        return "redirect:/board/paging";
+        return "redirect:/board";
     }
 
-    // 게시글 목록
-    // 나중에 프론트랑 연결할때 / 고려해야하는지 고민
-//    @GetMapping("/")
-//    public String findAll(Model model) {
-//        // DB에서 전체 게시글 데이터를 가져와서 phraseList.html에 보여준다.
-//        List<BoardDTO> boardDTOList = boardService.findAll();
-//        model.addAttribute("boardList",boardDTOList);
-//        return "phraseList";
-//    }
-
     // 게시글 상세 조회
-    @GetMapping("/{id}")
+    @GetMapping("/board/{id}")
     public String findById(@PathVariable("id") Long id, Model model,
                            @PageableDefault(page=1) Pageable pageable){
         // 해당 게시글의 조회수를 하나 올리고, 게시글 데이터를 가져와서 detail.html에 출력
@@ -64,14 +50,14 @@ public class BoardController {
     }
 
     // 게시글 수정
-    @GetMapping("/phraseUpdate/{id}")
+    @GetMapping("/board/phraseUpdate/{id}")
     public String updateForm(@PathVariable("id") Long id, Model model){
         BoardDTO boardDTO = boardService.findById(id);
         model.addAttribute("boardUpdate",boardDTO);
         return "phraseUpdate";
     }
 
-    @PostMapping("/phraseUpdate")
+    @PostMapping("/board/phraseUpdate")
     public String update(@ModelAttribute BoardDTO boardDTO, Model model) {
         BoardDTO board = boardService.update(boardDTO);
         model.addAttribute("board", board);
@@ -79,14 +65,14 @@ public class BoardController {
     }
 
     // 게시글 삭제
-    @GetMapping("/delete/{id}")
+    @GetMapping("/board/delete/{id}")
     public String delete(@PathVariable("id") Long id){
         boardService.delete(id);
-        return "redirect:/board/paging";
+        return "redirect:/board";
     }
 
     // 페이징 처리
-    @GetMapping("/paging")
+    @GetMapping("/board")
     public String paging(@PageableDefault(page=1) Pageable pageable, Model model){
         //pageable.getPageNumber();
         // 페이지 값을 가져오기 위함
@@ -105,8 +91,8 @@ public class BoardController {
     }
 
     // 카테고리별 인상깊은 구절 매핑
-    @GetMapping("/category-searching")
-    public String getBooksByCategory(@RequestParam("category") String category, Model model) {
+    @GetMapping("/board/genre")
+    public String getBooksByCategory(@RequestParam("genre") String category, Model model) {
         List<BoardDTO> bookList = boardService.findByCategory(category);
         model.addAttribute("books", bookList);
         return "categorySearchResult";

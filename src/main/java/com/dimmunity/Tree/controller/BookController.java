@@ -34,10 +34,10 @@ public class BookController {
         return "bookSearch";
     }
 
-    @GetMapping("/bookSave")
-    public String bookSave() {
-        return "bookSave";
-    }
+//    @GetMapping("/bookSave")
+//    public String bookSave() {
+//        return "bookSave";
+//    }
 
     @GetMapping("/book-search")
     public String BookSearchHome(Model model) {
