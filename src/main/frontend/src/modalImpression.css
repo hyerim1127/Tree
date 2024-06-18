@@ -124,3 +124,16 @@
     border-radius: 5px;
     margin-bottom: 10px;
 }
+.I-book-reason textarea {
+    display: flex;
+    height: 8vh;
+    width: 50vw;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #FFFAF3;
+    outline:none;
+    border:none;
+    border-radius: 5px;
+    vertical-align: center;
+    resize:none;
+}
