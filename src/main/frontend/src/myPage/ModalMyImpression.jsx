@@ -1,36 +1,43 @@
+import React from 'react';
 import BookImage from "../impression/BookImage";
 import BookInfo from "../impression/BookInfo";
 import Button from "./Button";
 
 const ModalMyImpression = ({ book, onClose }) => {
-    const handleClick = () => {
-        alert('Button was clicked!');
-      };
-    return (
-        <div className="I-modal">
-            <div className="I-modal-reason-content">
-            <span className="I-modal-close" onClick={onClose}>&times;</span>
+  const handleDelete = () => {
+    // 구절 삭제 로직 구현
+    alert('구절이 삭제되었습니다.');
+  };
 
-            <div className="I-modal-body">
-                <div style={{ display: 'flex', alignItems: 'stretch' }}>
-                <div className="I-book-image">
-                    <BookImage src={book.image} />
-                </div>
-                <div className="I-book-info">
-                    <BookInfo 
-                    title={book.title} 
-                    author={book.author} 
-                    description={book.description} 
-                    />
-                </div>
+  const handleEdit = () => {
+    // 구절 수정 로직 구현
+    alert('구절을 수정할 수 있습니다.');
+  };
+
+  return (
+    <div className="I-modal">
+      <div className="I-modal-reason-content">
+        <span className="I-modal-close" onClick={onClose}>&times;</span>
+        <div className="I-modal-body">
+          <div style={{ display: 'flex', alignItems: 'stretch' }}>
+            <div className="I-book-image">
+              <BookImage src={book.bookImageURL} />
             </div>
-            <div className="I-book-reason">
-            {book.reason}
+            <div className="I-book-info">
+              <BookInfo
+                title={book.bookTitle}
+                author={book.bookAuthor}
+                description={book.bookCategoryName}
+              />
             </div>
-            <Button onClick={handleClick} label="삭제" />
-            <Button onClick={handleClick} label="수정" />
-            </div>
+          </div>
+          <div className="I-book-reason">
+            {book.boardReason}
+          </div>
+          <Button onClick={handleDelete} label="삭제" />
+          <Button onClick={handleEdit} label="수정" />
         </div>
+      </div>
     </div>
   );
 };
