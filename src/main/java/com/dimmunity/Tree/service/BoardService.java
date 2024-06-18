@@ -10,8 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,7 +32,12 @@ public class BoardService {
         Optional<BoardEntity> optionalBoardEntity = boardRepository.findById(id);
         return optionalBoardEntity.map(BoardDTO::toBoardDTO).orElse(null);
     }
-
+    public List<BoardDTO> findByBookTitle(String bookTitle) {
+        List<BoardEntity> entities = boardRepository.findByBookTitle(bookTitle);
+        return entities.stream()
+                .map(BoardDTO::fromEntity)
+                .collect(Collectors.toList());
+    }
     public BoardDTO update(BoardDTO boardDTO) {
         BoardEntity boardEntity = BoardEntity.toUpdateEntity(boardDTO);
         boardRepository.save(boardEntity);
@@ -53,11 +57,31 @@ public class BoardService {
 
     public List<BoardDTO> findByCategory(String genre) {
         List<BoardEntity> entities = boardRepository.findByBookCategoryName(genre);
-        return entities.stream().map(BoardDTO::fromEntity).collect(Collectors.toList());
+        return entities.stream()
+                .map(BoardDTO::fromEntity)
+                .collect(Collectors.toList());
     }
 
     public List<BoardDTO> findByBoardWriter(String boardWriter) {
         List<BoardEntity> entities = boardRepository.findByBoardWriter(boardWriter);
         return entities.stream().map(BoardDTO::toBoardDTO).collect(Collectors.toList());
+    }
+
+
+    public Map<String, Object> getImpressionDetails(Long id) {
+        BoardEntity selectedImpression = boardRepository.findById(id).orElse(null);
+        if (selectedImpression == null) {
+            return Collections.emptyMap();
+        }
+
+        List<BoardEntity> relatedImpressions = boardRepository.findByBookTitle(selectedImpression.getBookTitle());
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("selectedImpression", BoardDTO.toBoardDTO(selectedImpression));
+        result.put("relatedImpressions", relatedImpressions.stream()
+                .map(BoardDTO::toBoardDTO)
+                .collect(Collectors.toList()));
+
+        return result;
     }
 }

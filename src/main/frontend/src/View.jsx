@@ -15,6 +15,7 @@ const View = () => {
   const [showModal, setShowModal] = useState(false);
   const [showImpressionModal, setShowImpressionModal] = useState(false);
   const [selectedImpression, setSelectedImpression] = useState(null);
+  const [relatedImpressions, setRelatedImpressions] = useState([]);
   const [impressions, setImpressions] = useState([]);
 
   const navigate = useNavigate();
@@ -32,14 +33,22 @@ const View = () => {
     setShowModal(false);
   };
 
-  const openImpressionModal = (impression) => {
-    setSelectedImpression(impression);
-    setShowImpressionModal(true);
+  const openImpressionModal = async (impressionId) => {
+    try {
+      const response = await axios.get(`/board/details/${impressionId}`);
+      console.log(response.data); // 데이터 확인을 위한 로그
+      setSelectedImpression(response.data.selectedImpression);
+      setRelatedImpressions(response.data.relatedImpressions);
+      setShowImpressionModal(true);
+    } catch (error) {
+      console.error('Failed to fetch impression details:', error);
+    }
   };
 
   const closeImpressionModal = () => {
     setShowImpressionModal(false);
     setSelectedImpression(null);
+    setRelatedImpressions([]);
   };
 
   const handleGenreSelect = (genre) => {
@@ -60,7 +69,7 @@ const View = () => {
           } while (isOverlapping(newImpressions, newPosition));
 
           newImpressions.push({
-            id: index,
+            id: impression.id,
             text: impression.boardPhrase,
             top: newPosition.top,
             left: newPosition.left
@@ -92,10 +101,8 @@ const View = () => {
     return false;
   };
 
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const logoutHandler = () => {
     localStorage.removeItem("isLoggedIn");
-    setIsLoggedIn(false);
     goToLogin();
   };
 
@@ -116,7 +123,7 @@ const View = () => {
             <div
               key={impression.id}
               className="phrases"
-              onClick={() => openImpressionModal(impression)}
+              onClick={() => openImpressionModal(impression.id)}
               style={{
                 position: 'absolute',
                 top: impression.top,
@@ -135,7 +142,13 @@ const View = () => {
           <div>
             <button className='showAllBtn' onClick={openModal}>구절 전체 보기</button>
             {showModal && <ModalGenre onClose={closeModal} onGenreSelect={handleGenreSelect} />}
-            {showImpressionModal && <ModalImpression book={selectedImpression} onClose={closeImpressionModal} />}
+            {showImpressionModal && selectedImpression && (
+              <ModalImpression
+                book={selectedImpression}
+                relatedImpressions={relatedImpressions}
+                onClose={closeImpressionModal}
+              />
+            )}
           </div>
         </div>
       </div>
