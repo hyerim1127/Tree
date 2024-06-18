@@ -1,5 +1,5 @@
-import Login from "./Login";
-import SignUp from "./SignUp";
+import Login from "./loginSignUp/Login";
+import SignUp from "./loginSignUp/SignUp";
 import WriteImpression from "./WriteImpression";
 import View from "./View";
 import Genre from "./Genre";

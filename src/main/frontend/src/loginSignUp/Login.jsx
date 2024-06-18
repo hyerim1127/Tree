@@ -1,10 +1,11 @@
 // Login.jsx
 
 import React, { useEffect, useState } from "react";
-import logo from './img/treelogo.png';
-import Description from './Description';
+import logo from '../img/treelogo.png';
+import Description from '../Description';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import './loginSignUp.css';
 
 const User = {
     email: '',
@@ -19,20 +20,7 @@ export default function Login() {
     const [pwValid, setPwValid] = useState(false);
     const [notAllow, setNotAllow] = useState(true);
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-
     const navigate = useNavigate();
-
-    const loginHandler = (email, pw) => {
-        localStorage.setItem("isLoggedIn", "1");
-    };
-
-    useEffect(() => {
-        const storedUserLoggedInInformation = localStorage.getItem("isLoggedIn");
-        if (storedUserLoggedInInformation === "1") {
-            setIsLoggedIn(true);
-        }
-    }, []);
 
     useEffect(() => {
         if (emailValid && pwValid) {
@@ -84,11 +72,6 @@ export default function Login() {
         }
     };
 
-    const logoutHandler = () => {
-        localStorage.removeItem("isLoggedIn");
-        setIsLoggedIn(false);
-    };
-
     const goToSign = () => {
         navigate("/member/save");
     };
@@ -98,7 +81,7 @@ export default function Login() {
             <Description />
             <form method="post" action="/member/login" className='form'>
                 <center>
-                    <button className="backBtn" onClick={logoutHandler}>
+                    <button className="backBtn">
                         <img 
                         className='logo'
                         alt='treeImg'
@@ -106,7 +89,7 @@ export default function Login() {
                     </button>
                 </center>
                 <div className='contentWrap'>
-                    <div className='inputWrap'>
+                    <div className='ls-inputWrap'>
                         <input 
                         className='input'
                         placeholder='email'
@@ -121,7 +104,7 @@ export default function Login() {
                         }                    
                     </div>
 
-                    <div className='inputWrap'>
+                    <div className='ls-inputWrap'>
                         <input 
                         type='password'
                         className='input'
