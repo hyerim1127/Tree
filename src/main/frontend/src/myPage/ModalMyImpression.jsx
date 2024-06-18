@@ -32,7 +32,14 @@ const ModalMyImpression = ({ book, onClose }) => {
             </div>
           </div>
           <div className="I-book-reason">
+            <p>
+            <strong>인상 깊은 구절</strong><br /><br />
+            {book.boardPhrase}
+            </p><br />
+            <p>
+            <strong>인상 깊은 이유</strong><br /><br />
             {book.boardReason}
+            </p>
           </div>
           <Button onClick={handleDelete} label="삭제" />
           <Button onClick={handleEdit} label="수정" />
