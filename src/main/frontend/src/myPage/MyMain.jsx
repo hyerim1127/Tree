@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
-import { useLocation } from 'react-router-dom';
 import lockLight from '../img/lock-light.png';
 import logoutLight from '../img/logout-light.png';
 import pencilLight from '../img/pencil-light.png';
@@ -19,15 +18,18 @@ const MyMain = () => {
   const [showModalPwChange, setShowModalPwChange] = useState(false);
   const [impressions, setImpressions] = useState([]);
   const navigate = useNavigate();
-  
-  // 사용자 ID를 localStorage에서 가져오기
-  const userId = localStorage.getItem("userId");
+
+  const boardWriter = localStorage.getItem("userEmail");
+ // const boardWriter = userEmail ? userEmail.split("@")[0] : null;
 
   useEffect(() => {
-    // API에서 데이터 가져오기
     const fetchImpressions = async () => {
+      if (!boardWriter) {
+        console.error("Board writer not found in localStorage");
+        return;
+      }
       try {
-        const response = await axios.get(`/board/user/${userId}`);
+        const response = await axios.get(`http://localhost:8081/member/${boardWriter}`);
         setImpressions(response.data);
       } catch (error) {
         console.error("Error fetching impressions", error);
@@ -35,7 +37,7 @@ const MyMain = () => {
     };
 
     fetchImpressions();
-  }, [userId]);
+  }, [boardWriter]);
 
   const openModalGenre = () => {
     setShowModalGenre(true);

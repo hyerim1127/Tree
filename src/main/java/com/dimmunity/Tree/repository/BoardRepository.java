@@ -13,5 +13,7 @@ import java.util.List;
 @Repository
 public interface BoardRepository extends JpaRepository<BoardEntity, Long> {
     List<BoardEntity> findByBookCategoryName(String bookCategoryName);
+    List<BoardEntity> findByBoardWriter(String boardWriter);
+
 }
 

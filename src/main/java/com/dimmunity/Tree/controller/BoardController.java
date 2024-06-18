@@ -104,5 +104,10 @@ public class BoardController {
         return "categorySearchResult";
     }
 
+    @GetMapping("/member/{boardWriter}")
+    public List<BoardDTO> getImpressionsByUser(@PathVariable("boardWriter") String boardWriter) {
+        return boardService.findByBoardWriter(boardWriter);
+    }
+
 }
 
