@@ -25,6 +25,7 @@ const MyImpressionEdit = ({ book, onSave, onClose }) => {
 
       await axios.put(`http://localhost:8081/board/phraseUpdate/${book.id}`, updatedBook);
       onSave(updatedBook);
+      window.location.reload(); 
       onClose();
     } catch (error) {
       console.error('Error updating impression', error);

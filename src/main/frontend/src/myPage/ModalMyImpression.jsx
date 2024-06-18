@@ -64,7 +64,7 @@ const ModalMyImpression = ({ book, onClose }) => {
           book={book}
           onSave={(updatedBook) => {
             // 수정된 데이터 처리 로직
-            alert('구절이 수정되었습니다.');
+            //alert('구절이 수정되었습니다.');
             // 여기서 수정 후의 작업을 할 수 있음 (API 호출 등)
             // onSave 함수를 통해 수정 후의 데이터를 처리할 수 있음
             // 예: onClose(); // 모달 닫기
