@@ -1,10 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BookImage from "./impression/BookImage";
 import BookInfo from "./impression/BookInfo";
-import ToggleDetail from "./ToggleDetail";
 
 const ModalImpressionReason = ({ book, relatedImpressions, onClose }) => {
-
   return (
     <div className="I-modal">
       <div className="I-modal-reason-content">
@@ -28,11 +26,32 @@ const ModalImpressionReason = ({ book, relatedImpressions, onClose }) => {
           </div>
           <div className="toggle-sections">
             {relatedImpressions.map((impression, index) => (
-              <ToggleDetail key={index} detail={{title: impression.boardPhrase, content: impression.boardReason}} />
+              <ToggleDetail key={index} detail={{ title: impression.boardPhrase, content: impression.boardReason }} />
             ))}
           </div>
         </div>
       </div>
+    </div>
+  );
+};
+
+const ToggleDetail = ({ detail }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <div className="toggle-detail">
+      <div className="toggle-header" onClick={toggle}>
+        {detail.title}
+      </div>
+      {isOpen && (
+        <div className="toggle-content">
+          {detail.content}
+        </div>
+      )}
     </div>
   );
 };

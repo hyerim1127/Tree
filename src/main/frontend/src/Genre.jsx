@@ -25,7 +25,7 @@ const Genre = () => {
 
   useEffect(() => {
     if (selectedGenre) {
-      axios.get(`http://localhost:8081/board/genre?genre=${selectedGenre}`)
+      axios.get(`http://localhost:8081/board/genre?genre=${encodeURIComponent(selectedGenre)}`)
         .then(response => {
           if (Array.isArray(response.data)) {
             setImpressions(response.data);
