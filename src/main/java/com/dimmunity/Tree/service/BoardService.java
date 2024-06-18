@@ -86,25 +86,14 @@ public class BoardService {
         // page 위치에 있는 값은 0부터 시작이기 때문에 -1 을 해준다.
         int page = pageable.getPageNumber() - 1;
         int pageLimit = 5;
-        // findAll 함수를 호출하는데, 전달되는 값이 많다.
-        /*
-                page :  몇페이지를 보고 싶은지
-                pageLimit : 한 페이지에 보여줄 글 갯수
-                Sort.~ : 어떻게 정렬을 해서 해당 페이지 값을 가져올것인지
-                    - id (기준 컬럼 - 엔티티에 작성한 이름 기준(DB 컬럼 기준 X)) 기준을 가지고 가져오겠다.
-                    - 레포지토리에서 가져오는 것이기 때문에 엔티티가 담겨있을 것이다.
-                ∴ 의미하는 바 = 한페이지당 5개씩 글을 보여주고 정렬 기준은 id 기분으로 내림차순 정렬
-         */
-        // 지금은 List 객체가 아니라 Page 객체다.
+
         Page<BoardEntity> boardEntities =
                 boardRepository.findAll(PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "id")));
 
-        // map 은 Page 객체에서 제공해주는 메소드이고, board 는 엔티티 개체다. board 에서 변수를 하나씩 꺼내서 BoardDTO로 옮겨 담는다.(즉, 바꿔주는 거다.)
-        // 페이지 목록에서 보여주면 되는 데이터 : id, writer, title, hits, createdTime -> 이정보를 담을 수 있는 DTO 생성자를 추가하면 된다.
         Page<BoardDTO> boardDTOS = boardEntities.map(board -> new BoardDTO(board.getId(),
                 board.getBoardPhrase(), board.getBoardWriter(),
-                board.getBookTitle(), board.getBookAuthor(), board.getBookCategoryName(), board.getBookImageURL(),board.getBoardReason(),
-                board.getBoardHits(), board.getCreatedTime()));
+                board.getBookTitle(), board.getBookAuthor(), board.getBookCategoryName(), board.getBookImageURL(),board.getBoardReason()
+        ));
 //
 
         return boardDTOS; // DTO 객체를 controller 쪽으로 return 한다.
