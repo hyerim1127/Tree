@@ -15,12 +15,12 @@ spring:
 #    driver-class-name: com.mysql.cj.jdbc.Driver
 
 #    secondary:
-#      url: jdbc:mysql://localhost:3306/db_checkIt?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-#
-#      username: root
-#      password: 1148
-#      driver-class-name: com.mysql.cj.jdbc.Driver
-#
+     url: jdbc:mysql://localhost:3306/db_checkIt?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+
+     username: root
+     password: 1148
+     driver-class-name: com.mysql.cj.jdbc.Driver
+
 
   thymeleaf:
     cache: false

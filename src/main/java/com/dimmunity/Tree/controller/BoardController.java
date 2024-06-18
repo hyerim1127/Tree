@@ -19,12 +19,11 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/board")
 
 public class BoardController {
     private final BoardService boardService;
 
-    @GetMapping("/bookSave")
+    @GetMapping("/board/bookSave")
     public String saveForm(){
         return "bookSave";
     }
@@ -39,11 +38,10 @@ public class BoardController {
     }
 
     // 게시글 상세 조회
-    @GetMapping("/{id}")
+    @GetMapping("/board/{id}")
     public String findById(@PathVariable("id") Long id, Model model,
                            @PageableDefault(page=1) Pageable pageable){
-
-        BoardDTO boardDTO = boardService.findById(id);
+                            boardService.updateHits(id);BoardDTO boardDTO = boardService.findById(id); 
 
         model.addAttribute("board", boardDTO);
         model.addAttribute("page", pageable.getPageNumber());
@@ -52,14 +50,14 @@ public class BoardController {
     }
 
     // 게시글 수정
-    @GetMapping("/phraseUpdate/{id}")
+    @GetMapping("/board/phraseUpdate/{id}")
     public String updateForm(@PathVariable("id") Long id, Model model){
         BoardDTO boardDTO = boardService.findById(id);
         model.addAttribute("boardUpdate",boardDTO);
         return "phraseUpdate";
     }
 
-    @PostMapping("/phraseUpdate")
+    @PostMapping("/board/phraseUpdate")
     public String update(@ModelAttribute BoardDTO boardDTO, Model model) {
         BoardDTO board = boardService.update(boardDTO);
         model.addAttribute("board", board);
@@ -67,14 +65,14 @@ public class BoardController {
     }
 
     // 게시글 삭제
-    @GetMapping("/delete/{id}")
+    @GetMapping("/board/delete/{id}")
     public String delete(@PathVariable("id") Long id){
         boardService.delete(id);
         return "redirect:/board";
     }
 
     // 페이징 처리
-    @GetMapping("/")
+    @GetMapping("/board")
     public String paging(@PageableDefault(page=1) Pageable pageable, Model model){
         //pageable.getPageNumber();
         // 페이지 값을 가져오기 위함
@@ -93,7 +91,7 @@ public class BoardController {
     }
 
     // 카테고리별 인상깊은 구절 매핑
-    @GetMapping("/genre")
+    @GetMapping("/board/genre")
     public String getBooksByCategory(@RequestParam("genre") String category, Model model) {
         List<BoardDTO> bookList = boardService.findByCategory(category);
         model.addAttribute("books", bookList);
