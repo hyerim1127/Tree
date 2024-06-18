@@ -5,6 +5,7 @@ import com.dimmunity.Tree.dto.BookDTO;
 import com.dimmunity.Tree.entity.BoardEntity;
 import com.dimmunity.Tree.service.BoardService;
 import com.dimmunity.Tree.service.BookService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.query.criteria.JpaCriteriaUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
+
 public class BoardController {
     private final BoardService boardService;
 
@@ -28,8 +30,14 @@ public class BoardController {
     }
 
     //post로 보냈기 때문에 postmapping 사용
+
     @PostMapping("/board/bookSave")
-    public String save(@ModelAttribute BoardDTO boardDTO){
+    public String save(@RequestBody BoardDTO boardDTO, HttpSession session){
+        String memberEmail = (String) session.getAttribute("loginEmail");
+        if (memberEmail != null) {
+            String boardWriter = memberEmail.split("@")[0];
+            boardDTO.setBoardWriter(boardWriter);
+        }
         boardService.save(boardDTO); // board bookSave 완료
         return "redirect:/board";
     }
@@ -38,10 +46,8 @@ public class BoardController {
     @GetMapping("/board/{id}")
     public String findById(@PathVariable("id") Long id, Model model,
                            @PageableDefault(page=1) Pageable pageable){
-        // 해당 게시글의 조회수를 하나 올리고, 게시글 데이터를 가져와서 detail.html에 출력
-        // 두번의 메소드 호출 이뤄짐
-        boardService.updateHits(id);
         BoardDTO boardDTO = boardService.findById(id);
+
 
         model.addAttribute("board", boardDTO);
         model.addAttribute("page", pageable.getPageNumber());
@@ -96,6 +102,11 @@ public class BoardController {
         List<BoardDTO> bookList = boardService.findByCategory(category);
         model.addAttribute("books", bookList);
         return "categorySearchResult";
+    }
+
+    @GetMapping("/member/{boardWriter}")
+    public List<BoardDTO> getImpressionsByUser(@PathVariable("boardWriter") String boardWriter) {
+        return boardService.findByBoardWriter(boardWriter);
     }
 
 }

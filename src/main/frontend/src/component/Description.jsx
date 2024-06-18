@@ -1,12 +1,11 @@
-// BackgroundDescription.jsx
-
 import React from 'react';
-import mainImg from './img/mainImage.png';
-import btn from './img/btn.png';
+import mainImg from '../img/mainImage.png';
+import btn from '../img/btn.png';
+import './description.css';
 
 const Description = ({ goToPageR }) => {
     return (
-        <div className='background' style={{zIndex:-1}}>
+        <div style={{zIndex:-1}}>
             <img className='mainImg' alt='main' src={mainImg} />
             <img className='btnR' alt='btn' src={btn} onClick={goToPageR} />
             <div className='description'>

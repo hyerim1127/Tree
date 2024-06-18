@@ -1,0 +1,26 @@
+.mainImg {
+    z-index: -2;
+    position:absolute;
+    top:0;
+    right:0;
+    height: 100%;
+    width: 50vw;
+    object-fit:cover;
+}
+
+.description {
+    background-color: #E5D1B2;
+    position:fixed;
+    opacity: 0.8;
+    top: 25vh;
+    text-align: right;
+    font-size: smaller;
+    right: 7.5vw;
+    width: 35vw;
+    z-index: -2;
+}
+
+.descriptionText {
+    padding: 50px;
+    color: #562E12;
+}
