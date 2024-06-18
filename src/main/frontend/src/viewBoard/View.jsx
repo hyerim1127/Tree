@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import personLight from './img/person-light.png';
-import logoutLight from './img/logout-light.png';
-import pencilLight from './img/pencil-light.png';
-import treeLight from './img/tree-light.png';
-import btn from './img/btn.png';
-import bmkRed from './img/bookmark-red.png';
-import ModalGenre from './genreSelectModal/ModalGenre';
-import ModalImpressionReason from './ModalImpressionReason';
-import './modalImpression.css';
+import personLight from '../img/person-light.png';
+import logoutLight from '../img/logout-light.png';
+import pencilLight from '../img/pencil-light.png';
+import treeLight from '../img/tree-light.png';
+import btn from '../img/btn.png';
+import bmkRed from '../img/bookmark-red.png';
+import ModalGenre from '../genreSelectModal/ModalGenre';
+import ModalImpressionReason from '../impression/ModalImpression';
+import '../impression/modalImpression.css';
+import './view.css';
 import axios from 'axios';
 
 const View = () => {
@@ -103,6 +104,7 @@ const View = () => {
 
   const logoutHandler = () => {
     localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userEmail");
     goToLogin();
   };
 

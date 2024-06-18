@@ -1,11 +1,11 @@
 import Login from "./loginSignUp/Login";
 import SignUp from "./loginSignUp/SignUp";
 import WriteImpression from "./writeBoard/WriteImpression";
-import View from "./View";
-import Genre from "./Genre";
+import View from "./viewBoard/View";
+import Genre from "./genreImpression/Genre";
 import MyMain from "./myPage/MyMain";
 import MyLog from "./myPage/MyLog";
-import axios from 'axios';
+
 import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter,

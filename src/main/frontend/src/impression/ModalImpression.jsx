@@ -1,14 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BookImage from "./BookImage";
 import BookInfo from "./BookInfo";
 
-const ModalImpression = ({ book, relatedImpressions, onClose }) => {
-  if (!book) return null;
-
+const ModalImpressionReason = ({ book, relatedImpressions, onClose }) => {
   return (
     <div className="I-modal">
-      <div className="I-modal-content">
+      <div className="I-modal-reason-content">
         <span className="I-modal-close" onClick={onClose}>&times;</span>
+
         <div className="I-modal-body">
           <div style={{ display: 'flex', alignItems: 'stretch' }}>
             <div className="I-book-image">
@@ -24,11 +23,7 @@ const ModalImpression = ({ book, relatedImpressions, onClose }) => {
           </div>
           <div className="toggle-sections">
             {relatedImpressions.map((impression, index) => (
-              <div key={index} className="toggle-detail">
-                <div className="toggle-content">
-                  {impression.boardPhrase}
-                </div>
-              </div>
+              <ToggleDetail key={index} detail={{ title: impression.boardPhrase, content: impression.boardReason }} />
             ))}
           </div>
         </div>
@@ -37,4 +32,25 @@ const ModalImpression = ({ book, relatedImpressions, onClose }) => {
   );
 };
 
-export default ModalImpression;
+const ToggleDetail = ({ detail }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <div className="toggle-detail">
+      <div className="toggle-header" onClick={toggle}>
+        {detail.title}
+      </div>
+      {isOpen && (
+        <div className="toggle-content">
+          {detail.content}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default ModalImpressionReason;

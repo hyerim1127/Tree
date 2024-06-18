@@ -78,6 +78,7 @@ const MyMain = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const logoutHandler = () => {
     localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userEmail");
     setIsLoggedIn(false);
     goToLogin();
   };

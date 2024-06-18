@@ -1,0 +1,52 @@
+.pageView {
+    width:100vw;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    opacity: 0.9;
+    background-color: #F1E4D1;
+    background-image:url(../img/page-line.png);
+}
+.bmkRed {
+    position:absolute;
+    width:3vw;
+    left:52vw;
+}
+
+.phrases:hover {
+    position: absolute;
+    padding:10px;
+    border: none;
+    font-size: 1.05em;
+    border-radius: 5px;
+    font-weight: 700;
+    background-color: #FDEEE4;
+    box-shadow: 0px 0px 35px 20px #FDEEE4;
+    border-radius: 50%;
+    filter: blur(2px);
+    word-wrap: break-word;
+}
+
+.phrases { 
+    animation: bounce 1s infinite alternate;
+}
+  @keyframes bounce {
+    0% {
+      transform : translateY(-5px);
+    }
+    100% {
+      transform : translateY(5px);
+    }
+}
+.showAllBtn {
+    position: absolute;
+    right: 3vw;
+    bottom: 4vh;
+    padding : 0 10px;
+    border : none;
+    font-size: 18px;
+    text-decoration: 2px underline;
+    font-weight:bolder;
+    background-color: transparent;
+    color:#562E12;
+}
