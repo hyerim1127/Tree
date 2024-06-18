@@ -50,8 +50,9 @@ const View = () => {
   useEffect(() => {
     const fetchImpressions = async () => {
       try {
-        const response = await axios.get('/api/board/impressions');
-        const newImpressions = response.data.map((impression, index) => {
+        const response = await axios.get('/board');
+        const impressionsArray = Object.values(response.data);
+        const newImpressions = impressionsArray.map((impression, index) => {
           let newPosition;
           do {
             newPosition = generateRandomPosition();
