@@ -89,8 +89,8 @@ const WriteImpression = () => {
               </inline>
           </div>
           <center>
-              <div className="wi-descriptionPhrase">
-                  <h1>인상 깊은 구절</h1>
+              <div>
+                  <h1 className="wi-descriptionPhrase">인상 깊은 구절</h1>
                   <h5>최근 독서를 하면서 다른 사람들과 공유하고 싶었던<br /> 마음에 남는 구절을 작성해 주세요</h5>
               </div>
           </center>
