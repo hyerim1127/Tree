@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import personLight from './img/person-light.png';
-import logoutLight from './img/logout-light.png';
-import treeLight from './img/tree-light.png';
+import personLight from '../img/person-light.png';
+import logoutLight from '../img/logout-light.png';
+import treeLight from '../img/tree-light.png';
 import ModalBookSearch from './ModalBookSearch';
 import './writeImpression.css';
 import axios from 'axios';

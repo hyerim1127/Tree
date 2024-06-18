@@ -23,28 +23,7 @@ html, body {
   background-color: #F1E4D1;
   background-image:url(./img/page-line.png);
 }
-/*사진 배경*/
-.mainImg {
-  z-index: -2;
-  position:absolute;
-  top:0;
-  right:0;
-  height: 100%;
-  width: 50vw;
-  object-fit:cover;
-}
-/*그루터기 설명 설명 배경*/
-.description {
-  background-color: #E5D1B2;
-  position:fixed;
-  opacity: 0.8;
-  top: 25vh;
-  text-align: right;
-  font-size: smaller;
-  right: 7.5vw;
-  width: 35vw;
-  z-index: -2;
-}
+
 /*버튼 왼쪽, 오른쪽+hover*/
 .btnL {
   position: absolute;
@@ -68,11 +47,6 @@ html, body {
 }
 .btnR:hover {
   width: 6vh;
-}
-/*그루터기 서비스 설명 텍스트*/
-.descriptionText {
-  padding: 50px;
-  color: #562E12;
 }
 
 

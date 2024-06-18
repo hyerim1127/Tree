@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import logo from '../img/treelogo.png';
-import Description from '../Description';
+import Description from '../component/Description';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import './loginSignUp.css';

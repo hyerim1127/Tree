@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import Description from '../Description';
+import Description from '../component/Description';
 import logo from '../img/treelogo.png';
 import axios from 'axios';
 import './loginSignUp.css';
