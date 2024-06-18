@@ -3,7 +3,7 @@ import axios from 'axios';
 import BookImage from "../impression/BookImage";
 import BookInfo from "../impression/BookInfo";
 import Button from "./Button";
-import ModalMyImpressionEdit from './MyImpressionEdit'; // 수정 모달 추가
+import MyImpressionEdit from './MyImpressionEdit'; // 수정 모달 추가
 
 const ModalMyImpression = ({ book, onClose }) => {
   const [showEditModal, setShowEditModal] = useState(false); // 수정 모달 상태 추가
@@ -26,11 +26,6 @@ const ModalMyImpression = ({ book, onClose }) => {
   const closeEditModal = () => {
     setShowEditModal(false);
   };
-
-  // 삭제된 상태라면 모달을 닫고 아무것도 렌더링하지 않음
-  if (deleted) {
-    return null;
-  }
 
   return (
     <div className="I-modal">
@@ -65,7 +60,7 @@ const ModalMyImpression = ({ book, onClose }) => {
       </div>
       {/* 수정 모달 */}
       {showEditModal && (
-        <ModalMyImpressionEdit
+        <MyImpressionEdit
           book={book}
           onSave={(updatedBook) => {
             // 수정된 데이터 처리 로직
