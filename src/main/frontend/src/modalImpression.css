@@ -30,6 +30,7 @@
     float: right;
     font-size: 28px;
     font-weight: bold;
+    align-self: flex-end;
   }
   
 .I-modal-close:hover,
@@ -41,6 +42,7 @@
   
 .I-modal-body {
     flex-direction: column;
+    flex: 1;
 }
   
 .I-book-image {
@@ -50,8 +52,13 @@
   
 .I-book-info {
     padding-left: 20px;
+    font-size: 18px;
 }
-
+.I-book-phrase {
+    text-align: left;
+    font-size: 10px;
+    padding: 10px;
+}
 .I-book-text {
     text-align: left;
     padding : 10px;
@@ -99,11 +106,34 @@
     text-align: center;
     margin: 30vh auto;
     padding: 30px;
-    width: 500px;
+    width: 500px;    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-height: 80vh;
+    overflow-y: auto;
 }
 .I-book-reason {
     text-align: left;
     margin-top: 25px;
     width: 100%;
     font-size: 13px;
+}
+.I-book-reason p {
+    border: 1px solid #562E12;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.I-book-reason textarea {
+    display: flex;
+    height: 8vh;
+    width: 50vw;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #FFFAF3;
+    outline:none;
+    border:none;
+    border-radius: 5px;
+    vertical-align: center;
+    resize:none;
 }

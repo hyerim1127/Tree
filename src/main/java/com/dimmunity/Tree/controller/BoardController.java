@@ -68,20 +68,26 @@ public class BoardController {
 
 
     // 게시글 수정
-    @GetMapping("/board/phraseUpdate/{id}")
+    @PutMapping("/board/phraseUpdate/{id}")
     public String updateForm(@PathVariable("id") Long id, Model model){
         BoardDTO boardDTO = boardService.findById(id);
         model.addAttribute("boardUpdate",boardDTO);
         return "phraseUpdate";
     }
 
-    @PostMapping("/board/phraseUpdate")
+    @PostMapping("/board/phraseUpdate/{id}")
     public String update(@ModelAttribute BoardDTO boardDTO, Model model) {
         BoardDTO board = boardService.update(boardDTO);
         model.addAttribute("board", board);
         return "redirect:/board/" + boardDTO.getId();
     }
 
+    // 게시글 삭제
+    @DeleteMapping("/board/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") Long id){
+        boardService.delete(id);
+        return ResponseEntity.ok("게시글이 삭제되었습니다.");
+    }
 
     // 페이징 처리
     @GetMapping("/board")
