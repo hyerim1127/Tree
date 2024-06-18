@@ -235,36 +235,7 @@ html, body {
 .inputTextWrap2:focus-within {
   border:2px solid #DABF98;
 }
-/*인상 깊은 구절 작성 - 이유+focus*/
-.inputText2 {
-  width:100%;
-  outline:none;
-  border:none;
-  border-radius: 5px;
-  height : 150px;
-  background-color: #FFFAF3;
-  vertical-align: center;
-  font-size: 18px;
-  resize:none;
-}
-.inputText2::placeholder {
-  color : #b5947e;
-}
-/*인상깊은구절 작성 페이지 실제 input창*/
-.inputText {
-  width:100%;
-  outline:none;
-  border:none;
-  border-radius: 5px;
-  height : 110px;
-  background-color: #FFFAF3;
-  vertical-align: center;
-  font-size: 18px;
-  resize:none;
-}
-.inputText::placeholder {
-  color : #b5947e;
-}
+
 /*인상깊은구절 조회 페이지 - 구절 hover 시 효과*/
 .phrases:hover {
   position: absolute;
