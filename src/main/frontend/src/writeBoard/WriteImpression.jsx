@@ -69,8 +69,8 @@ const WriteImpression = () => {
             bookCategoryName: category,
             bookTitle: title,
             bookImageURL: imageURL,
-            bookPhrase: phrase,
-            bookReason: reason,
+            boardPhrase: phrase,
+            boardReason: reason,
             boardWriter: userEmail
         }, {
             headers: {
