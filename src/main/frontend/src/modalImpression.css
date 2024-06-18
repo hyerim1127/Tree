@@ -119,8 +119,8 @@
     font-size: 13px;
 }
 .I-book-reason p {
-    border: 1px solid #562E12; /* Border style */
-    padding: 10px; /* Padding inside the border */
-    border-radius: 5px; /* Rounded corners */
-    margin-bottom: 10px; /* Spacing between paragraphs */
+    border: 1px solid #562E12;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
 }
