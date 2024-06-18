@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class BoardService {
+    @Autowired
     private final BoardRepository boardRepository;
 
     public void save(BoardDTO boardDTO) {
@@ -38,25 +39,15 @@ public class BoardService {
     }
 
     public List<BoardDTO> findAll() {
-        // entity로 받아온 정보를 dto 객체로 옮겨 담아서 controller로 return 한다.
-
         List<BoardEntity> boardEntityList = boardRepository.findAll();
-        // return 할 list 객체 선언
         List<BoardDTO> boardDTOList = new ArrayList<>();
-        // List<BoardEntity>에 담긴 데이터를 List<BoardDTO>에 옮겨 담기 (즉, entity객체를 dto 객체로 옮겨 담기)
         for (BoardEntity boardEntity : boardEntityList) {
-            // boardEntity 객체를 DTO로 변환하고(BoardDTO.toBoardDTO(boardEntity) boardDTOList에 담는 과정
             boardDTOList.add(BoardDTO.toBoardDTO(boardEntity));
         }
         return boardDTOList;
     }
 
     // 조회수 증가 메소드
-    @Transactional
-    public void updateHits(Long id) {
-        boardRepository.updateHits(id);
-    }
-
 
     public BoardDTO findById(Long id) {
         Optional<BoardEntity> optionalBoardEntity = boardRepository.findById(id);
@@ -82,8 +73,6 @@ public class BoardService {
 
     // DB 로부터 paging 처리된 db 가져옴
     public Page<BoardDTO> paging(Pageable pageable) {
-        // getPageNumber() 메소드를 사용해서 몇페이지를 요청했는지 가져올 수 있다.
-        // page 위치에 있는 값은 0부터 시작이기 때문에 -1 을 해준다.
         int page = pageable.getPageNumber() - 1;
         int pageLimit = 5;
 
