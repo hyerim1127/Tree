@@ -17,7 +17,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,8 +34,6 @@ public class BoardController {
         return "bookSave";
     }
 
-    //post로 보냈기 때문에 postmapping 사용
-
     @PostMapping("/board/bookSave")
     public String save(@RequestBody BoardDTO boardDTO, HttpSession session){
         String memberEmail = (String) session.getAttribute("loginEmail");
@@ -43,18 +45,27 @@ public class BoardController {
         return "redirect:/board";
     }
 
-    // 게시글 상세 조회
-    @GetMapping("/board/{id}")
-    public String findById(@PathVariable("id") Long id, Model model,
-                           @PageableDefault(page=1) Pageable pageable){
-        BoardDTO boardDTO = boardService.findById(id);
-
-
-        model.addAttribute("board", boardDTO);
-        model.addAttribute("page", pageable.getPageNumber());
-
-        return "boardDetail";
+    @GetMapping("board/{id}")
+    public BoardDTO findById(@PathVariable("id") Long id){
+        return boardService.findById(id);
     }
+
+
+    // 특정 구절 조회 및 동일한 책에 대한 다른 구절들 조회
+    @GetMapping("board/details/{id}")
+    public ResponseEntity<Map<String, Object>> getImpressionDetails(@PathVariable("id") Long id) {
+        BoardDTO selectedImpression = boardService.findById(id);
+        if (selectedImpression == null) {
+            return ResponseEntity.notFound().build();
+        }
+        List<BoardDTO> relatedImpressions = boardService.findByBookTitle(selectedImpression.getBookTitle());
+        Map<String, Object> response = new HashMap<>();
+        response.put("selectedImpression", selectedImpression);
+        response.put("relatedImpressions", relatedImpressions);
+
+        return ResponseEntity.ok(response);
+    }
+
 
     
      // 게시글 수정 (GET 방식으로 수정할 데이터 가져오기)
@@ -87,10 +98,9 @@ public class BoardController {
 
     // 카테고리별 인상깊은 구절 매핑
     @GetMapping("/board/genre")
-    public String getBooksByCategory(@RequestParam("genre") String category, Model model) {
-        List<BoardDTO> bookList = boardService.findByCategory(category);
-        model.addAttribute("books", bookList);
-        return "categorySearchResult";
+    public List<BoardDTO> getBooksByCategory(@RequestParam("genre") String category) {
+        String decodedCategory = URLDecoder.decode(category, StandardCharsets.UTF_8);
+        return boardService.findByCategory(decodedCategory);
     }
 
     @GetMapping("/member/{boardWriter}")
