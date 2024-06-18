@@ -117,7 +117,7 @@ const WriteImpression = () => {
                           <button onClick={openModalBookSearch} className="wi-bookSearchBtn">책 검색</button>
                           <ModalBookSearch show={showModal} onClose={closeModalBookSearch} onSelect={handleBookSelect} />
                       </div>
-                      <div style={{ display: 'flex' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
                         <div className="wi-inputWrap-img">
                             <img
                                 src={imageURL}

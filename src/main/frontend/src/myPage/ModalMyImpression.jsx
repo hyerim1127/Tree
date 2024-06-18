@@ -1,17 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import BookImage from "../impression/BookImage";
 import BookInfo from "../impression/BookInfo";
 import Button from "./Button";
+import MyImpressionEdit from './MyImpressionEdit'; // 수정 모달 추가
 
 const ModalMyImpression = ({ book, onClose }) => {
-  const handleDelete = () => {
-    // 구절 삭제 로직 구현
-    alert('구절이 삭제되었습니다.');
+  const [showEditModal, setShowEditModal] = useState(false); // 수정 모달 상태 추가
+  const [deleted, setDeleted] = useState(false); // 삭제 여부 상태 추가
+
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`http://localhost:8081/board/delete/${book.id}`);
+      alert('구절이 삭제되었습니다.');
+      window.location.reload(); 
+    } catch (error) {
+      console.error('Error deleting impression', error);
+    }
   };
 
   const handleEdit = () => {
-    // 구절 수정 로직 구현
-    alert('구절을 수정할 수 있습니다.');
+    setShowEditModal(true);
+  };
+
+  const closeEditModal = () => {
+    setShowEditModal(false);
   };
 
   return (
@@ -32,12 +45,33 @@ const ModalMyImpression = ({ book, onClose }) => {
             </div>
           </div>
           <div className="I-book-reason">
-            {book.boardReason}
+            <p>
+              <strong>인상 깊은 구절</strong><br /><br />
+              {book.boardPhrase}
+            </p><br />
+            <p>
+              <strong>인상 깊은 이유</strong><br /><br />
+              {book.boardReason}
+            </p>
           </div>
           <Button onClick={handleDelete} label="삭제" />
           <Button onClick={handleEdit} label="수정" />
         </div>
       </div>
+      {/* 수정 모달 */}
+      {showEditModal && (
+        <MyImpressionEdit
+          book={book}
+          onSave={(updatedBook) => {
+            // 수정된 데이터 처리 로직
+            alert('구절이 수정되었습니다.');
+            // 여기서 수정 후의 작업을 할 수 있음 (API 호출 등)
+            // onSave 함수를 통해 수정 후의 데이터를 처리할 수 있음
+            // 예: onClose(); // 모달 닫기
+          }}
+          onClose={closeEditModal}
+        />
+      )}
     </div>
   );
 };

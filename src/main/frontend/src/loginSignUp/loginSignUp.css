@@ -25,14 +25,14 @@
     background-color: #F1E4D1;
 }
 .contentWrap {
-    padding: 0 8.5vw;
+    padding: 0 12vw;
     flex: 1;
 }
 .ls-inputWrap {
     display: flex;
     align-items: center;
     height: 4vh;
-    width: 30vw;
+    width: 25vw;
     border-radius: 5px;
     padding: 15px;
     margin-top: 30px;
@@ -63,7 +63,7 @@
   }
 
 .bottomButton {
-    width:  calc(30vw + 15px);
+    width:  calc(25vw + 20px);
     height: 6vh;
     border: none;
     font-size: 25px;
