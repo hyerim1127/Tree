@@ -2,6 +2,7 @@
     float: right;
     padding: 5px 7px;
     margin: 5px;
+    margin-bottom: 10px; /* 여기에 마진을 추가하세요 */
     font-size: 12px;
     color: #BDA594;
     background-color: #FFFAF3;
@@ -15,4 +16,3 @@
     background-color: #744F36;
     color: #FFFAF3;
 }
-  
