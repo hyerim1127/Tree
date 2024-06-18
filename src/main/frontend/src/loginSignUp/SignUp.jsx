@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import Description from './Description';
-import logo from './img/treelogo.png';
+import Description from '../component/Description';
+import logo from '../img/treelogo.png';
 import axios from 'axios';
+import './loginSignUp.css';
 
 const SignUp = () => {
     const [email, setEmail] = useState('');
@@ -101,7 +102,7 @@ const SignUp = () => {
                   </button>
               </center>
               <div className='contentWrap'>
-                  <div className='inputWrap'>
+                  <div className='ls-inputWrap'>
                       <input
                         className='input'
                         placeholder='email'
@@ -115,7 +116,7 @@ const SignUp = () => {
                       )}
                   </div>
 
-                  <div className='inputWrap'>
+                  <div className='ls-inputWrap'>
                       <input
                         type='password'
                         className='input'
@@ -130,7 +131,7 @@ const SignUp = () => {
                         )
                       }
                   </div>
-                  <div className='inputWrap'>
+                  <div className='ls-inputWrap'>
                       <input
                         type='password'
                         className='input'

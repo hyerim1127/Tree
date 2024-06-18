@@ -1,0 +1,113 @@
+.page { 
+    background-color: #F1E4D1;
+    flex-direction : row;
+    color:#562E12;
+}
+.form {
+    position:fixed;
+    left: 0;
+    top: 0;
+    width:50vw;
+    height: 100vh;
+    display : flex;
+    flex-direction : column;
+    background-color:#F1E4D1;
+    vertical-align: center;
+}
+.backBtn {
+    margin-top: 20vh;
+    margin-bottom: 10px;
+    border: none;
+    background-color:transparent;
+}
+.logo {
+    width: 100px;
+    background-color: #F1E4D1;
+}
+.contentWrap {
+    padding: 0 8.5vw;
+    flex: 1;
+}
+.ls-inputWrap {
+    display: flex;
+    align-items: center;
+    height: 4vh;
+    width: 30vw;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 30px;
+    background-color: #FFFAF3;
+}
+.ls-inputWrap:focus-within {
+    border:2px solid #DABF98;
+}
+.input {
+    outline:none;
+    border:none;
+    border-radius: 5px;
+    height : 3vh;
+    width:100%;
+    background-color: #FFFAF3;
+    vertical-align: center;
+    font-size: 18px;
+}
+.input::placeholder {
+    color : #b5947e;
+}
+.errorMessageWrap {
+    margin-top : 5px;
+    margin-bottom : -5px;
+    margin-left : 10px;
+    color : #853602;
+    font-size: 15px;
+  }
+
+.bottomButton {
+    width:  calc(30vw + 15px);
+    height: 6vh;
+    border: none;
+    font-size: 25px;
+    font-weight: 800;
+    border-radius: 40px;
+    margin-top : 30px;
+    cursor: pointer;
+    background-color: #562E12;
+    color:#F9F0E3;
+}
+  .bottomButton:disabled {
+    background-color: #DABF98;
+    color:#562E12;
+}
+/*로그인*/
+.joinText {
+    padding : 2vh 0;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    color:#562E12;
+}
+.joinBtn {
+    padding : 0 10px;
+    border : none;
+    font-size: 18px;
+    text-decoration: 2px underline;
+    font-weight:bolder;
+    background-color: #F1E4D1;
+    color:#562E12;
+}
+/*회원가입*/
+.duplicationCheck {
+    width: 30%;
+    height: 3vh;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 40px;
+    cursor: pointer;
+    background-color: #DABF98;
+    color:#562E12;
+}
+.duplicationCheck:hover {
+    background-color: #744F36;
+    color:#F9F0E3;
+}

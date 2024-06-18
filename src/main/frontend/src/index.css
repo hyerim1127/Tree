@@ -7,11 +7,7 @@
   /*background-color: #F1E4D1;*/
 }
 /*전체 페이지*/
-.page { 
-  background-color: #F1E4D1;
-  flex-direction : row;
-  color:#562E12;
-}
+
 html, body {
   margin:0;
   padding:0;
@@ -27,28 +23,7 @@ html, body {
   background-color: #F1E4D1;
   background-image:url(./img/page-line.png);
 }
-/*사진 배경*/
-.mainImg {
-  z-index: -2;
-  position:absolute;
-  top:0;
-  right:0;
-  height: 100%;
-  width: 50vw;
-  object-fit:cover;
-}
-/*그루터기 설명 설명 배경*/
-.description {
-  background-color: #E5D1B2;
-  position:fixed;
-  opacity: 0.8;
-  top: 25vh;
-  text-align: right;
-  font-size: smaller;
-  right: 7.5vw;
-  width: 35vw;
-  z-index: -2;
-}
+
 /*버튼 왼쪽, 오른쪽+hover*/
 .btnL {
   position: absolute;
@@ -73,35 +48,8 @@ html, body {
 .btnR:hover {
   width: 6vh;
 }
-/*그루터기 서비스 설명 텍스트*/
-.descriptionText {
-  padding: 50px;
-  color: #562E12;
-}
-/*좌측 페이지 전체*/
-.form {
-  position:fixed;
-  left: 0;
-  top: 0;
-  width:50vw;
-  height: 100vh;
-  display : flex;
-  flex-direction : column;
-  background-color:#F1E4D1;
-  vertical-align: center;
-}
-/*되돌아가는 버튼, 로고와 연결*/
-.backBtn {
-  margin-top: 20vh;
-  margin-bottom: 10px;
-  border: none;
-  background-color:transparent;
-}
-/*로고*/
-.logo {
-  width: 100px;
-  background-color: #F1E4D1;
-}
+
+
 /*우측 상단 단축키 버튼*/
 .shortcuts {
   position:relative;
@@ -112,103 +60,6 @@ html, body {
   top:1%;
   width:5vh;
 }
-/*로그인,회원가입 시 input창~버튼 묶은 div*/
-.contentWrap {
-  padding: 0 12.5vw;
-  flex: 1;
-}
-
-/*로그인,회원가입 시 input창 배경+focus*/
-.inputWrap {
-  display: flex;
-  align-items: center;
-  height: 4vh;
-  width: 25vw;
-  border-radius: 5px;
-  padding: 15px;
-  margin-top: 30px;
-  background-color: #FFFAF3;
-}
-.inputWrap:focus-within {
-  border:2px solid #DABF98;
-}
-/*로그인,회원가입 시 실제 input창+placeholder*/
-.input {
-  width: 20vw;
-  outline:none;
-  border:none;
-  border-radius: 5px;
-  height : 3vh;
-  background-color: #FFFAF3;
-  vertical-align: center;
-  font-size: 18px;
-}
-.input::placeholder {
-  color : #b5947e;
-}
-/*에러 발생 시 메세지*/
-.errorMessageWrap {
-  margin-top : 5px;
-  margin-bottom : -5px;
-  margin-left : 10px;
-  color : #853602;
-  font-size: 15px;
-}
-/*로그인 / 회원가입 버튼+disabled*/
-.bottomButton {
-  width: 27vw;
-  height: 6vh;
-  border: none;
-  font-size: 25px;
-  font-weight: 800;
-  border-radius: 40px;
-  margin-top : 30px;
-  cursor: pointer;
-  background-color: #562E12;
-  color:#F9F0E3;
-}
-.bottomButton:disabled {
-  background-color: #DABF98;
-  color:#562E12;
-}
-
-/*로그인 창에서 회원가입 텍스트*/
-.joinText {
-  padding : 2vh 0;
-  margin-left: 2vw;
-  text-align: center;
-  font-size: 16px;
-  font-weight: 500;
-  color:#562E12;
-}
-/*회원가입 페이지로 이동하는 버튼*/
-.joinBtn {
-  padding : 0 10px;
-  border : none;
-  font-size: 18px;
-  text-decoration: 2px underline;
-  font-weight:bolder;
-  background-color: #F1E4D1;
-  color:#562E12;
-}
-
-/*회원가입 중복 체크+hover*/
-.duplicationCheck {
-  width: 30%;
-  height: 3vh;
-  border: none;
-  font-size: 15px;
-  font-weight: 600;
-  border-radius: 40px;
-  cursor: pointer;
-  background-color: #DABF98;
-  color:#562E12;
-}
-.duplicationCheck:hover {
-  background-color: #744F36;
-  color:#F9F0E3;
-}
-
 
 /*인상깊은구절 조회 페이지 - 구절 hover 시 효과*/
 .phrases:hover {

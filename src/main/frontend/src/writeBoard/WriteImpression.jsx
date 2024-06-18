@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import personLight from './img/person-light.png';
-import logoutLight from './img/logout-light.png';
-import treeLight from './img/tree-light.png';
+import personLight from '../img/person-light.png';
+import logoutLight from '../img/logout-light.png';
+import treeLight from '../img/tree-light.png';
 import ModalBookSearch from './ModalBookSearch';
 import './writeImpression.css';
 import axios from 'axios';
@@ -16,6 +16,7 @@ const WriteImpression = () => {
     const [imageURL, setImageURL] = useState('');
     const [phrase, setPhrase] = useState('');
     const [reason, setReason] = useState('');
+    const [userEmail, setUserEmail] = useState('');
 
     const goToLogin = () => navigate("/");
     const goToMypage = () => navigate("/member");
@@ -29,11 +30,20 @@ const WriteImpression = () => {
         }
     }, [phrase, reason]);
 
+    useEffect(() => {
+        // 로컬스토리지에서 이메일 값을 가져와 상태로 설정
+        const email = localStorage.getItem('userEmail');
+        if (email) {
+            setUserEmail(email);
+        }
+    }, []);
+
     const goToBoard = () => navigate("/board");
 
     const [isLoggedIn, setIsLoggedIn] = useState(true);
     const logoutHandler = () => {
         localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("userEmail");  // 이메일 값도 로컬스토리지에서 제거
         setIsLoggedIn(false);
         goToLogin();
     }
@@ -61,6 +71,7 @@ const WriteImpression = () => {
             bookImageURL: imageURL,
             bookPhrase: phrase,
             bookReason: reason,
+            boardWriter: userEmail
         }, {
             headers: {
                 'Content-Type': 'application/json'
