@@ -1,7 +1,6 @@
 import React from 'react';
 import BookImage from "./BookImage";
 import BookInfo from "./BookInfo";
-import ToggleDetail from "./ToggleDetail";
 
 const ModalImpression = ({ book, relatedImpressions, onClose }) => {
   if (!book) return null;
@@ -25,7 +24,11 @@ const ModalImpression = ({ book, relatedImpressions, onClose }) => {
           </div>
           <div className="toggle-sections">
             {relatedImpressions.map((impression, index) => (
-              <ToggleDetail key={index} detail={{ title: impression.boardWriter, content: impression.boardPhrase }} />
+              <div key={index} className="toggle-detail">
+                <div className="toggle-content">
+                  {impression.boardPhrase}
+                </div>
+              </div>
             ))}
           </div>
         </div>
