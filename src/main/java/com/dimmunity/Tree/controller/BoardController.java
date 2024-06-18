@@ -29,7 +29,7 @@ public class BoardController {
 
     //post로 보냈기 때문에 postmapping 사용
     @PostMapping("/board/bookSave")
-    public String save(@ModelAttribute BoardDTO boardDTO){
+    public String save(@RequestBody BoardDTO boardDTO){
         boardService.save(boardDTO); // board bookSave 완료
         return "redirect:/board";
     }
