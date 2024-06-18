@@ -114,17 +114,19 @@ html, body {
 }
 /*로그인,회원가입 시 input창~버튼 묶은 div*/
 .contentWrap {
-  padding: 0 10%;
+  padding: 0 12.5vw;
   flex: 1;
 }
 
 /*로그인,회원가입 시 input창 배경+focus*/
 .inputWrap {
   display: flex;
-  height: 3vh;
+  align-items: center;
+  height: 4vh;
+  width: 25vw;
   border-radius: 5px;
   padding: 15px;
-  margin-top: 20px;
+  margin-top: 30px;
   background-color: #FFFAF3;
 }
 .inputWrap:focus-within {
@@ -132,7 +134,7 @@ html, body {
 }
 /*로그인,회원가입 시 실제 input창+placeholder*/
 .input {
-  width:100%;
+  width: 20vw;
   outline:none;
   border:none;
   border-radius: 5px;
@@ -154,7 +156,7 @@ html, body {
 }
 /*로그인 / 회원가입 버튼+disabled*/
 .bottomButton {
-  width: 100%;
+  width: 27vw;
   height: 6vh;
   border: none;
   font-size: 25px;
@@ -172,9 +174,10 @@ html, body {
 
 /*로그인 창에서 회원가입 텍스트*/
 .joinText {
-  padding : 20px 0;
+  padding : 2vh 0;
+  margin-left: 2vw;
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   color:#562E12;
 }
@@ -205,36 +208,7 @@ html, body {
   background-color: #744F36;
   color:#F9F0E3;
 }
-/*인상 깊은 구절 작성 페이지 제목*/
-.descriptionPhrase {
-  margin-top:5vh;
-  padding: 10px;
-  color: #562E12;
-}
-/*인상 깊은 구절 작성 - 제목,작가+focus*/
-.inputTextWrap {
-  display: flex;
-  height: 110px;
-  border-radius: 5px;
-  padding: 15px;
-  margin-top: 15px;
-  background-color: #FFFAF3;
-}
-.inputTextWrap:focus-within {
-  border:2px solid #DABF98;
-}
-/*인상 깊은 구절 작성 - 구절+focus*/
-.inputTextWrap2 {
-  display: flex;
-  height: 150px;
-  border-radius: 5px;
-  padding: 15px;
-  margin-top: 15px;
-  background-color: #FFFAF3;
-}
-.inputTextWrap2:focus-within {
-  border:2px solid #DABF98;
-}
+
 
 /*인상깊은구절 조회 페이지 - 구절 hover 시 효과*/
 .phrases:hover {

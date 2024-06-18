@@ -4,7 +4,7 @@ import personLight from './img/person-light.png';
 import logoutLight from './img/logout-light.png';
 import treeLight from './img/tree-light.png';
 import ModalBookSearch from './ModalBookSearch';
-import './modalBookSearch.css';
+import './writeImpression.css';
 import axios from 'axios';
 
 const WriteImpression = () => {
@@ -80,7 +80,7 @@ const WriteImpression = () => {
     }
 
     return (
-      <div className="bs-page">
+      <div className="wi-page">
           <div>
               <inline>
                   <img className="shortcuts" alt="logout" src={logoutLight} onClick={logoutHandler} />
@@ -89,25 +89,25 @@ const WriteImpression = () => {
               </inline>
           </div>
           <center>
-              <div className="bs-descriptionPhrase">
+              <div className="wi-descriptionPhrase">
                   <h1>인상 깊은 구절</h1>
                   <h5>최근 독서를 하면서 다른 사람들과 공유하고 싶었던<br /> 마음에 남는 구절을 작성해 주세요</h5>
               </div>
           </center>
-          <div className="bs-form-container">
-              <div className="bs-form-left">
-                  <div className="contentWrap">
-                      <div className="inputWrap">
+          <div className="wi-form-container">
+              <div className="wi-form-left">
+                  <div className="wi-contentWrap">
+                      <div className="wi-inputWrap">
                           <input
-                            className="input"
+                            className="wi-input"
                             value={title}
                             placeholder="책의 제목을 입력해 주세요"
                             readOnly />
-                          <button onClick={openModalBookSearch} className="duplicationCheck">책 검색</button>
+                          <button onClick={openModalBookSearch} className="wi-bookSearchBtn">책 검색</button>
                           <ModalBookSearch show={showModal} onClose={closeModalBookSearch} onSelect={handleBookSelect} />
                       </div>
-                      <div style={{ display: 'flex', alignItems: 'stretch' }}>
-                        <div className="inputWrap-img">
+                      <div style={{ display: 'flex' }}>
+                        <div className="wi-inputWrap-img">
                             <img
                                 src={imageURL}
                                 width="100"
@@ -116,17 +116,17 @@ const WriteImpression = () => {
                                 id="bookImage" />
                         </div>
                         <div style={{paddingLeft:"20px"}}>
-                        <div className="inputWrap-etc">
+                        <div className="wi-inputWrap-etc">
                           <input
-                            className="input"
+                            className="wi-input"
                             value={writer}
                             placeholder="책의 작가를 입력해 주세요"
                             readOnly />
                         </div>
                         
-                        <div className="inputWrap-etc">
+                        <div className="wi-inputWrap-etc">
                             <input
-                                className="input"
+                                className="wi-input"
                                 value={category}
                                 placeholder="카테고리"
                                 readOnly />
@@ -137,18 +137,18 @@ const WriteImpression = () => {
                       
                   </div>
               </div>
-              <div className="bs-form-right">
-                  <div className="contentWrap">
-                      <div className="inputTextWrap">
+              <div className="wi-form-right">
+                  <div className="wi-contentWrap">
+                      <div className="wi-inputTextWrap">
                             <textarea
-                              className="inputText"
+                              className="wi-inputText"
                               value={phrase}
                               placeholder="인상 깊었던 구절을 200자 이내로 작성해주세요."
                               onChange={(e) => setPhrase(e.target.value)} />
                       </div>
-                      <div className="inputTextWrap2">
+                      <div className="wi-inputTextWrap2">
                             <textarea
-                              className="inputText2"
+                              className="wi-inputText2"
                               value={reason}
                               placeholder="해당 구절이 인상 깊었던 이유를 300자 이내로 작성해 주세요."
                               onChange={(e) => setReason(e.target.value)} />

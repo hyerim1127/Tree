@@ -8,88 +8,6 @@
     margin-top: 30px;
     background-color: #FFFAF3;
 }
-.inputWrap-etc {
-    display: flex;
-    align-items: center;
-    height: 4vh;
-    width: 23vw;
-    border-radius: 5px;
-    padding: 15px;
-    margin-top: 30px;
-    background-color: #FFFAF3;
-}
-
-.inputWrap-etc:focus-within {
-    border: 2px solid #DABF98;
-}
-
-.inputWrap-img {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 17vh;
-    width: 8vw;
-    border-radius: 5px;
-    padding: 15px;
-    margin-top: 20px;
-    background-color: #FFFAF3;
-}
-
-.inputWrap-img:focus-within {
-    border: 2px solid #DABF98;
-}
-.inputText {
-    display: flex;
-    height: 9.5vh;
-    width: 50vw;
-    border-radius: 5px;
-    padding: 15px;
-    background-color: #FFFAF3;
-    outline:none;
-    border:none;
-    border-radius: 5px;
-    vertical-align: center;
-    font-size: 17px;
-    resize:none;
-}
-.inputText::placeholder {
-    color : #b5947e;
-}
-.inputText2 {
-    display: flex;
-    height: 13.5vh;
-    width: 50vw;
-    border-radius: 5px;
-    padding: 15px;
-    background-color: #FFFAF3;
-    outline:none;
-    border:none;
-    border-radius: 5px;
-    vertical-align: center;
-    font-size: 17px;
-    resize:none;
-}
-.inputText2::placeholder {
-    color : #b5947e;
-}
-.wi-bottomButton {
-    width: 40vw;
-    height: 6vh;
-    border: none;
-    font-size: 25px;
-    font-weight: 800;
-    border-radius: 40px;
-    margin-top : 30px;
-    margin-left:7vw;
-    cursor: pointer;
-    background-color: #562E12;
-    color:#F9F0E3;
-}
-.wi-bottomButton:disabled {
-    background-color: #DABF98;
-    color:#562E12;
-}
-
 
 .bs-table {
     width: 100%;
@@ -123,13 +41,6 @@
     background-color: #FFFAF3;
 }
 
-.bs-page {
-    background-color: #F1E4D1;
-    display: flex;
-    flex-direction: column;
-    color: #562E12;
-    height: 100vh;
-}
 .bs-modal {
     display: flex;
     position: fixed;
@@ -142,24 +53,6 @@
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-.bs-descriptionPhrase {
-    padding: 50px;
-    color: #562E12;
-    text-align: center;
-}
-.bs-form-container {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding-top: 3vh;
-}
-.bs-form-left, .bs-form-right {
-    flex: 1;
-    padding: 20px;
-    box-sizing: border-box;
-    background-color: #F1E4D1;
-    vertical-align: center;
-}
 .bs-title {
     text-align: center;
     font-size: 1.5em;
