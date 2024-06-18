@@ -43,6 +43,7 @@ public class BoardService {
         boardRepository.save(boardEntity);
         return findById(boardDTO.getId());
     }
+    
 
     public void delete(Long id) {
         boardRepository.deleteById(id);

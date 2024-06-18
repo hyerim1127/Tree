@@ -67,20 +67,20 @@ public class BoardController {
     }
 
 
-    // 게시글 수정
-    @PutMapping("/board/phraseUpdate/{id}")
-    public String updateForm(@PathVariable("id") Long id, Model model){
-        BoardDTO boardDTO = boardService.findById(id);
-        model.addAttribute("boardUpdate",boardDTO);
-        return "phraseUpdate";
-    }
-
-    @PostMapping("/board/phraseUpdate/{id}")
-    public String update(@ModelAttribute BoardDTO boardDTO, Model model) {
-        BoardDTO board = boardService.update(boardDTO);
-        model.addAttribute("board", board);
-        return "redirect:/board/" + boardDTO.getId();
-    }
+    
+     // 게시글 수정 (GET 방식으로 수정할 데이터 가져오기)
+     @GetMapping("/board/phraseUpdate/{id}")
+     public BoardDTO updateForm(@PathVariable("id") Long id) {
+         return boardService.findById(id);
+     }
+ 
+     // 게시글 수정 (PUT 방식으로 데이터 업데이트)
+     @PutMapping("/board/phraseUpdate/{id}")
+     public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody BoardDTO boardDTO) {
+         boardDTO.setId(id);
+         boardService.update(boardDTO);
+         return ResponseEntity.ok("Board updated successfully");
+     }
 
     // 게시글 삭제
     @DeleteMapping("/board/delete/{id}")
