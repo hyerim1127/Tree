@@ -58,6 +58,7 @@ export default function Login() {
     
                 if (res.status === 200) {
                     console.log('로그인 성공');
+                    localStorage.setItem('userEmail',email);
                     navigate('/board/bookSave');
                 } else if (res.status === 204) {
                     console.log('로그인 실패');
