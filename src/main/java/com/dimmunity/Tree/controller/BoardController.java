@@ -17,6 +17,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -90,10 +92,9 @@ public class BoardController {
 
     // 카테고리별 인상깊은 구절 매핑
     @GetMapping("/board/genre")
-    public String getBooksByCategory(@RequestParam("genre") String category, Model model) {
-        List<BoardDTO> bookList = boardService.findByCategory(category);
-        model.addAttribute("books", bookList);
-        return "categorySearchResult";
+    public List<BoardDTO> getBooksByCategory(@RequestParam("genre") String category) {
+        String decodedCategory = URLDecoder.decode(category, StandardCharsets.UTF_8);
+        return boardService.findByCategory(decodedCategory);
     }
 
     @GetMapping("/member/{boardWriter}")

@@ -14,6 +14,7 @@ const Genre = () => {
   const [showModalGenre, setShowModalGenre] = useState(false);
   const [showModalImpression, setShowModalImpression] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
+  const [relatedImpressions, setRelatedImpressions] = useState([]);
   const [impressions, setImpressions] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
 
@@ -38,7 +39,6 @@ const Genre = () => {
         });
     }
   }, [selectedGenre]);
-  
 
   const openModalGenre = () => {
     setShowModalGenre(true);
@@ -48,19 +48,27 @@ const Genre = () => {
     setShowModalGenre(false);
   };
 
-  const openModalImpression = (book) => {
-    setSelectedBook(book);
-    setShowModalImpression(true);
+  const openModalImpression = async (bookId) => {
+    try {
+      const response = await axios.get(`/board/details/${bookId}`);
+      setSelectedBook(response.data.selectedImpression);
+      setRelatedImpressions(response.data.relatedImpressions);
+      setShowModalImpression(true);
+    } catch (error) {
+      console.error('Failed to fetch impression details:', error);
+    }
   };
 
   const closeModalImpression = () => {
     setShowModalImpression(false);
     setSelectedBook(null);
+    setRelatedImpressions([]);
   };
 
   const handleGenreSelect = (genre) => {
     setShowModalGenre(false);
-    navigate(`/board/genre?genre=${genre}`);
+    const encodedGenre = encodeURIComponent(genre);
+    navigate(`/board/genre?genre=${encodedGenre}`);
   };
 
   const logoutHandler = () => {
@@ -90,7 +98,7 @@ const Genre = () => {
         <div>
           <div className="phrase-container">
             {impressions.length > 0 ? impressions.map((book, index) => (
-              <div key={index} className="phrase" onClick={() => openModalImpression(book)}>
+              <div key={index} className="phrase" onClick={() => openModalImpression(book.id)}>
                 {book.boardPhrase}
               </div>
             )) : <p>No impressions available for this genre.</p>}
@@ -98,7 +106,11 @@ const Genre = () => {
         </div>
       </div>
       {showModalImpression && selectedBook && (
-        <ModalImpressionReason book={selectedBook} onClose={closeModalImpression} />
+        <ModalImpressionReason
+          book={selectedBook}
+          relatedImpressions={relatedImpressions}
+          onClose={closeModalImpression}
+        />
       )}
     </div>
   );
