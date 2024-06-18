@@ -7,7 +7,7 @@ import treeLight from './img/tree-light.png';
 import btn from './img/btn.png';
 import bmkRed from './img/bookmark-red.png';
 import ModalGenre from './genreSelectModal/ModalGenre';
-import ModalImpression from './impression/ModalImpression';
+import ModalImpressionReason from './ModalImpressionReason';
 import './modalImpression.css';
 import axios from 'axios';
 
@@ -143,7 +143,7 @@ const View = () => {
             <button className='showAllBtn' onClick={openModal}>구절 전체 보기</button>
             {showModal && <ModalGenre onClose={closeModal} onGenreSelect={handleGenreSelect} />}
             {showImpressionModal && selectedImpression && (
-              <ModalImpression
+              <ModalImpressionReason
                 book={selectedImpression}
                 relatedImpressions={relatedImpressions}
                 onClose={closeImpressionModal}

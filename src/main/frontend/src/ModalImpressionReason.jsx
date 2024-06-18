@@ -21,9 +21,7 @@ const ModalImpressionReason = ({ book, relatedImpressions, onClose }) => {
               />
             </div>
           </div>
-          <div className="I-book-reason">
-            {book.boardReason}
-          </div>
+
           <div className="toggle-sections">
             {relatedImpressions.map((impression, index) => (
               <ToggleDetail key={index} detail={{ title: impression.boardPhrase, content: impression.boardReason }} />
