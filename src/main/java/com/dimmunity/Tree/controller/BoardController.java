@@ -44,16 +44,10 @@ public class BoardController {
 
     // 게시글 상세 조회
     @GetMapping("/board/{id}")
-    public String findById(@PathVariable("id") Long id, Model model,
-                           @PageableDefault(page=1) Pageable pageable){
-        BoardDTO boardDTO = boardService.findById(id);
-
-
-        model.addAttribute("board", boardDTO);
-        model.addAttribute("page", pageable.getPageNumber());
-
-        return "boardDetail";
+    public BoardDTO findById(@PathVariable("id") Long id){
+        return boardService.findById(id);
     }
+
 
     // 게시글 수정
     @GetMapping("/board/phraseUpdate/{id}")

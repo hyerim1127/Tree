@@ -3,6 +3,7 @@ import BookInfo from "./BookInfo";
 import ToggleDetail from "./ToggleDetail";
 
 const ModalImpression = ({ book, onClose }) => {
+  if (!book) return null;
 
   return (
     <div className="I-modal">
@@ -10,25 +11,23 @@ const ModalImpression = ({ book, onClose }) => {
         <span className="I-modal-close" onClick={onClose}>&times;</span>
 
         <div className="I-modal-body">
-          <div style={{display: 'flex', alignItems: 'stretch',}}>
+          <div style={{ display: 'flex', alignItems: 'stretch' }}>
             <div className="I-book-image">
-              <BookImage src={book.image} />
+              <BookImage src={book.bookImageURL} />
             </div>
             <div className="I-book-info">
-              <BookInfo 
-                title={book.title} 
-                author={book.author} 
-                description={book.description} 
+              <BookInfo
+                title={book.bookTitle}
+                author={book.bookAuthor}
+                description={book.bookCategoryName}
               />
+            </div>
+          </div>
+          <div className="toggle-sections">
+            <ToggleDetail detail={book.boardPhrase} />
+            <ToggleDetail detail={book.boardReason} />
           </div>
         </div>
-        <div className="toggle-sections">
-          {book.details.map((detail, index) => (
-            <ToggleDetail key={index} detail={detail} />
-          ))}
-          </div>
-        </div>
-
       </div>
     </div>
   );

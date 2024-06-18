@@ -32,9 +32,14 @@ const View = () => {
     setShowModal(false);
   };
 
-  const openImpressionModal = (impression) => {
-    setSelectedImpression(impression);
-    setShowImpressionModal(true);
+  const openImpressionModal = async (impressionId) => {
+    try {
+      const response = await axios.get(`/board/${impressionId}`);
+      setSelectedImpression(response.data);
+      setShowImpressionModal(true);
+    } catch (error) {
+      console.error('Failed to fetch impression details:', error);
+    }
   };
 
   const closeImpressionModal = () => {
@@ -60,7 +65,7 @@ const View = () => {
           } while (isOverlapping(newImpressions, newPosition));
 
           newImpressions.push({
-            id: index,
+            id: impression.id,
             text: impression.boardPhrase,
             top: newPosition.top,
             left: newPosition.left
@@ -116,7 +121,7 @@ const View = () => {
             <div
               key={impression.id}
               className="phrases"
-              onClick={() => openImpressionModal(impression)}
+              onClick={() => openImpressionModal(impression.id)}
               style={{
                 position: 'absolute',
                 top: impression.top,
