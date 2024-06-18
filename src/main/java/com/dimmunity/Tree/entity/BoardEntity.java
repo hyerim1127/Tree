@@ -29,10 +29,10 @@ public class BoardEntity {
     @Column
     private String bookImageURL;
 
-    @Column(length = 500)
+    @Column(length = 2000)
     private String boardPhrase;
 
-    @Column(length = 500)
+    @Column(length = 2000)
     private String boardReason;
 
     public static BoardEntity toSaveEntity(BoardDTO boardDTO) {
