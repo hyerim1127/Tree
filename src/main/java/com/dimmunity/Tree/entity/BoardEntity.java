@@ -60,7 +60,6 @@ public class BoardEntity {
         // DTO에 담긴 값들을 객체로 옮겨담는 작업
         BoardEntity boardEntity = new BoardEntity();
         boardEntity.setBoardWriter(boardDTO.getBoardWriter());
-        boardEntity.setBoardPass(boardDTO.getBoardPass());
         boardEntity.setBookAuthor(boardDTO.getBookAuthor());
         boardEntity.setBookImageURL(boardDTO.getBookImageURL());
         boardEntity.setBookTitle(boardDTO.getBookTitle());
@@ -76,14 +75,12 @@ public class BoardEntity {
         // id 가 있어야만 update query 수행됨
         boardEntity.setId(boardDTO.getId());
         boardEntity.setBoardWriter(boardDTO.getBoardWriter());
-        boardEntity.setBoardPass(boardDTO.getBoardPass());
         boardEntity.setBookAuthor(boardDTO.getBookAuthor());
         boardEntity.setBookImageURL(boardDTO.getBookImageURL());
         boardEntity.setBookTitle(boardDTO.getBookTitle());
         boardEntity.setBookCategoryName(boardDTO.getBookCategoryName());
         boardEntity.setBoardPhrase(boardDTO.getBoardPhrase());
         boardEntity.setBoardReason(boardDTO.getBoardReason());
-        boardEntity.setBoardHits(boardDTO.getBoardHits());
         return boardEntity;
     }
 }

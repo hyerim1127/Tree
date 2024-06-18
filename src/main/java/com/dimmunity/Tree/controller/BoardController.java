@@ -19,28 +19,30 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/board")
+
 public class BoardController {
     private final BoardService boardService;
 
-    @GetMapping("/board/bookSave")
+    @GetMapping("/bookSave")
     public String saveForm(){
         return "bookSave";
     }
 
     //post로 보냈기 때문에 postmapping 사용
+
     @PostMapping("/board/bookSave")
     public String save(@RequestBody BoardDTO boardDTO){
+
         boardService.save(boardDTO); // board bookSave 완료
         return "redirect:/board";
     }
 
     // 게시글 상세 조회
-    @GetMapping("/board/{id}")
+    @GetMapping("/{id}")
     public String findById(@PathVariable("id") Long id, Model model,
                            @PageableDefault(page=1) Pageable pageable){
-        // 해당 게시글의 조회수를 하나 올리고, 게시글 데이터를 가져와서 detail.html에 출력
-        // 두번의 메소드 호출 이뤄짐
-        boardService.updateHits(id);
+
         BoardDTO boardDTO = boardService.findById(id);
 
         model.addAttribute("board", boardDTO);
@@ -50,14 +52,14 @@ public class BoardController {
     }
 
     // 게시글 수정
-    @GetMapping("/board/phraseUpdate/{id}")
+    @GetMapping("/phraseUpdate/{id}")
     public String updateForm(@PathVariable("id") Long id, Model model){
         BoardDTO boardDTO = boardService.findById(id);
         model.addAttribute("boardUpdate",boardDTO);
         return "phraseUpdate";
     }
 
-    @PostMapping("/board/phraseUpdate")
+    @PostMapping("/phraseUpdate")
     public String update(@ModelAttribute BoardDTO boardDTO, Model model) {
         BoardDTO board = boardService.update(boardDTO);
         model.addAttribute("board", board);
@@ -65,14 +67,14 @@ public class BoardController {
     }
 
     // 게시글 삭제
-    @GetMapping("/board/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") Long id){
         boardService.delete(id);
         return "redirect:/board";
     }
 
     // 페이징 처리
-    @GetMapping("/board")
+    @GetMapping("/")
     public String paging(@PageableDefault(page=1) Pageable pageable, Model model){
         //pageable.getPageNumber();
         // 페이지 값을 가져오기 위함
@@ -91,7 +93,7 @@ public class BoardController {
     }
 
     // 카테고리별 인상깊은 구절 매핑
-    @GetMapping("/board/genre")
+    @GetMapping("/genre")
     public String getBooksByCategory(@RequestParam("genre") String category, Model model) {
         List<BoardDTO> bookList = boardService.findByCategory(category);
         model.addAttribute("books", bookList);
