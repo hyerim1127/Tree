@@ -51,20 +51,21 @@ const View = () => {
     const fetchImpressions = async () => {
       try {
         const response = await axios.get('/board');
-        const impressionsArray = Object.values(response.data);
-        const newImpressions = impressionsArray.map((impression, index) => {
+        const impressionsArray = response.data.slice(0, 6); // 최대 6개의 구절만 가져오기
+        const newImpressions = [];
+        for (const [index, impression] of impressionsArray.entries()) {
           let newPosition;
           do {
             newPosition = generateRandomPosition();
           } while (isOverlapping(newImpressions, newPosition));
 
-          return {
+          newImpressions.push({
             id: index,
             text: impression.boardPhrase,
             top: newPosition.top,
             left: newPosition.left
-          };
-        });
+          });
+        }
         setImpressions(newImpressions);
       } catch (error) {
         console.error('Failed to fetch impressions:', error);

@@ -79,22 +79,10 @@ public class BoardController {
 
     // 페이징 처리
     @GetMapping("/board")
-    public String paging(@PageableDefault(page=1) Pageable pageable, Model model){
-        //pageable.getPageNumber();
-        // 페이지 값을 가져오기 위함
-        Page<BoardDTO> boardList = boardService.paging(pageable);
-
-        // page 가 몇개까지 보여지게 될건지 설정 -> 우리는 전페이지, 현재페이지, 이후페이지 (이렇게 3페이지만 보여지게 될것)
-        int blockLimit = 3;
-        int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1; // 1 4 7 10 ~ 이렇게 계산되어 나올것
-        int endPage = ((startPage + blockLimit -1) < boardList.getTotalPages()) ? startPage + blockLimit -1 : boardList.getTotalPages();
-
-        model.addAttribute("boardList", boardList);
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
-
-        return "boardPaging";
+    public List<BoardDTO> findAll(){
+        return boardService.findAll();
     }
+
 
     // 카테고리별 인상깊은 구절 매핑
     @GetMapping("/board/genre")
