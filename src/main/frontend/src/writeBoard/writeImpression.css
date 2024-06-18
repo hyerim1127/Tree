@@ -37,13 +37,16 @@
     vertical-align: center;
 }
 .wi-form-left{
-    padding-left: 5vw;
+    margin-left:5vw
+}
+.wi-form-right{
+    margin-right:5vw
 }
 /*input창~버튼 묶은 div*/
 .wi-contentWrap {
     padding: 0 3vw;
     flex: 1;
-    width:35vw;
+    width: 35vw;
 }
   
 /*input창 배경+focus*/
@@ -69,7 +72,7 @@
     height : 3vh;
     background-color: #FFFAF3;
     vertical-align: center;
-    font-size: 18px;
+    font-size: 15px;
 }
 .wi-input::placeholder {
     color : #b5947e;
@@ -94,7 +97,6 @@
     display: flex;
     align-items: center;
     height: 4vh;
-    width:20vw;
     border-radius: 5px;
     padding: 15px;
     margin-top: 30px;
@@ -120,7 +122,7 @@
 }
 .wi-inputText {
     display: flex;
-    height: 9.5vh;
+    height: 8vh;
     width: 50vw;
     border-radius: 5px;
     padding: 15px;
@@ -137,7 +139,7 @@
 }
 .wi-inputText2 {
     display: flex;
-    height: 13.5vh;
+    height: 12vh;
     width: 50vw;
     border-radius: 5px;
     padding: 15px;
