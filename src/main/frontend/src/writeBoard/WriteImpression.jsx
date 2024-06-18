@@ -43,7 +43,7 @@ const WriteImpression = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(true);
     const logoutHandler = () => {
         localStorage.removeItem("isLoggedIn");
-        localStorage.removeItem("userEmail");  // 이메일 값도 로컬스토리지에서 제거
+        localStorage.removeItem("userEmail");
         setIsLoggedIn(false);
         goToLogin();
     }

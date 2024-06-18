@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import Button from "./Button";
+import '../impression/modalImpression.css';
 
 const MyImpressionEdit = ({ book, onSave, onClose }) => {
   const [editedPhrase, setEditedPhrase] = useState(book.boardPhrase);
