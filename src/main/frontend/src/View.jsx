@@ -24,13 +24,8 @@ const View = () => {
   const goToMypage = () => navigate("/member");
   const goToLogin = () => navigate("/");
 
-  const openModal = () => {
-    setShowModal(true);
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
-  };
+  const openModal = () => setShowModal(true);
+  const closeModal = () => setShowModal(false);
 
   const openImpressionModal = (impression) => {
     setSelectedImpression(impression);
@@ -46,33 +41,6 @@ const View = () => {
     setShowModal(false);
     navigate(`/board/genre?genre=${genre}`);
   };
-
-  useEffect(() => {
-    const fetchImpressions = async () => {
-      try {
-        const response = await axios.get('/board');
-        const impressionsArray = Object.values(response.data);
-        const newImpressions = impressionsArray.map((impression, index) => {
-          let newPosition;
-          do {
-            newPosition = generateRandomPosition();
-          } while (isOverlapping(newImpressions, newPosition));
-
-          return {
-            id: index,
-            text: impression.boardPhrase,
-            top: newPosition.top,
-            left: newPosition.left
-          };
-        });
-        setImpressions(newImpressions);
-      } catch (error) {
-        console.error('Failed to fetch impressions:', error);
-      }
-    };
-
-    fetchImpressions();
-  }, []);
 
   const generateRandomPosition = () => ({
     top: Math.floor(Math.random() * (window.innerHeight - 200)) + 'px',
@@ -90,6 +58,41 @@ const View = () => {
     }
     return false;
   };
+
+  const getRandomImpressions = (impressionsArray, count) => {
+    const shuffled = impressionsArray.sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
+  };
+
+  useEffect(() => {
+    const fetchImpressions = async () => {
+      try {
+        const response = await axios.get('http://localhost:8081/board');
+        const impressionsArray = response.data;
+        const selectedImpressions = getRandomImpressions(impressionsArray, 6);
+        const newImpressions = selectedImpressions.map((impression, index) => {
+          let newPosition;
+          let attempts = 0; // Add a limit to the number of attempts to prevent infinite loops
+          do {
+            newPosition = generateRandomPosition();
+            attempts++;
+          } while (isOverlapping(impressions, newPosition) && attempts < 100);
+
+          return {
+            id: impression.id,
+            text: impression.boardPhrase,
+            top: newPosition.top,
+            left: newPosition.left
+          };
+        });
+        setImpressions(newImpressions);
+      } catch (error) {
+        console.error('Failed to fetch impressions:', error);
+      }
+    };
+
+    fetchImpressions();
+  }, []);
 
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const logoutHandler = () => {
