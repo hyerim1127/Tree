@@ -30,12 +30,9 @@ public class BoardController {
     }
 
     //post로 보냈기 때문에 postmapping 사용
-    @PostMapping("/bookSave")
-    public String save(@ModelAttribute BoardDTO boardDTO){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        Long memberId = memberService.findMemberIdByUsername(username); // memberId 가져오기
-        boardDTO.setBoardWriter(memberId.toString());
+
+    @PostMapping("/board/bookSave")
+    public String save(@RequestBody BoardDTO boardDTO){
 
         boardService.save(boardDTO); // board bookSave 완료
         return "redirect:/board";
