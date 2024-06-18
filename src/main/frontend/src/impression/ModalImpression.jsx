@@ -1,15 +1,15 @@
+import React from 'react';
 import BookImage from "./BookImage";
 import BookInfo from "./BookInfo";
 import ToggleDetail from "./ToggleDetail";
 
-const ModalImpression = ({ book, onClose }) => {
+const ModalImpression = ({ book, relatedImpressions, onClose }) => {
   if (!book) return null;
 
   return (
     <div className="I-modal">
       <div className="I-modal-content">
         <span className="I-modal-close" onClick={onClose}>&times;</span>
-
         <div className="I-modal-body">
           <div style={{ display: 'flex', alignItems: 'stretch' }}>
             <div className="I-book-image">
@@ -24,8 +24,9 @@ const ModalImpression = ({ book, onClose }) => {
             </div>
           </div>
           <div className="toggle-sections">
-            <ToggleDetail detail={book.boardPhrase} />
-            <ToggleDetail detail={book.boardReason} />
+            {relatedImpressions.map((impression, index) => (
+              <ToggleDetail key={index} detail={{ title: impression.boardWriter, content: impression.boardPhrase }} />
+            ))}
           </div>
         </div>
       </div>

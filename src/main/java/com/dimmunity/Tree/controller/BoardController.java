@@ -12,11 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,8 +32,6 @@ public class BoardController {
         return "bookSave";
     }
 
-    //post로 보냈기 때문에 postmapping 사용
-
     @PostMapping("/board/bookSave")
     public String save(@RequestBody BoardDTO boardDTO, HttpSession session){
         String memberEmail = (String) session.getAttribute("loginEmail");
@@ -42,10 +43,25 @@ public class BoardController {
         return "redirect:/board";
     }
 
-    // 게시글 상세 조회
-    @GetMapping("/board/{id}")
+    @GetMapping("board/{id}")
     public BoardDTO findById(@PathVariable("id") Long id){
         return boardService.findById(id);
+    }
+
+
+    // 특정 구절 조회 및 동일한 책에 대한 다른 구절들 조회
+    @GetMapping("board/details/{id}")
+    public ResponseEntity<Map<String, Object>> getImpressionDetails(@PathVariable("id") Long id) {
+        BoardDTO selectedImpression = boardService.findById(id);
+        if (selectedImpression == null) {
+            return ResponseEntity.notFound().build();
+        }
+        List<BoardDTO> relatedImpressions = boardService.findByBookTitle(selectedImpression.getBookTitle());
+        Map<String, Object> response = new HashMap<>();
+        response.put("selectedImpression", selectedImpression);
+        response.put("relatedImpressions", relatedImpressions);
+
+        return ResponseEntity.ok(response);
     }
 
 
@@ -64,12 +80,6 @@ public class BoardController {
         return "redirect:/board/" + boardDTO.getId();
     }
 
-    // 게시글 삭제
-    @GetMapping("/board/delete/{id}")
-    public String delete(@PathVariable("id") Long id){
-        boardService.delete(id);
-        return "redirect:/board";
-    }
 
     // 페이징 처리
     @GetMapping("/board")

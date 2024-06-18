@@ -33,7 +33,12 @@ public class BoardService {
         Optional<BoardEntity> optionalBoardEntity = boardRepository.findById(id);
         return optionalBoardEntity.map(BoardDTO::toBoardDTO).orElse(null);
     }
-
+    public List<BoardDTO> findByBookTitle(String bookTitle) {
+        List<BoardEntity> entities = boardRepository.findByBookTitle(bookTitle);
+        return entities.stream()
+                .map(BoardDTO::fromEntity)
+                .collect(Collectors.toList());
+    }
     public BoardDTO update(BoardDTO boardDTO) {
         BoardEntity boardEntity = BoardEntity.toUpdateEntity(boardDTO);
         boardRepository.save(boardEntity);
