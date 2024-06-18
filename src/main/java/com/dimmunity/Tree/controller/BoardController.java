@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -56,14 +57,14 @@ public class BoardController {
     }
 
     // 게시글 수정
-    @GetMapping("/board/phraseUpdate/{id}")
+    @PutMapping("/board/phraseUpdate/{id}")
     public String updateForm(@PathVariable("id") Long id, Model model){
         BoardDTO boardDTO = boardService.findById(id);
         model.addAttribute("boardUpdate",boardDTO);
         return "phraseUpdate";
     }
 
-    @PostMapping("/board/phraseUpdate")
+    @PostMapping("/board/phraseUpdate/{id}")
     public String update(@ModelAttribute BoardDTO boardDTO, Model model) {
         BoardDTO board = boardService.update(boardDTO);
         model.addAttribute("board", board);
@@ -71,10 +72,10 @@ public class BoardController {
     }
 
     // 게시글 삭제
-    @GetMapping("/board/delete/{id}")
-    public String delete(@PathVariable("id") Long id){
+    @DeleteMapping("/board/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") Long id){
         boardService.delete(id);
-        return "redirect:/board";
+        return ResponseEntity.ok("게시글이 삭제되었습니다.");
     }
 
     // 페이징 처리

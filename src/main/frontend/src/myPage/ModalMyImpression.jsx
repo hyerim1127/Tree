@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import BookImage from "../impression/BookImage";
 import BookInfo from "../impression/BookInfo";
 import Button from "./Button";
@@ -6,9 +7,16 @@ import ModalMyImpressionEdit from './MyImpressionEdit'; // 수정 모달 추가
 
 const ModalMyImpression = ({ book, onClose }) => {
   const [showEditModal, setShowEditModal] = useState(false); // 수정 모달 상태 추가
+  const [deleted, setDeleted] = useState(false); // 삭제 여부 상태 추가
 
-  const handleDelete = () => {
-    alert('구절이 삭제되었습니다.');
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`http://localhost:8081/board/delete/${book.id}`);
+      alert('구절이 삭제되었습니다.');
+      window.location.reload(); 
+    } catch (error) {
+      console.error('Error deleting impression', error);
+    }
   };
 
   const handleEdit = () => {
@@ -18,6 +26,11 @@ const ModalMyImpression = ({ book, onClose }) => {
   const closeEditModal = () => {
     setShowEditModal(false);
   };
+
+  // 삭제된 상태라면 모달을 닫고 아무것도 렌더링하지 않음
+  if (deleted) {
+    return null;
+  }
 
   return (
     <div className="I-modal">
